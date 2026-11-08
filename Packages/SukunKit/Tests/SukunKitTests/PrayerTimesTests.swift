@@ -37,6 +37,24 @@ final class PrayerTimesTests: XCTestCase {
         ])
     }
 
+    func testAdjustmentsShiftOnlyChosenTimes() {
+        let day = Fixtures.date(2026, 12, 15, 12, tz: "Europe/Berlin")
+        let plain = Fixtures.settings(method: .muslimWorldLeague)
+        var adjusted = plain
+        adjusted.adjustments = [.isha: 5, .fajr: -2, .sunrise: 3]
+        let base = PrayerCalculator(location: Fixtures.munich, settings: plain).schedule(for: day)!
+        let shifted = PrayerCalculator(location: Fixtures.munich, settings: adjusted).schedule(for: day)!
+        func delta(_ kind: PrayerKind) -> TimeInterval { shifted.time(for: kind)!.timeIntervalSince(base.time(for: kind)!) }
+        XCTAssertEqual(delta(.isha), 300)
+        XCTAssertEqual(delta(.fajr), -120)
+        XCTAssertEqual(delta(.sunrise), 180)
+        XCTAssertEqual(delta(.dhuhr), 0)
+        XCTAssertEqual(delta(.asr), 0)
+        XCTAssertEqual(delta(.maghrib), 0)
+        XCTAssertTrue(CalculationConfiguration(settings: adjusted, location: Fixtures.munich).isAdjusted)
+        XCTAssertFalse(CalculationConfiguration(settings: plain, location: Fixtures.munich).isAdjusted)
+    }
+
     func testMunichWinterHanafiAsr() {
         assertSchedule(Fixtures.munich, Fixtures.settings(method: .muslimWorldLeague, madhab: .hanafi), 2026, 12, 15, [
             .asr: (14, 36),
