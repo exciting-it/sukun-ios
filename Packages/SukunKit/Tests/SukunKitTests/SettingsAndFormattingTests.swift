@@ -17,6 +17,51 @@ final class SettingsAndFormattingTests: XCTestCase {
         XCTAssertEqual(decoded.notificationsEnabled, [.fajr])
     }
 
+    func testNewSettingsDefaultFromOldJSON() throws {
+        // Exactly what 1.0 builds before these features wrote.
+        let old = Data(#"{"method":"automatic","madhab":"automatic","highLatitude":"automatic","clockFormat":"system","useManualLocation":false,"notificationsEnabled":["isha"],"showsPattern":true,"qiblaHaptics":true}"#.utf8)
+        let s = try JSONDecoder().decode(SukunSettings.self, from: old)
+        XCTAssertEqual(s.adjustments, [:])
+        XCTAssertNil(s.earlyReminderMinutes)
+        XCTAssertNil(s.jumuahReminder)
+        XCTAssertEqual(s.ramadanMode, .automatic)
+        XCTAssertNil(s.suhoorReminderMinutes)
+        XCTAssertEqual(s.hijriAdjustmentDays, 0)
+        XCTAssertFalse(s.hasAdjustments)
+        XCTAssertEqual(s.notificationsEnabled, [.isha])
+    }
+
+    func testNewSettingsRoundTrip() throws {
+        var s = SukunSettings()
+        s.adjustments = [.isha: 5, .fajr: -2, .sunrise: 3]
+        s.earlyReminderMinutes = 15
+        s.jumuahReminder = .fixedTime(hour: 12, minute: 45)
+        s.ramadanMode = .on
+        s.suhoorReminderMinutes = 30
+        s.hijriAdjustmentDays = -1
+        let decoded = try JSONDecoder().decode(SukunSettings.self, from: JSONEncoder().encode(s))
+        XCTAssertEqual(decoded, s)
+        XCTAssertEqual(decoded.adjustment(for: .isha), 5)
+        XCTAssertEqual(decoded.adjustment(for: .dhuhr), 0)
+        XCTAssertTrue(decoded.hasAdjustments)
+
+        s.jumuahReminder = .beforeDhuhr(minutes: 60)
+        XCTAssertEqual(try JSONDecoder().decode(SukunSettings.self, from: JSONEncoder().encode(s)).jumuahReminder, .beforeDhuhr(minutes: 60))
+    }
+
+    func testOutOfRangeValuesAreClamped() throws {
+        let json = Data(#"{"adjustments":{"isha":90,"fajr":-45,"bogus":5,"dhuhr":0},"hijriAdjustmentDays":5,"earlyReminderMinutes":7,"suhoorReminderMinutes":0,"jumuahReminder":{"beforeDhuhr":{"minutes":17}}}"#.utf8)
+        let s = try JSONDecoder().decode(SukunSettings.self, from: json)
+        XCTAssertEqual(s.adjustments, [.isha: 30, .fajr: -30])
+        XCTAssertEqual(s.hijriAdjustmentDays, 2)
+        XCTAssertNil(s.earlyReminderMinutes)
+        XCTAssertNil(s.suhoorReminderMinutes)
+        XCTAssertEqual(s.jumuahReminder, JumuahReminder.defaultReminder)
+
+        let badTime = Data(#"{"jumuahReminder":{"fixedTime":{"hour":25,"minute":0}}}"#.utf8)
+        XCTAssertNil(try JSONDecoder().decode(SukunSettings.self, from: badTime).jumuahReminder)
+    }
+
     func testSharedStoreEffectiveLocation() {
         let defaults = UserDefaults(suiteName: "sukun.tests.\(UUID().uuidString)")!
         let store = SharedStore(defaults: defaults)

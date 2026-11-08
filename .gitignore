@@ -22,3 +22,6 @@ Sukun/Info.plist
 Sukun/Sukun.entitlements
 SukunWidgets/Info.plist
 SukunWidgets/SukunWidgets.entitlements
+
+# Agent working files (plan execution ledgers)
+.superpowers/

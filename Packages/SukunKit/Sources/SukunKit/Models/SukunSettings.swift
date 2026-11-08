@@ -89,12 +89,27 @@ public struct SukunSettings: Codable, Hashable, Sendable {
     public var notificationsEnabled: Set<PrayerKind> = []
     public var showsPattern: Bool = true
     public var qiblaHaptics: Bool = true
+    /// Minutes added to each time to match a mosque timetable (-30…30). Missing kinds mean 0.
+    public var adjustments: [PrayerKind: Int] = [:]
+    /// "Remind me before": minutes before each prayer whose notification is on, or nil.
+    public var earlyReminderMinutes: Int?
+    public var jumuahReminder: JumuahReminder?
+    public var ramadanMode: RamadanMode = .automatic
+    /// Minutes before Fajr while Ramadan mode is active, or nil.
+    public var suhoorReminderMinutes: Int?
+    /// Shifts the Hijri calendar by whole days (-2…2) to match the local start of the month.
+    public var hijriAdjustmentDays: Int = 0
 
     public init() {}
+
+    public func adjustment(for kind: PrayerKind) -> Int { adjustments[kind] ?? 0 }
+
+    public var hasAdjustments: Bool { adjustments.values.contains { $0 != 0 } }
 
     enum CodingKeys: String, CodingKey {
         case method, madhab, highLatitude, clockFormat, useManualLocation, manualLocation
         case notificationsEnabled, showsPattern, qiblaHaptics
+        case adjustments, earlyReminderMinutes, jumuahReminder, ramadanMode, suhoorReminderMinutes, hijriAdjustmentDays
     }
 
     public init(from decoder: Decoder) throws {
@@ -110,6 +125,22 @@ public struct SukunSettings: Codable, Hashable, Sendable {
         notificationsEnabled = Set(kinds.compactMap(PrayerKind.init(rawValue:)))
         showsPattern = (try? c.decodeIfPresent(Bool.self, forKey: .showsPattern)) ?? d.showsPattern
         qiblaHaptics = (try? c.decodeIfPresent(Bool.self, forKey: .qiblaHaptics)) ?? d.qiblaHaptics
+
+        let range = ReminderChoices.adjustmentRange
+        let rawAdjustments = (try? c.decodeIfPresent([String: Int].self, forKey: .adjustments)) ?? [:]
+        adjustments = rawAdjustments.reduce(into: [:]) { result, entry in
+            guard let kind = PrayerKind(rawValue: entry.key), entry.value != 0 else { return }
+            result[kind] = min(max(entry.value, range.lowerBound), range.upperBound)
+        }
+        earlyReminderMinutes = (try? c.decodeIfPresent(Int.self, forKey: .earlyReminderMinutes))
+            .flatMap { ReminderChoices.early.contains($0) ? $0 : nil }
+        jumuahReminder = (try? c.decodeIfPresent(JumuahReminder.self, forKey: .jumuahReminder))??.validated()
+        ramadanMode = (try? c.decodeIfPresent(RamadanMode.self, forKey: .ramadanMode)) ?? d.ramadanMode
+        suhoorReminderMinutes = (try? c.decodeIfPresent(Int.self, forKey: .suhoorReminderMinutes))
+            .flatMap { ReminderChoices.suhoor.contains($0) ? $0 : nil }
+        let hijri = ReminderChoices.hijriAdjustmentRange
+        let rawHijri = (try? c.decodeIfPresent(Int.self, forKey: .hijriAdjustmentDays)) ?? d.hijriAdjustmentDays
+        hijriAdjustmentDays = min(max(rawHijri, hijri.lowerBound), hijri.upperBound)
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -123,5 +154,12 @@ public struct SukunSettings: Codable, Hashable, Sendable {
         try c.encode(notificationsEnabled.map(\.rawValue).sorted(), forKey: .notificationsEnabled)
         try c.encode(showsPattern, forKey: .showsPattern)
         try c.encode(qiblaHaptics, forKey: .qiblaHaptics)
+        let nonZero = adjustments.filter { $0.value != 0 }
+        try c.encode(Dictionary(uniqueKeysWithValues: nonZero.map { ($0.key.rawValue, $0.value) }), forKey: .adjustments)
+        try c.encodeIfPresent(earlyReminderMinutes, forKey: .earlyReminderMinutes)
+        try c.encodeIfPresent(jumuahReminder, forKey: .jumuahReminder)
+        try c.encode(ramadanMode, forKey: .ramadanMode)
+        try c.encodeIfPresent(suhoorReminderMinutes, forKey: .suhoorReminderMinutes)
+        try c.encode(hijriAdjustmentDays, forKey: .hijriAdjustmentDays)
     }
 }
