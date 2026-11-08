@@ -5,12 +5,12 @@ public extension DayPeriod {
     /// Top color of the background gradient; the bottom always melts into `Palette.background`.
     var gradientTop: Color {
         switch self {
-        case .dawn: Color.dynamic(light: 0xEBDDE2, dark: 0x2B3050)       // soft rose / indigo dawn
-        case .morning: Color.dynamic(light: 0xF3EADB, dark: 0x1C2E44)    // pale gold
-        case .midday: Color.dynamic(light: 0xE9EFE7, dark: 0x1A3046)     // light sage
-        case .afternoon: Color.dynamic(light: 0xF2E6D3, dark: 0x262C3A)  // warm sand
-        case .dusk: Color.dynamic(light: 0xF0D9C6, dark: 0x3A2C34)       // apricot / plum
-        case .night: Color.dynamic(light: 0xE2E5EA, dark: 0x08111C)      // cool / deep blue
+        case .dawn: Color.dynamic(light: 0xE8D2DB, dark: 0x3A2E48)       // rose / muted violet dawn
+        case .morning: Color.dynamic(light: 0xF2E2C6, dark: 0x1C3A32)    // pale gold / teal green
+        case .midday: Color.dynamic(light: 0xE1EBDD, dark: 0x1B3B2D)     // sage / green
+        case .afternoon: Color.dynamic(light: 0xF0DDBF, dark: 0x2F3726)  // warm sand / olive
+        case .dusk: Color.dynamic(light: 0xF0CDB2, dark: 0x4A302C)       // apricot / warm rust
+        case .night: Color.dynamic(light: 0xD9DEE6, dark: 0x07130F)      // cool grey / near-black green
         }
     }
 }
@@ -28,8 +28,12 @@ public struct TimeOfDayBackground: View {
 
     public var body: some View {
         ZStack {
+            // The time-of-day color fades into the background over the upper ~60 % of the screen.
             LinearGradient(
-                colors: [period.gradientTop, Palette.background, Palette.background],
+                stops: [
+                    .init(color: period.gradientTop, location: 0),
+                    .init(color: Palette.background, location: 0.6),
+                ],
                 startPoint: .top,
                 endPoint: .bottom
             )
