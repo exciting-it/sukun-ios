@@ -124,6 +124,7 @@ struct SettingsView: View {
                     get: { model.settings.notificationsEnabled.contains(kind) },
                     set: { enabled in Task { await model.setNotification(enabled, for: kind) } }
                 ))
+                .accessibilityInputLabels(kind.voiceControlNames.map { Text(verbatim: $0) })
             }
             Picker("Remind me before", selection: Binding(
                 get: { model.settings.earlyReminderMinutes },

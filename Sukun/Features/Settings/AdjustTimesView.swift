@@ -41,6 +41,7 @@ struct AdjustTimesView: View {
                         }
                     }
                     .accessibilityValue(Text("\(AdjustmentSummary.signed(model.settings.adjustment(for: kind))) min"))
+                    .accessibilityInputLabels(kind.voiceControlNames.map { Text(verbatim: $0) })
                 }
             } footer: {
                 Text("Match your mosque’s timetable. Applies to the app, widgets and reminders.")

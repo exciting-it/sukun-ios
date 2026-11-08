@@ -35,7 +35,10 @@ Settings → Accessibility → Voice Control on.
 
 1. "Tap Qibla", "Tap Settings", "Tap Today" switch tabs.
 2. "Tap Munich" (or your city) opens the city picker; "Tap Cancel".
-3. "Show names" on Today, then "Show actions for Isha" → "Turn notification on".
+3. "Show names" on Today, then "Show actions for Isha" → "Turn notification on". Also try the plain names
+   ("Show actions for Night prayer", "Dawn prayer", "Sunset prayer"; in German "Nachtgebet", "Morgengebet") and
+   spellings dictation tends to produce ("Aisha", "Zuhr", "Maghreb"). "Show actions for Sunrise" offers no reminder.
+   "Tap Compass" / "Tap Kibla" opens the Qibla tab.
 4. Settings: "Tap Adjust times", "Tap Increment" on a stepper, "Go back"; "Tap Jumu'ah reminder", toggle it by name.
 5. Feedback: "Tap Send feedback", "Type I like the widgets", "Tap Send".
 

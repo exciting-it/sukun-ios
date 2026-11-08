@@ -4,6 +4,12 @@
     "CFBundleDisplayName" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "سكون"
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -14,26 +20,13 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sukun"
-          }
-        },
-        "ar" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "سكون"
           }
         }
       }
     },
     "CFBundleName" : {
       "comment" : "Bundle name",
-      "extractionState" : "extracted_with_value",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "SukunWidgets"
-          }
-        },
         "ar" : {
           "stringUnit" : {
             "state" : "needs_review",
@@ -41,6 +34,12 @@
           }
         },
         "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SukunWidgets"
+          }
+        },
+        "en" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "SukunWidgets"
@@ -51,6 +50,12 @@
     "NSLocationWhenInUseUsageDescription" : {
       "extractionState" : "manual",
       "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "يستخدم سكون موقعك لحساب مواقيت صلاة دقيقة واتجاه القبلة، في التطبيق وفي أدواته. يبقى موقعك على جهازك."
+          }
+        },
         "de" : {
           "stringUnit" : {
             "state" : "translated",
@@ -61,12 +66,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sukun uses your location to calculate accurate prayer times and the Qibla direction, in the app and in its widgets. Your location stays on your device."
-          }
-        },
-        "ar" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "يستخدم سكون موقعك لحساب مواقيت صلاة دقيقة واتجاه القبلة، في التطبيق وفي أدواته. يبقى موقعك على جهازك."
           }
         }
       }

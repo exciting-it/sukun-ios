@@ -110,6 +110,17 @@ final class SettingsAndFormattingTests: XCTestCase {
         XCTAssertEqual(german, "Montag, 9. November")
     }
 
+    func testVoiceControlNamesIncludeVisibleNameDescriptionAndSpellings() {
+        let isha = PrayerKind.isha.voiceControlNames
+        XCTAssertEqual(isha.first, PrayerKind.isha.localizedName, "the visible name comes first")
+        XCTAssertTrue(isha.contains("Night prayer"))
+        XCTAssertTrue(isha.contains("Aisha"), "what English dictation often hears for Isha")
+        XCTAssertTrue(PrayerKind.dhuhr.voiceControlNames.contains("Zuhr"))
+        XCTAssertTrue(PrayerKind.maghrib.voiceControlNames.contains("Maghreb"))
+        XCTAssertEqual(Set(isha).count, isha.count, "no duplicates")
+        XCTAssertTrue(VoiceControlNames.qibla.contains("Compass"))
+    }
+
     func testHijriDate() {
         let date = Fixtures.date(2026, 12, 15, 12, tz: "Asia/Riyadh")
         let c = HijriDate.components(for: date, timeZone: TimeZone(identifier: "Asia/Riyadh")!)

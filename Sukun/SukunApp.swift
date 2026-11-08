@@ -52,7 +52,10 @@ struct RootView: View {
                         .tabItem { Label("Today", systemImage: "clock") }
                         .tag(AppTab.today)
                     QiblaView()
-                        .tabItem { Label("Qibla", systemImage: "location.north.circle") }
+                        .tabItem {
+                            Label("Qibla", systemImage: "location.north.circle")
+                                .accessibilityInputLabels(VoiceControlNames.qibla.map { Text(verbatim: $0) })
+                        }
                         .tag(AppTab.qibla)
                     SettingsView()
                         .tabItem { Label("Settings", systemImage: "slider.horizontal.3") }
