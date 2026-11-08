@@ -50,6 +50,8 @@ targets:
       path: Sukun/Info.plist
       properties:
         CFBundleDisplayName: Sukun
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         CFBundleLocalizations: [en, de]
         LSApplicationCategoryType: public.app-category.lifestyle
         ITSAppUsesNonExemptEncryption: false
@@ -61,6 +63,8 @@ targets:
           UIColorName: LaunchBackground
         UIApplicationSceneManifest:
           UIApplicationSupportsMultipleScenes: false
+        # Portrait-only iPhone app: opt out of multitasking orientations (silences the archive warning).
+        UIRequiresFullScreen: true
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         UIBackgroundModes:
@@ -95,6 +99,8 @@ targets:
       path: SukunWidgets/Info.plist
       properties:
         CFBundleDisplayName: Sukun
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         CFBundleLocalizations: [en, de]
         SukunAppGroup: $(SUKUN_APP_GROUP)
         NSWidgetWantsLocation: true

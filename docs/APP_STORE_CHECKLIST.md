@@ -1,28 +1,35 @@
 # App Store submission checklist
 
 ## 1. Identity & signing
-- [ ] `SUKUN_BUNDLE_ID`, `SUKUN_APP_GROUP`, `DEVELOPMENT_TEAM` set in `project.yml`, `xcodegen generate` re-run
+- [x] `SUKUN_BUNDLE_ID`, `SUKUN_APP_GROUP`, `DEVELOPMENT_TEAM` set in `project.yml`, `xcodegen generate` re-run
 - [ ] App Group exists and is enabled for **both** App IDs (app + `.widgets`). Automatic signing does this.
 - [ ] App record created in App Store Connect with the same bundle ID; SKU set; primary language English; German added
-- [ ] Version `1.0.0` / build `1` (bump `CURRENT_PROJECT_VERSION` for every upload)
+- [x] Version `1.0.0` / build `1`. Bump `CURRENT_PROJECT_VERSION` for every upload; both Info.plists read
+  `MARKETING_VERSION` / `CURRENT_PROJECT_VERSION`, so app and widget always match
 
 ## 2. Build quality
-- [ ] `swift test` in `Packages/SukunKit` and ⌘U in Xcode pass
+- [x] `swift test` in `Packages/SukunKit` and ⌘U in Xcode pass (27 package + 4 app tests; 0 warnings, also with
+  `SWIFT_STRICT_CONCURRENCY=complete`)
 - [ ] Real device: deny location → city search works; allow location → widget updates after moving
 - [ ] Real device: compass aligns and gives a haptic within ±3°; calibration hint appears near magnets
 - [ ] Widgets in every family; light, dark, **tinted** (iOS 18 Home Screen → Edit → Customize) and StandBy
+  (rendered off-device in light/dark/accented: OK; still check on a real Home Screen and in StandBy)
 - [ ] Lock Screen circular / rectangular / inline
 - [ ] Notifications fire at prayer time with the app closed; toggling off removes them
-- [ ] Largest Dynamic Type (AX5) on Today, Qibla, Settings; VoiceOver pass on all three tabs
-- [ ] Reduce Motion on: no rotating spring animations; gradient changes without animation
-- [ ] German device language: all strings translated, 24h format, dates in German
-- [ ] Archive with the Release config, no warnings about missing `containerBackground` or privacy manifest
+- [x] Largest Dynamic Type (AX5) on Today, Qibla, Settings (simulator: everything scrolls, nothing truncated)
+- [ ] VoiceOver pass on all three tabs (real device)
+- [x] Reduce Motion on: no rotating spring animations; gradient changes without animation (all motion goes
+  through `Animation.sukun(reduceMotion:)` or `reduceMotion ? nil : …`)
+- [x] German device language: all strings translated, 24h format, dates in German (all string catalogs complete)
+- [x] Archive with the Release config, no warnings about missing `containerBackground` or privacy manifest
+  (verified unsigned; do the signed archive in Xcode)
 
 ## 3. App Store Connect metadata (en + de)
+Drafts for every field: [`APP_STORE_METADATA.md`](APP_STORE_METADATA.md) (limits checked by `check_metadata.py`).
 - [ ] Name: **Sukun** (30 chars max). Subtitle e.g. "Prayer Times & Qibla" / "Gebetszeiten & Qibla"
 - [ ] Category: Lifestyle (secondary: Reference or Utilities)
 - [ ] Description, keywords (prayer, salah, namaz, adhan, qibla, widget, gebetszeiten, …), promotional text
-- [ ] Support URL (e.g. https://sukun.faith/support) and Privacy Policy URL (e.g. https://sukun.faith/privacy), both required even when no data is collected; a simple page that says so is enough
+- [ ] Support URL https://sukun.faith/support/ and Privacy Policy URL https://sukun.faith/privacy/ (`website/`, see README), both required even when no data is collected; a simple page that says so is enough
 - [ ] Age rating questionnaire → 4+
 - [ ] Price: free; availability: all regions
 - [ ] Copyright line
@@ -38,6 +45,9 @@ Suggested set of 5–6, per language:
 6. Settings (methods) — "Works offline. No tracking."
 
 Tip: use the simulator with a manual city (e.g. Munich) so the times are stable, and `xcrun simctl status_bar booted override --time 9:41`.
+Debug builds accept `-SukunInitialTab today|qibla|settings`, e.g.
+`xcrun simctl launch booted faith.sukun.ios -AppleLanguages "(de)" -AppleLocale de_DE -SukunInitialTab qibla`.
+The Qibla shot should come from a real device (the simulator has no compass).
 
 ## 5. App Privacy ("nutrition label")
 - [ ] **Data Not Collected.** Location is only processed on device and never sent off it, so it isn't "collected"
@@ -45,7 +55,7 @@ Tip: use the simulator with a manual city (e.g. Munich) so the times are stable,
 - [ ] Tracking: **No**
 
 ## 6. Export compliance
-- [ ] `ITSAppUsesNonExemptEncryption = NO` is set in Info.plist, so no question appears on upload
+- [x] `ITSAppUsesNonExemptEncryption = NO` is set in Info.plist, so no question appears on upload
 
 ## 7. Review notes (paste into "Notes" for App Review)
 > Sukun calculates Islamic prayer times and the Qibla direction entirely on device using the open-source Adhan library.

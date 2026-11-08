@@ -10,7 +10,7 @@ struct SukunApp: App {
         WindowGroup {
             RootView()
                 .environment(model)
-                .tint(Palette.accent)
+                .tint(Palette.accentText) // text-safe accent (≥ 4.5:1) for buttons and links
         }
         .onChange(of: scenePhase) { _, phase in
             switch phase {
