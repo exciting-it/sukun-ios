@@ -15,6 +15,12 @@
             "state": "translated",
             "value": "12 Stunden"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "12 ساعة"
+          }
         }
       }
     },
@@ -31,6 +37,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "24 Stunden"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "24 ساعة"
           }
         }
       }
@@ -49,6 +61,12 @@
             "state": "translated",
             "value": "System"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "النظام"
+          }
         }
       }
     },
@@ -65,6 +83,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "O"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ق"
           }
         }
       }
@@ -83,6 +107,12 @@
             "state": "translated",
             "value": "Osten"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "شرق"
+          }
         }
       }
     },
@@ -99,6 +129,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "N"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ش"
           }
         }
       }
@@ -117,6 +153,12 @@
             "state": "translated",
             "value": "NO"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ش ق"
+          }
         }
       }
     },
@@ -133,6 +175,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Norden"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "شمال"
           }
         }
       }
@@ -151,6 +199,12 @@
             "state": "translated",
             "value": "Nordosten"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "شمال شرق"
+          }
         }
       }
     },
@@ -167,6 +221,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nordwesten"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "شمال غرب"
           }
         }
       }
@@ -185,6 +245,12 @@
             "state": "translated",
             "value": "NW"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ش غ"
+          }
         }
       }
     },
@@ -201,6 +267,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "S"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ج"
           }
         }
       }
@@ -219,6 +291,12 @@
             "state": "translated",
             "value": "SO"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ج ق"
+          }
         }
       }
     },
@@ -235,6 +313,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Süden"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "جنوب"
           }
         }
       }
@@ -253,6 +337,12 @@
             "state": "translated",
             "value": "Südosten"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "جنوب شرق"
+          }
         }
       }
     },
@@ -269,6 +359,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Südwesten"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "جنوب غرب"
           }
         }
       }
@@ -287,6 +383,12 @@
             "state": "translated",
             "value": "SW"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ج غ"
+          }
         }
       }
     },
@@ -303,6 +405,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "W"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "غ"
           }
         }
       }
@@ -321,6 +429,12 @@
             "state": "translated",
             "value": "Westen"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "غرب"
+          }
         }
       }
     },
@@ -337,6 +451,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dämmerungswinkel"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "زاوية الشفق"
           }
         }
       }
@@ -355,6 +475,12 @@
             "state": "translated",
             "value": "Automatisch"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تلقائي"
+          }
         }
       }
     },
@@ -371,6 +497,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mitte der Nacht"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "منتصف الليل"
           }
         }
       }
@@ -389,6 +521,12 @@
             "state": "translated",
             "value": "Ein Siebtel der Nacht"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "سُبع الليل"
+          }
         }
       }
     },
@@ -405,6 +543,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Automatisch (nach Region)"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تلقائي (حسب المنطقة)"
           }
         }
       }
@@ -423,6 +567,12 @@
             "state": "translated",
             "value": "Hanafi"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الحنفي"
+          }
         }
       }
     },
@@ -439,6 +589,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Standard (Schafiʿi, Maliki, Hanbali)"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الجمهور (الشافعي، المالكي، الحنبلي)"
           }
         }
       }
@@ -457,6 +613,12 @@
             "state": "translated",
             "value": "Automatisch (nach Region)"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تلقائي (حسب المنطقة)"
+          }
         }
       }
     },
@@ -473,6 +635,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dubai"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "دبي"
           }
         }
       }
@@ -491,6 +659,12 @@
             "state": "translated",
             "value": "Ägyptische Generalbehörde für Landvermessung"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الهيئة المصرية العامة للمساحة"
+          }
         }
       }
     },
@@ -507,6 +681,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "ISNA (Nordamerika)"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الجمعية الإسلامية لأمريكا الشمالية (ISNA)"
           }
         }
       }
@@ -525,6 +705,12 @@
             "state": "translated",
             "value": "Universität für Islamische Wissenschaften, Karatschi"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "جامعة العلوم الإسلامية، كراتشي"
+          }
         }
       }
     },
@@ -541,6 +727,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kuwait"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الكويت"
           }
         }
       }
@@ -559,6 +751,12 @@
             "state": "translated",
             "value": "Moonsighting Committee"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "لجنة رؤية الهلال"
+          }
         }
       }
     },
@@ -575,6 +773,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Islamische Weltliga (MWL)"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "رابطة العالم الإسلامي"
           }
         }
       }
@@ -593,6 +797,12 @@
             "state": "translated",
             "value": "Katar"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "قطر"
+          }
         }
       }
     },
@@ -609,6 +819,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Singapur / Südostasien"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "سنغافورة / جنوب شرق آسيا"
           }
         }
       }
@@ -627,6 +843,12 @@
             "state": "translated",
             "value": "Institut für Geophysik, Teheran"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "معهد الجيوفيزياء، طهران"
+          }
         }
       }
     },
@@ -643,6 +865,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Diyanet (Türkei)"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "رئاسة الشؤون الدينية (تركيا)"
           }
         }
       }
@@ -661,6 +889,12 @@
             "state": "translated",
             "value": "Umm al-Qura, Mekka"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "أم القرى، مكة المكرمة"
+          }
         }
       }
     },
@@ -677,6 +911,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Asr"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "العصر"
           }
         }
       }
@@ -695,6 +935,12 @@
             "state": "translated",
             "value": "Dhuhr"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الظهر"
+          }
         }
       }
     },
@@ -711,6 +957,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fajr"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الفجر"
           }
         }
       }
@@ -729,6 +981,12 @@
             "state": "translated",
             "value": "Isha"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "العشاء"
+          }
         }
       }
     },
@@ -745,6 +1003,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Maghrib"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "المغرب"
           }
         }
       }
@@ -763,6 +1027,12 @@
             "state": "translated",
             "value": "Sonnenaufgang"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الشروق"
+          }
         }
       }
     },
@@ -779,6 +1049,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Automatisch"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تلقائي"
           }
         }
       }
@@ -797,6 +1073,12 @@
             "state": "translated",
             "value": "An"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تشغيل"
+          }
         }
       }
     },
@@ -813,6 +1095,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aus"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "إيقاف"
           }
         }
       }

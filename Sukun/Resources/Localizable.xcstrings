@@ -15,6 +15,12 @@
             "state": "translated",
             "value": "%@ km bis zur Kaaba"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%@ كم إلى الكعبة"
+          }
         }
       }
     },
@@ -32,6 +38,12 @@
             "state": "translated",
             "value": "%@, %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%1$@، %2$@"
+          }
         }
       }
     },
@@ -47,6 +59,12 @@
         "de": {
           "stringUnit": {
             "state": "translated",
+            "value": "%lld°"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
             "value": "%lld°"
           }
         }
@@ -66,6 +84,12 @@
             "state": "translated",
             "value": "Eine sanfte, lokale Erinnerung zu Beginn jedes ausgewählten Gebets. Es wird nichts über das Internet gesendet."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تذكير محلي لطيف عند دخول وقت كل صلاة تختارها. لا يُرسَل أي شيء عبر الإنترنت."
+          }
         }
       }
     },
@@ -82,6 +106,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Über"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "حول التطبيق"
           }
         }
       }
@@ -100,6 +130,12 @@
             "state": "translated",
             "value": "Ortungszugriff in den Einstellungen erlauben"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اسمح بالوصول إلى الموقع في الإعدادات"
+          }
         }
       }
     },
@@ -116,6 +152,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mitteilungen in den Einstellungen erlauben"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اسمح بالإشعارات في الإعدادات"
           }
         }
       }
@@ -134,6 +176,12 @@
             "state": "translated",
             "value": "Asr-Zeit"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "وقت العصر"
+          }
         }
       }
     },
@@ -150,6 +198,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hintergrundmuster"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "نقش الخلفية"
           }
         }
       }
@@ -168,6 +222,12 @@
             "state": "translated",
             "value": "Berechnung"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "طريقة الحساب"
+          }
         }
       }
     },
@@ -184,6 +244,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Abbrechen"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "إلغاء"
           }
         }
       }
@@ -202,6 +268,12 @@
             "state": "translated",
             "value": "Ort ändern"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تغيير الموقع"
+          }
         }
       }
     },
@@ -218,6 +290,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Stadt wählen"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اختر مدينة"
           }
         }
       }
@@ -236,6 +314,12 @@
             "state": "translated",
             "value": "Stadt wählen …"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اختر مدينة…"
+          }
         }
       }
     },
@@ -252,6 +336,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Stadt"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "المدينة"
           }
         }
       }
@@ -270,6 +360,12 @@
             "state": "translated",
             "value": "Aktueller Standort"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الموقع الحالي"
+          }
         }
       }
     },
@@ -286,6 +382,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Darstellung"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "العرض"
           }
         }
       }
@@ -304,6 +406,12 @@
             "state": "translated",
             "value": "Haptisches Feedback bei Qibla"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اهتزاز عند التوجّه إلى القبلة"
+          }
         }
       }
     },
@@ -320,6 +428,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hohe Breitengrade"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "خطوط العرض العليا"
           }
         }
       }
@@ -338,6 +452,12 @@
             "state": "translated",
             "value": "Halte dein iPhone flach."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "أمسك هاتفك بشكل أفقي."
+          }
         }
       }
     },
@@ -354,6 +474,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Verwendet: %@ · %@ · %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "المستخدَم: %1$@ · %2$@ · %3$@"
           }
         }
       }
@@ -372,6 +498,12 @@
             "state": "translated",
             "value": "Zeit für %@ · %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "حان وقت صلاة %1$@ · %2$@"
+          }
         }
       }
     },
@@ -388,6 +520,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ort"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الموقع"
           }
         }
       }
@@ -406,6 +544,12 @@
             "state": "translated",
             "value": "Der Ortungszugriff ist deaktiviert. Wähle stattdessen deine Stadt oder erlaube den Zugriff in den Einstellungen."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الوصول إلى الموقع متوقف. اختر مدينتك بدلًا من ذلك، أو اسمح بالوصول إلى الموقع في الإعدادات."
+          }
         }
       }
     },
@@ -422,6 +566,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ort: %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الموقع: %@"
           }
         }
       }
@@ -440,6 +590,12 @@
             "state": "translated",
             "value": "Manuell"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "يدوي"
+          }
         }
       }
     },
@@ -456,6 +612,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Methode"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الطريقة"
           }
         }
       }
@@ -474,6 +636,12 @@
             "state": "translated",
             "value": "Bewege dein iPhone in Form einer Acht, um den Kompass zu kalibrieren."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "حرّك هاتفك في حركة على شكل الرقم ثمانية (∞) لمعايرة البوصلة."
+          }
         }
       }
     },
@@ -490,6 +658,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nächstes Gebet: %@ um %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الصلاة القادمة: %1$@ في %2$@"
           }
         }
       }
@@ -508,6 +682,12 @@
             "state": "translated",
             "value": "Dieses Gerät hat keinen Kompass. Richte dich nach dem Winkel oben, im Uhrzeigersinn von Norden gemessen."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "لا توجد بوصلة في هذا الجهاز. اتجه وفق الزاوية أعلاه، مقيسةً باتجاه عقارب الساعة من الشمال."
+          }
         }
       }
     },
@@ -524,6 +704,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Keine Orte gefunden."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "لم يُعثر على أماكن."
           }
         }
       }
@@ -542,6 +728,12 @@
             "state": "translated",
             "value": "Mitteilung aus"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الإشعار متوقف"
+          }
         }
       }
     },
@@ -558,6 +750,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mitteilung an"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الإشعار مفعّل"
           }
         }
       }
@@ -576,6 +774,12 @@
             "state": "translated",
             "value": "Mitteilungen"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الإشعارات"
+          }
         }
       }
     },
@@ -592,6 +796,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Einstellungen öffnen"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "فتح الإعدادات"
           }
         }
       }
@@ -610,6 +820,12 @@
             "state": "translated",
             "value": "Gebetszeiten und Qibla. Ruhig, privat, offline."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "مواقيت الصلاة والقبلة. بهدوء وخصوصية ودون اتصال."
+          }
         }
       }
     },
@@ -626,6 +842,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gebetszeiten nicht verfügbar"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "مواقيت الصلاة غير متاحة"
           }
         }
       }
@@ -644,6 +866,12 @@
             "state": "translated",
             "value": "Qibla"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "القبلة"
+          }
         }
       }
     },
@@ -660,6 +888,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Qibla-Richtung %lld Grad, %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اتجاه القبلة %1$lld درجة، %2$@"
           }
         }
       }
@@ -678,6 +912,12 @@
             "state": "translated",
             "value": "Einstellungen"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الإعدادات"
+          }
         }
       }
     },
@@ -694,6 +934,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sukun"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "سكون"
           }
         }
       }
@@ -712,6 +958,12 @@
             "state": "translated",
             "value": "Sukun berechnet alles auf deinem Gerät. Keine Konten, kein Tracking, keine Werbung."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "يحسب سكون كل شيء على جهازك. بلا حسابات ولا تتبّع ولا إعلانات."
+          }
         }
       }
     },
@@ -728,6 +980,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sukun verwendet deinen Standort ausschließlich auf diesem Gerät, um Gebetszeiten und die Qibla-Richtung zu berechnen."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "يستخدم سكون موقعك على هذا الجهاز فقط لحساب مواقيت الصلاة واتجاه القبلة."
           }
         }
       }
@@ -746,6 +1004,12 @@
             "state": "translated",
             "value": "Zeitformat"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تنسيق الوقت"
+          }
         }
       }
     },
@@ -762,6 +1026,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Für diesen Ort und dieses Datum können keine Zeiten berechnet werden."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "لا يمكن حساب المواقيت لهذا الموقع وهذا التاريخ."
           }
         }
       }
@@ -780,6 +1050,12 @@
             "state": "translated",
             "value": "Heute"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اليوم"
+          }
         }
       }
     },
@@ -796,6 +1072,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld° nach links drehen"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "استدر يسارًا %lld°"
           }
         }
       }
@@ -814,6 +1096,12 @@
             "state": "translated",
             "value": "Mitteilung ausschalten"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "إيقاف الإشعار"
+          }
         }
       }
     },
@@ -830,6 +1118,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mitteilung einschalten"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تفعيل الإشعار"
           }
         }
       }
@@ -848,6 +1142,12 @@
             "state": "translated",
             "value": "%lld° nach rechts drehen"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "استدر يمينًا %lld°"
+          }
         }
       }
     },
@@ -864,6 +1164,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aktuellen Standort verwenden"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "استخدام الموقع الحالي"
           }
         }
       }
@@ -882,6 +1188,12 @@
             "state": "translated",
             "value": "Meinen Standort verwenden"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "استخدم موقعي"
+          }
         }
       }
     },
@@ -898,6 +1210,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Magnetischer Norden wird verwendet. Erlaube den Ortungszugriff für mehr Genauigkeit."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "يُستخدم الشمال المغناطيسي. اسمح بالوصول إلى الموقع للحصول على دقة أعلى."
           }
         }
       }
@@ -916,6 +1234,12 @@
             "state": "translated",
             "value": "Version"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الإصدار"
+          }
         }
       }
     },
@@ -932,6 +1256,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Du blickst in Richtung Qibla."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "أنت متّجه نحو القبلة."
           }
         }
       }
@@ -950,6 +1280,12 @@
             "state": "translated",
             "value": "Dein Standort verlässt nie dieses Gerät."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "لا يغادر موقعك هذا الجهاز أبدًا."
+          }
         }
       }
     },
@@ -966,6 +1302,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "in %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "بعد %@"
           }
         }
       }
@@ -984,6 +1326,12 @@
             "state": "translated",
             "value": "Feedback"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الملاحظات"
+          }
         }
       }
     },
@@ -1000,6 +1348,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Feedback senden"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "إرسال ملاحظات"
           }
         }
       }
@@ -1018,6 +1372,12 @@
             "state": "translated",
             "value": "Sukun bewerten"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "قيّم سكون"
+          }
         }
       }
     },
@@ -1034,6 +1394,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Art"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "النوع"
           }
         }
       }
@@ -1052,6 +1418,12 @@
             "state": "translated",
             "value": "Idee"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "فكرة"
+          }
         }
       }
     },
@@ -1068,6 +1440,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Problem"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "مشكلة"
           }
         }
       }
@@ -1086,6 +1464,12 @@
             "state": "translated",
             "value": "Falsche Zeiten"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "مواقيت غير صحيحة"
+          }
         }
       }
     },
@@ -1102,6 +1486,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dein Feedback"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ملاحظاتك"
           }
         }
       }
@@ -1120,6 +1510,12 @@
             "state": "translated",
             "value": "Technische Infos anhängen"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "إرفاق تفاصيل تقنية"
+          }
         }
       }
     },
@@ -1136,6 +1532,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "App-Version, iOS-Version, Gerätemodell, Sprache und Berechnungsmethode. Niemals dein Standort."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "إصدار التطبيق وإصدار iOS وطراز الجهاز واللغة وطريقة الحساب. لا يُرسَل موقعك أبدًا."
           }
         }
       }
@@ -1154,6 +1556,12 @@
             "state": "translated",
             "value": "Wird anonym gesendet. Wenn du eine Antwort möchtest, schreib an support@sukun.faith."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تُرسَل دون ذكر هويتك. إذا أردت ردًا، فاكتب إلى support@sukun.faith."
+          }
         }
       }
     },
@@ -1170,6 +1578,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Was würde Sukun für dich besser machen?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ما الذي سيجعل سكون أفضل لك؟"
           }
         }
       }
@@ -1188,6 +1602,12 @@
             "state": "translated",
             "value": "Was ist passiert, und was hast du erwartet?"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ماذا حدث، وماذا كنت تتوقع؟"
+          }
         }
       }
     },
@@ -1204,6 +1624,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Welches Gebet, welche Stadt, und welche Zeit nutzt deine Moschee?"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "أي صلاة، وأي مدينة، وما الوقت الذي يعتمده مسجدك؟"
           }
         }
       }
@@ -1222,6 +1648,12 @@
             "state": "translated",
             "value": "Danke"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "شكرًا لك"
+          }
         }
       }
     },
@@ -1238,6 +1670,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dein Feedback wurde gesendet."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تم إرسال ملاحظاتك."
           }
         }
       }
@@ -1256,6 +1694,12 @@
             "state": "translated",
             "value": "Fertig"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تم"
+          }
         }
       }
     },
@@ -1272,6 +1716,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Senden"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "إرسال"
           }
         }
       }
@@ -1290,6 +1740,12 @@
             "state": "translated",
             "value": "Keine Verbindung. Dein Text bleibt erhalten, versuch es später noch mal."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "لا يوجد اتصال. احتفظنا بنصك، حاول مرة أخرى لاحقًا."
+          }
         }
       }
     },
@@ -1306,6 +1762,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gerade nicht möglich. Dein Text bleibt erhalten, versuch es später noch mal."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تعذّر الإرسال الآن. احتفظنا بنصك، حاول مرة أخرى لاحقًا."
           }
         }
       }
@@ -1324,6 +1786,12 @@
             "state": "translated",
             "value": "%@ in %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%1$@ بعد %2$@"
+          }
         }
       }
     },
@@ -1340,6 +1808,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aktuelles Gebet: %@ seit %@. Als Nächstes: %@ um %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الصلاة الحالية: %1$@ منذ %2$@. التالية: %3$@ في %4$@"
           }
         }
       }
@@ -1358,6 +1832,12 @@
             "state": "translated",
             "value": "%@, %@, aktuelles Gebet"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%1$@، %2$@، الصلاة الحالية"
+          }
         }
       }
     },
@@ -1374,6 +1854,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suhoor ist vorbei · %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "انتهى وقت السحور · %@"
           }
         }
       }
@@ -1392,6 +1878,12 @@
             "state": "translated",
             "value": "Zeit für Iftar · %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "حان وقت الإفطار · %@"
+          }
         }
       }
     },
@@ -1408,6 +1900,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%1$@ in %2$lld Min. · %3$@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%1$@ بعد %2$lld دقيقة · %3$@"
           }
         }
       }
@@ -1426,6 +1924,12 @@
             "state": "translated",
             "value": "Jumu'ah"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الجمعة"
+          }
         }
       }
     },
@@ -1442,6 +1946,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Heute · Dhuhr %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اليوم · الظهر %@"
           }
         }
       }
@@ -1460,6 +1970,12 @@
             "state": "translated",
             "value": "Suhoor"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "السحور"
+          }
         }
       }
     },
@@ -1476,6 +1992,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suhoor endet in %1$lld Min. · Fajr %2$@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ينتهي السحور بعد %1$lld دقيقة · الفجر %2$@"
           }
         }
       }
@@ -1494,6 +2016,12 @@
             "state": "translated",
             "value": "Zeiten anpassen"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تعديل المواقيت"
+          }
         }
       }
     },
@@ -1510,6 +2038,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Aus"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "إيقاف"
           }
         }
       }
@@ -1528,6 +2062,12 @@
             "state": "translated",
             "value": "Zurücksetzen"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "إعادة تعيين"
+          }
         }
       }
     },
@@ -1544,6 +2084,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ Min."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%@ دقيقة"
           }
         }
       }
@@ -1562,6 +2108,12 @@
             "state": "translated",
             "value": "Gleiche die Zeiten an deine Moschee an. Gilt für App, Widgets und Erinnerungen."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "طابِق جدول مسجدك. ينطبق على التطبيق والأدوات والتذكيرات."
+          }
         }
       }
     },
@@ -1578,6 +2130,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vorher erinnern"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ذكّرني قبل"
           }
         }
       }
@@ -1596,6 +2154,12 @@
             "state": "translated",
             "value": "%lld Min."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%lld دقيقة"
+          }
         }
       }
     },
@@ -1612,6 +2176,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Jumu'ah-Erinnerung"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تذكير الجمعة"
           }
         }
       }
@@ -1630,6 +2200,12 @@
             "state": "translated",
             "value": "%lld Min. vor Dhuhr"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%lld دقيقة قبل الظهر"
+          }
         }
       }
     },
@@ -1646,6 +2222,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ramadan-Modus"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "وضع رمضان"
           }
         }
       }
@@ -1664,6 +2246,12 @@
             "state": "translated",
             "value": "Suhoor-Erinnerung"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تذكير السحور"
+          }
         }
       }
     },
@@ -1680,6 +2268,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld Min. vor Fajr"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%lld دقيقة قبل الفجر"
           }
         }
       }
@@ -1698,6 +2292,12 @@
             "state": "translated",
             "value": "Hidschri-Datum"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "التاريخ الهجري"
+          }
         }
       }
     },
@@ -1714,6 +2314,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ramadan"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "رمضان"
           }
         }
       }
@@ -1732,6 +2338,12 @@
             "state": "translated",
             "value": "Der Ramadan-Modus zeigt Suhoor- und Iftar-Zeiten. Beginnt der Ramadan bei dir einen Tag früher oder später, passe das Hidschri-Datum an."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "يعرض وضع رمضان أوقات السحور والإفطار. إذا بدأ رمضان في بلدك قبل يوم أو بعده، فعدّل التاريخ الهجري."
+          }
         }
       }
     },
@@ -1748,6 +2360,12 @@
           "stringUnit": {
             "state": "translated",
             "value": " · angepasst"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": " · معدّلة"
           }
         }
       }
@@ -1766,6 +2384,12 @@
             "state": "translated",
             "value": "Erinnerung"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "التذكير"
+          }
         }
       }
     },
@@ -1782,6 +2406,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Vor Dhuhr"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "قبل الظهر"
           }
         }
       }
@@ -1800,6 +2430,12 @@
             "state": "translated",
             "value": "Zu fester Uhrzeit"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "في وقت محدد"
+          }
         }
       }
     },
@@ -1816,6 +2452,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Minuten vor Dhuhr"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "دقائق قبل الظهر"
           }
         }
       }
@@ -1834,6 +2476,12 @@
             "state": "translated",
             "value": "Uhrzeit"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الوقت"
+          }
         }
       }
     },
@@ -1850,6 +2498,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Freitags. „Vor Dhuhr“ folgt der Jahreszeit; eine feste Uhrzeit passt zu Moscheen mit fester Khutba-Zeit."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "أيام الجمعة. «قبل الظهر» يتبع الموسم، والوقت المحدد يناسب المساجد ذات موعد خطبة ثابت."
           }
         }
       }
@@ -1868,6 +2522,12 @@
             "state": "translated",
             "value": "Iftar in %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الإفطار بعد %@"
+          }
         }
       }
     },
@@ -1884,6 +2544,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suhoor endet in %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ينتهي السحور بعد %@"
           }
         }
       }
@@ -1902,6 +2568,12 @@
             "state": "translated",
             "value": "Suhoor endet"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "نهاية السحور"
+          }
         }
       }
     },
@@ -1918,6 +2590,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Iftar"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الإفطار"
           }
         }
       }

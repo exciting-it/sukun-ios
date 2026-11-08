@@ -52,7 +52,7 @@ targets:
         CFBundleDisplayName: Sukun
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
-        CFBundleLocalizations: [en, de]
+        CFBundleLocalizations: [en, de, ar]
         LSApplicationCategoryType: public.app-category.lifestyle
         ITSAppUsesNonExemptEncryption: false
         SukunAppGroup: $(SUKUN_APP_GROUP)
@@ -101,7 +101,7 @@ targets:
         CFBundleDisplayName: Sukun
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
-        CFBundleLocalizations: [en, de]
+        CFBundleLocalizations: [en, de, ar]
         SukunAppGroup: $(SUKUN_APP_GROUP)
         NSWidgetWantsLocation: true
         NSLocationWhenInUseUsageDescription: >-

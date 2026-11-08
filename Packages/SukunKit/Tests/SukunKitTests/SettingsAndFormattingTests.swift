@@ -99,6 +99,17 @@ final class SettingsAndFormattingTests: XCTestCase {
         XCTAssertTrue(f24.widthSamples.contains("20:58"))
     }
 
+    func testCivilDateIsGregorianEvenWhereTheDefaultCalendarIsIslamic() {
+        // ar_SA defaults to the Umm al-Qura calendar; the second date line must stay Gregorian.
+        let date = Fixtures.date(2026, 11, 9, 12, tz: "Asia/Riyadh")
+        let tz = TimeZone(identifier: "Asia/Riyadh")!
+        let arabic = CivilDate.string(for: date, timeZone: tz, locale: Locale(identifier: "ar_SA"))
+        XCTAssertTrue(arabic.contains("نوفمبر"), arabic)
+        XCTAssertFalse(arabic.contains("جمادى"), arabic)
+        let german = CivilDate.string(for: date, timeZone: tz, locale: Locale(identifier: "de_DE"))
+        XCTAssertEqual(german, "Montag, 9. November")
+    }
+
     func testHijriDate() {
         let date = Fixtures.date(2026, 12, 15, 12, tz: "Asia/Riyadh")
         let c = HijriDate.components(for: date, timeZone: TimeZone(identifier: "Asia/Riyadh")!)

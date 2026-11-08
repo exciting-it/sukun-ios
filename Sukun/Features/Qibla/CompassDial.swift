@@ -66,6 +66,8 @@ struct CompassDial: View {
             .position(x: proxy.size.width / 2, y: proxy.size.height / 2)
         }
         .aspectRatio(1, contentMode: .fit)
+        // A compass is geometry, not reading order: never mirror it in right-to-left languages.
+        .environment(\.layoutDirection, .leftToRight)
     }
 
     enum Cardinal: CaseIterable {

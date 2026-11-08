@@ -95,13 +95,14 @@ struct PrayerTimeStack: View {
                 .font(.system(size: compact ? 15 : 17, weight: isCurrent ? .regular : .light, design: .rounded).monospacedDigit())
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
-                .foregroundStyle(isPast ? Palette.secondaryText : Palette.text)
+                .foregroundStyle(Palette.text)
         }
         .padding(.vertical, 8)
         .frame(maxWidth: .infinity)
         .background {
             if isCurrent { CurrentHighlight(cornerRadius: 14) }
         }
+        .opacity(isPast ? 0.5 : 1)
         .widgetAccentable(isCurrent)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(isCurrent
@@ -147,6 +148,7 @@ struct QiblaArrowDial: View {
             .position(x: proxy.size.width / 2, y: proxy.size.height / 2)
         }
         .aspectRatio(1, contentMode: .fit)
+        .environment(\.layoutDirection, .leftToRight) // geometry, never mirrored in RTL
         .accessibilityHidden(true)
     }
 }

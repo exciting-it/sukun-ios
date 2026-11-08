@@ -15,6 +15,12 @@
             "state": "translated",
             "value": "%@ %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%1$@ %2$@"
+          }
         }
       }
     },
@@ -31,6 +37,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ in %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%1$@ بعد %2$@"
           }
         }
       }
@@ -49,6 +61,12 @@
             "state": "translated",
             "value": "%@, %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%1$@، %2$@"
+          }
         }
       }
     },
@@ -64,6 +82,12 @@
         "de": {
           "stringUnit": {
             "state": "translated",
+            "value": "%lld°"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
             "value": "%lld°"
           }
         }
@@ -83,6 +107,12 @@
             "state": "translated",
             "value": "%lld° %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%1$lld° %2$@"
+          }
         }
       }
     },
@@ -99,6 +129,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Alle fünf Gebete auf einen Blick."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الصلوات الخمس في لمحة."
           }
         }
       }
@@ -117,6 +153,12 @@
             "state": "translated",
             "value": "Richtung der Kaaba von deinem Standort aus, bezogen auf Norden."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اتجاه الكعبة من موقعك بالنسبة إلى الشمال."
+          }
         }
       }
     },
@@ -133,6 +175,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ort benötigt"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الموقع مطلوب"
           }
         }
       }
@@ -151,6 +199,12 @@
             "state": "translated",
             "value": "München"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ميونخ"
+          }
         }
       }
     },
@@ -167,6 +221,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Nächstes Gebet: %@ um %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الصلاة القادمة: %1$@ في %2$@"
           }
         }
       }
@@ -185,6 +245,12 @@
             "state": "translated",
             "value": "Öffne Sukun, um deinen Ort festzulegen"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "افتح سكون لتحديد موقعك"
+          }
         }
       }
     },
@@ -201,6 +267,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Übersicht"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "نظرة عامة"
           }
         }
       }
@@ -219,6 +291,12 @@
             "state": "translated",
             "value": "Gebetszeiten, Hidschri-Datum und Qibla-Richtung."
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "مواقيت الصلاة والتاريخ الهجري واتجاه القبلة."
+          }
         }
       }
     },
@@ -235,6 +313,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Qibla"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "القبلة"
           }
         }
       }
@@ -253,6 +337,12 @@
             "state": "translated",
             "value": "Qibla-Richtung %lld Grad, %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "اتجاه القبلة %1$lld درجة، %2$@"
+          }
         }
       }
     },
@@ -269,6 +359,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sukun"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "سكون"
           }
         }
       }
@@ -287,6 +383,12 @@
             "state": "translated",
             "value": "Heutige Gebete"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "صلوات اليوم"
+          }
         }
       }
     },
@@ -303,6 +405,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "in %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "بعد %@"
           }
         }
       }
@@ -321,6 +429,12 @@
             "state": "translated",
             "value": "Aktuelles Gebet: %@ seit %@. Als Nächstes: %@ um %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الصلاة الحالية: %1$@ منذ %2$@. التالية: %3$@ في %4$@"
+          }
         }
       }
     },
@@ -337,6 +451,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@, %@, aktuelles Gebet"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "%1$@، %2$@، الصلاة الحالية"
           }
         }
       }
@@ -355,6 +475,12 @@
             "state": "translated",
             "value": "Aktuelles Gebet"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الصلاة الحالية"
+          }
         }
       }
     },
@@ -371,6 +497,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Das Gebet, dessen Zeit gerade läuft, und wann das nächste beginnt."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الصلاة التي حان وقتها، وموعد بدء الصلاة التالية."
           }
         }
       }
@@ -389,6 +521,12 @@
             "state": "translated",
             "value": "Als Nächstes: %@ um %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "التالية: %1$@ في %2$@"
+          }
         }
       }
     },
@@ -405,6 +543,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Iftar in %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الإفطار بعد %@"
           }
         }
       }
@@ -423,6 +567,12 @@
             "state": "translated",
             "value": "Suhoor endet in %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ينتهي السحور بعد %@"
+          }
         }
       }
     },
@@ -439,6 +589,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suhoor endet"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "نهاية السحور"
           }
         }
       }
@@ -457,6 +613,12 @@
             "state": "translated",
             "value": "Iftar"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الإفطار"
+          }
         }
       }
     },
@@ -474,6 +636,12 @@
             "state": "translated",
             "value": "Iftar %@"
           }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الإفطار %@"
+          }
         }
       }
     },
@@ -490,6 +658,12 @@
           "stringUnit": {
             "state": "translated",
             "value": "Suhoor endet %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "نهاية السحور %@"
           }
         }
       }

@@ -65,6 +65,22 @@ public struct PrayerTimeFormatter: Sendable {
     }
 }
 
+/// The civil (Gregorian) date line, e.g. "Monday, 9 November". Always Gregorian, even in locales whose default
+/// calendar is Islamic (ar_SA), because the Hijri date is shown on its own line.
+public enum CivilDate {
+    public static func string(for date: Date, timeZone: TimeZone, locale: Locale = .current) -> String {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = timeZone
+        calendar.locale = locale
+        let f = DateFormatter()
+        f.calendar = calendar
+        f.locale = locale
+        f.timeZone = timeZone
+        f.setLocalizedDateFormatFromTemplate("EEEEdMMMM")
+        return f.string(from: date)
+    }
+}
+
 public enum HijriDate {
     /// Localized Hijri date (Umm al-Qura calendar), e.g. "6 Rajab 1448 AH". `adjustmentDays` shifts it by whole
     /// days to match the local start of the month (+1 = one day later than the calendar).

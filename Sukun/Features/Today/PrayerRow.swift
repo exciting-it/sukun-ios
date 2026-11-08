@@ -13,6 +13,7 @@ struct PrayerRow: View {
 
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorSchemeContrast) private var contrast
 
     var body: some View {
         let layout = dynamicTypeSize.isAccessibilitySize
@@ -73,6 +74,8 @@ struct PrayerRow: View {
                     .fill(Palette.highlight)
             }
         }
+        // Past prayers fade back; with "Increase Contrast" they use readable grey instead (see textColor).
+        .opacity(isPast && contrast != .increased ? 0.5 : 1)
         .animation(.sukun(reduceMotion: reduceMotion), value: isCurrent)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityText)
@@ -83,8 +86,8 @@ struct PrayerRow: View {
         }
     }
 
-    /// Past prayers recede in color, not opacity, so they stay readable (WCAG AA).
-    private var textColor: Color { isPast ? Palette.secondaryText : Palette.text }
+    /// With "Increase Contrast" past prayers recede in color (readable grey) instead of fading.
+    private var textColor: Color { isPast && contrast == .increased ? Palette.secondaryText : Palette.text }
 
     private var accessibilityText: Text {
         let time = formatter.string(from: slot.date)

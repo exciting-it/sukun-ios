@@ -71,7 +71,7 @@ struct TodayView: View {
             Text(snapshot.hijriDate)
                 .font(.sukunCallout)
                 .foregroundStyle(Palette.text)
-            Text(snapshot.date.formatted(.dateTime.weekday(.wide).day().month(.wide)))
+            Text(CivilDate.string(for: snapshot.date, timeZone: snapshot.location.timeZone))
                 .font(.sukunCallout)
                 .foregroundStyle(Palette.secondaryText)
         }
