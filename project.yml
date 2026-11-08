@@ -15,7 +15,7 @@ settings:
     # ---- Identity: edit these before your first App Store upload (they can't change afterwards) ----
     SUKUN_BUNDLE_ID: com.jasonschell.sukun
     SUKUN_APP_GROUP: group.com.jasonschell.sukun
-    DEVELOPMENT_TEAM: ""            # your 10-character Team ID
+    DEVELOPMENT_TEAM: 5A57FGF7LP
     # ------------------------------------------------------------------------------------------------
     MARKETING_VERSION: "1.0.0"
     CURRENT_PROJECT_VERSION: "1"

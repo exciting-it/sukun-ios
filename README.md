@@ -20,7 +20,7 @@ Before the first run, set your identity in **one place**, the `settings.base` bl
 |---|---|---|
 | `SUKUN_BUNDLE_ID` | `com.jasonschell.sukun` | Reverse-DNS, globally unique, **cannot change after the first App Store upload** |
 | `SUKUN_APP_GROUP` | `group.com.jasonschell.sukun` | Must start with `group.`; shared by app and widget |
-| `DEVELOPMENT_TEAM` | `AB12CD34EF` | Your Team ID (developer.apple.com → Membership) |
+| `DEVELOPMENT_TEAM` | `5A57FGF7LP` | Your Team ID (developer.apple.com → Membership) |
 
 Re-run `xcodegen generate` after editing `project.yml`. With automatic signing, Xcode registers the
 App IDs and the App Group for you.
