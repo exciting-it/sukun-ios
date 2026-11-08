@@ -82,14 +82,7 @@ struct PrayerRow: View {
         // Voice Control: visible name, plain description and common spellings ("Show actions for Night prayer").
         .accessibilityInputLabels(slot.kind.voiceControlNames.map { Text(verbatim: $0) })
         .accessibilityValue(onToggleNotification == nil ? Text(verbatim: "") : (notificationEnabled ? Text("Notification on") : Text("Notification off")))
-        // Only rows with a bell offer the reminder action (sunrise has none).
-        .accessibilityActions {
-            if let onToggleNotification {
-                Button(notificationEnabled ? "Turn notification off" : "Turn notification on") {
-                    onToggleNotification(!notificationEnabled)
-                }
-            }
-        }
+        .modifier(ReminderAccessibility(enabled: notificationEnabled, toggle: onToggleNotification))
     }
 
     /// With "Increase Contrast" past prayers recede in color (readable grey) instead of fading.
@@ -99,5 +92,26 @@ struct PrayerRow: View {
         let time = formatter.string(from: slot.date)
         if isCurrent { return Text("\(slot.kind.localizedName), \(time), current prayer") }
         return Text("\(slot.kind.localizedName), \(time)")
+    }
+}
+
+/// The bell stays inside the row's single VoiceOver element. Rows with a bell read as a switch: a double tap
+/// toggles the reminder, and the same choice sits in the Actions rotor (and Voice Control's "Show actions").
+/// Sunrise has no bell, so it gets neither.
+private struct ReminderAccessibility: ViewModifier {
+    let enabled: Bool
+    let toggle: ((Bool) -> Void)?
+
+    func body(content: Content) -> some View {
+        if let toggle {
+            content
+                .accessibilityAddTraits(.isToggle)
+                .accessibilityAction { toggle(!enabled) }
+                .accessibilityAction(named: enabled ? Text("Turn notification off") : Text("Turn notification on")) {
+                    toggle(!enabled)
+                }
+        } else {
+            content
+        }
     }
 }

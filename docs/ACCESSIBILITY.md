@@ -23,7 +23,9 @@ Settings → Accessibility → VoiceOver on (or triple-click the side button if 
 
 1. **Onboarding** (delete and reinstall the app): both buttons ("Use my location", "Choose a city") are announced and work. City search: type a city, pick a result.
 2. **Today:** swipe through. Expect: location ("Location: Munich", hint "Change location"), Hijri date, date, the hero ("Current prayer: Isha since 18:25. Next: Fajr at 05:24"), each row ("Fajr, 05:24"; the current one ends with "current prayer", without "Selected").
-3. **Reminders:** on a row, swipe up/down for actions → "Turn notification on". The permission prompt appears; allow. Row value now says "Notification on".
+3. **Reminders:** a row with a bell reads as a switch ("Isha, 18:14, Notification off, switch button"). Double tap → the
+   permission prompt appears; allow. Row value now says "Notification on". Also try the Actions rotor on a row: swipe
+   up/down → "Turn notification off", double tap. Sunrise has no switch and no action.
 4. **Qibla:** focus the readout: "Qibla direction 130 degrees, Southeast", then the guidance as its value ("Turn right 20°"). Keep it focused and turn: VoiceOver re-reads the guidance as it changes. When aligned, VoiceOver announces "You are facing the Qibla." wherever focus is, and the haptic fires.
 5. **Settings:** change Method, Asr time, Adjust times (stepper: swipe up/down), Remind me before, Jumu'ah reminder (toggle, segmented choice, time picker), Ramadan mode, Hijri date stepper.
 6. **Feedback:** open, choose a type, dictate text, Send, hear "Thank you".
