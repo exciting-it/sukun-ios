@@ -38,6 +38,7 @@ Packages/SukunKit/   Shared Swift package (app + widget)
 Sukun/               App target: Today, Qibla compass, Settings, notifications, background refresh
 SukunWidgets/        Widget extension: small/medium/large/Qibla + Lock Screen accessories
 SukunTests/          App-level tests
+website/             sukun.faith (static, EN + DE): home, privacy, support, imprint
 docs/                App Store checklist, icon guide
 ```
 
@@ -81,3 +82,17 @@ refreshes it when the app becomes active and via a background app refresh task (
 `PrivacyInfo.xcprivacy` (app and widget) declares no tracking and no collected data. The only
 required-reason API is `UserDefaults` (CA92.1, 1C8F.1 for the App Group). City search uses Apple's
 MapKit; nothing is sent to any other service.
+
+## Website
+
+`website/` is plain HTML and CSS with no build step and no third-party requests (system fonts, inline SVG,
+no scripts, no cookies). `.github/workflows/pages.yml` publishes it to GitHub Pages on every push that
+touches `website/`.
+
+One-time setup: repository Settings → Pages → Source **GitHub Actions**, custom domain `sukun.faith`
+(`website/CNAME`), then at your DNS provider point the apex at GitHub Pages (A records 185.199.108.153,
+185.199.109.153, 185.199.110.153, 185.199.111.153) and enable **Enforce HTTPS**.
+Pages for a private repository needs a paid GitHub plan.
+
+Before publishing, replace the highlighted placeholders (name, address) in the privacy and imprint pages
+and make sure `support@sukun.faith` receives mail.
