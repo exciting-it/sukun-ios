@@ -9,12 +9,9 @@ struct UNAuthorizationStatusBox: Equatable {
     var isDenied: Bool { value == .denied }
 }
 
-/// Local prayer notifications only. iOS allows 64 pending requests per app, so we schedule a rolling
-/// window (up to 7 days) and refresh it whenever the app becomes active or a background refresh runs.
+/// Local notifications only. `NotificationPlan` (SukunKit) decides what fires when within iOS's 64-request
+/// limit; this turns the plan into requests whenever the app becomes active or a background refresh runs.
 enum NotificationScheduler {
-    static let identifierPrefix = "sukun.prayer."
-    private static let maxRequests = 60
-
     static func requestAuthorization() async -> Bool {
         let center = UNUserNotificationCenter.current()
         let status = await center.notificationSettings().authorizationStatus
@@ -35,37 +32,31 @@ enum NotificationScheduler {
         let center = UNUserNotificationCenter.current()
         let existing = await center.pendingNotificationRequests()
             .map(\.identifier)
-            .filter { $0.hasPrefix(identifierPrefix) }
+            .filter { $0.hasPrefix("sukun.") }
         center.removePendingNotificationRequests(withIdentifiers: existing)
 
-        let enabled = settings.notificationsEnabled
-        guard !enabled.isEmpty, let location else { return }
+        guard let location else { return }
+        // The plan decides everything (budget, one extra per prayer, Jumu'ah/Suhoor without the prayer toggle).
+        let plan = NotificationPlan.make(settings: settings, location: location, now: now)
+        guard !plan.isEmpty else { return }
         let status = await center.notificationSettings().authorizationStatus
         guard status == .authorized || status == .provisional || status == .ephemeral else { return }
 
-        let days = max(1, min(7, maxRequests / enabled.count))
-        let calculator = PrayerCalculator(location: location, settings: settings)
         let formatter = PrayerTimeFormatter(clockFormat: settings.clockFormat, timeZone: location.timeZone)
-        let slots = calculator
-            .slots(from: now, to: now.addingTimeInterval(Double(days) * 86_400))
-            .filter { enabled.contains($0.kind) }
-            .prefix(maxRequests)
-
-        for slot in slots {
+        for item in plan {
+            let text = NotificationText.content(for: item, formatter: formatter)
             let content = UNMutableNotificationContent()
-            let name = slot.kind.localizedName
-            let time = formatter.string(from: slot.date)
-            content.title = name
-            content.body = String(localized: "It’s time for \(name) · \(time)")
+            content.title = text.title
+            content.body = text.body
             if let place = location.name { content.subtitle = place }
             content.sound = .default
             content.threadIdentifier = "sukun.prayers"
             content.interruptionLevel = .active
 
-            let interval = slot.date.timeIntervalSince(now)
+            let interval = item.fireDate.timeIntervalSince(now)
             guard interval > 1 else { continue }
             let request = UNNotificationRequest(
-                identifier: identifierPrefix + slot.id,
+                identifier: item.id,
                 content: content,
                 trigger: UNTimeIntervalNotificationTrigger(timeInterval: interval, repeats: false)
             )

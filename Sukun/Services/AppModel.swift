@@ -17,8 +17,12 @@ final class AppModel {
     private(set) var isLocating = false
     var notificationStatus: UNAuthorizationStatusBox = .init(.notDetermined)
 
-    init(store: SharedStore = .shared) {
+    private let requestAuthorization: @Sendable () async -> Bool
+
+    init(store: SharedStore = .shared,
+         requestAuthorization: @escaping @Sendable () async -> Bool = { await NotificationScheduler.requestAuthorization() }) {
         self.store = store
+        self.requestAuthorization = requestAuthorization
         settings = store.settings
         gpsLocation = store.gpsLocation
         locationService.onAuthorizationChange = { [weak self] in
@@ -115,14 +119,33 @@ final class AppModel {
     // MARK: Notifications
 
     func setNotification(_ enabled: Bool, for kind: PrayerKind) async {
-        if enabled {
-            let granted = await NotificationScheduler.requestAuthorization()
-            await refreshNotificationStatus()
-            guard granted else { return }
-        }
+        guard await authorizeIfTurningOn(enabled) else { return }
         update {
             if enabled { $0.notificationsEnabled.insert(kind) } else { $0.notificationsEnabled.remove(kind) }
         }
+    }
+
+    func setEarlyReminder(_ minutes: Int?) async {
+        guard await authorizeIfTurningOn(minutes != nil) else { return }
+        update { $0.earlyReminderMinutes = minutes }
+    }
+
+    func setJumuahReminder(_ reminder: JumuahReminder?) async {
+        guard await authorizeIfTurningOn(reminder != nil) else { return }
+        update { $0.jumuahReminder = reminder }
+    }
+
+    func setSuhoorReminder(_ minutes: Int?) async {
+        guard await authorizeIfTurningOn(minutes != nil) else { return }
+        update { $0.suhoorReminderMinutes = minutes }
+    }
+
+    /// Turning a reminder on asks for notification permission first; turning off never does.
+    private func authorizeIfTurningOn(_ turningOn: Bool) async -> Bool {
+        guard turningOn else { return true }
+        let granted = await requestAuthorization()
+        await refreshNotificationStatus()
+        return granted
     }
 
     func refreshNotificationStatus() async {

@@ -1360,6 +1360,125 @@
           }
         }
       }
+    },
+    "Suhoor has ended · %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suhoor has ended · %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suhoor ist vorbei · %@"
+          }
+        }
+      }
+    },
+    "Time for Iftar · %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Time for Iftar · %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zeit für Iftar · %@"
+          }
+        }
+      }
+    },
+    "%@ in %lld min · %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ in %2$lld min · %3$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ in %2$lld Min. · %3$@"
+          }
+        }
+      }
+    },
+    "Jumu'ah": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jumu'ah"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jumu'ah"
+          }
+        }
+      }
+    },
+    "Today · Dhuhr %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Today · Dhuhr %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Heute · Dhuhr %@"
+          }
+        }
+      }
+    },
+    "Suhoor": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suhoor"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suhoor"
+          }
+        }
+      }
+    },
+    "Suhoor ends in %lld min · Fajr %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suhoor ends in %1$lld min · Fajr %2$@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suhoor endet in %1$lld Min. · Fajr %2$@"
+          }
+        }
+      }
     }
   },
   "version": "1.0"
