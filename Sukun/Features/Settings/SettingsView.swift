@@ -16,6 +16,7 @@ struct SettingsView: View {
                     locationSection
                     calculationSection
                     notificationSection
+                    ramadanSection
                     displaySection
                     feedbackSection
                     aboutSection
@@ -88,12 +89,25 @@ struct SettingsView: View {
                 }
             }
             .pickerStyle(.navigationLink)
+
+            NavigationLink {
+                AdjustTimesView()
+            } label: {
+                LabeledContent("Adjust times") {
+                    if let summary = AdjustmentSummary.text(model.settings.adjustments) {
+                        Text(summary)
+                    } else {
+                        Text("Off")
+                    }
+                }
+            }
         } header: {
             Text("Calculation")
         } footer: {
             if let location = model.location {
                 let resolved = CalculationConfiguration(settings: model.settings, location: location)
                 Text("In use: \(resolved.method.localizedName) · \(resolved.madhab.localizedName) · \(resolved.highLatitude.localizedName)")
+                    + (resolved.isAdjusted ? Text(" · adjusted") : Text(verbatim: ""))
             }
         }
     }
@@ -108,6 +122,21 @@ struct SettingsView: View {
                     set: { enabled in Task { await model.setNotification(enabled, for: kind) } }
                 ))
             }
+            Picker("Remind me before", selection: Binding(
+                get: { model.settings.earlyReminderMinutes },
+                set: { value in Task { await model.setEarlyReminder(value) } }
+            )) {
+                Text("Off").tag(Int?.none)
+                ForEach(ReminderChoices.early, id: \.self) { Text("\($0) min").tag(Int?.some($0)) }
+            }
+            .disabled(model.settings.notificationsEnabled.isEmpty)
+
+            NavigationLink {
+                JumuahReminderView()
+            } label: {
+                LabeledContent("Jumu'ah reminder") { Text(jumuahSummary) }
+            }
+
             if model.notificationStatus.isDenied {
                 Button("Allow notifications in Settings") {
                     if let url = URL(string: UIApplication.openNotificationSettingsURLString) { openURL(url) }
@@ -117,6 +146,47 @@ struct SettingsView: View {
             Text("Notifications")
         } footer: {
             Text("A gentle local reminder at the start of each selected prayer. Nothing is sent over the internet.")
+        }
+    }
+
+    private var jumuahSummary: String {
+        switch model.settings.jumuahReminder {
+        case nil: String(localized: "Off")
+        case .beforeDhuhr(let minutes): String(localized: "\(minutes) min before Dhuhr")
+        case .fixedTime(let hour, let minute):
+            Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: .now)
+                .map { $0.formatted(date: .omitted, time: .shortened) } ?? ""
+        }
+    }
+
+    // MARK: Ramadan
+
+    private var ramadanSection: some View {
+        Section {
+            Picker("Ramadan mode", selection: model.binding(\.ramadanMode)) {
+                ForEach(RamadanMode.allCases) { Text($0.localizedName).tag($0) }
+            }
+            Picker("Suhoor reminder", selection: Binding(
+                get: { model.settings.suhoorReminderMinutes },
+                set: { value in Task { await model.setSuhoorReminder(value) } }
+            )) {
+                Text("Off").tag(Int?.none)
+                ForEach(ReminderChoices.suhoor, id: \.self) { Text("\($0) min before Fajr").tag(Int?.some($0)) }
+            }
+            .disabled(model.settings.ramadanMode == .off)
+            Stepper(value: model.binding(\.hijriAdjustmentDays), in: ReminderChoices.hijriAdjustmentRange) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("Hijri date")
+                    Text(HijriDate.string(for: .now, timeZone: model.location?.timeZone ?? .current,
+                                          adjustmentDays: model.settings.hijriAdjustmentDays))
+                        .font(.footnote)
+                        .foregroundStyle(Palette.secondaryText)
+                }
+            }
+        } header: {
+            Text("Ramadan")
+        } footer: {
+            Text("Ramadan mode shows Suhoor and Iftar times. If Ramadan starts a day earlier or later where you live, adjust the Hijri date.")
         }
     }
 
