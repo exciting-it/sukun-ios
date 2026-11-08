@@ -5,13 +5,13 @@
   --sand: #f3eadb;
   --paper: #f6f1ea;
   --ink: #2e3a40;
-  --ink-soft: #5f6b70;
-  --sage: #2f6b4f;
-  --sage-fill: rgba(47, 107, 79, 0.12);
-  --night: #0f1b2a;
+  --ink-soft: #525d62;
+  --sage: #2b6449;
+  --sage-fill: rgba(43, 100, 73, 0.12);
+  --night: #0b0e0d;
   --night-ink: #f3f0ea;
-  --night-soft: #a7b1bd;
-  --gold: #8cc3a5; /* footer links on night blue: Sukun green, dark variant */
+  --night-soft: #a4aaa7;
+  --gold: #8cc3a5; /* footer links on the night footer: Sukun green, dark variant */
   --rule: rgba(46, 58, 64, 0.12);
   --card: rgba(255, 252, 247, 0.72);
 
@@ -24,15 +24,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --dawn: #2b3050;
-    --sand: #1c2e44;
-    --paper: #0f1b2a;
+    --dawn: #352a42;
+    --sand: #2a241d;
+    --paper: #111413;
     --ink: #f3f0ea;
-    --ink-soft: #a7b1bd;
+    --ink-soft: #a4aaa7;
     --sage: #8cc3a5;
-    --sage-fill: rgba(95, 165, 130, 0.22);
+    --sage-fill: rgba(111, 184, 146, 0.16);
     --rule: rgba(243, 240, 234, 0.12);
-    --card: rgba(22, 38, 58, 0.78);
+    --card: rgba(27, 32, 30, 0.9);
   }
 }
 
@@ -253,7 +253,8 @@ address { font-style: normal; }
 .day .past { opacity: 0.5; }
 
 .day .next { background: var(--sage-fill); }
-.day .next .name, .day .next svg { color: var(--sage); }
+/* Current prayer: text color like the time; the soft green wash is the only accent. */
+.day .next .name, .day .next svg { color: var(--ink); }
 
 .day-figure { margin: 3.5rem 0 3rem; }
 .day-figure figcaption { margin-top: 0.75rem; }

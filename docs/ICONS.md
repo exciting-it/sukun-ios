@@ -6,7 +6,7 @@ The repository ships **placeholder** icons (an eight-pointed star) in
 | File | Use | Notes |
 |---|---|---|
 | `AppIcon.png` | Default (light) | 1024×1024, opaque, sRGB |
-| `AppIcon-Dark.png` | Dark appearance | Night blue + gold |
+| `AppIcon-Dark.png` | Dark appearance | Charcoal + Sukun green |
 | `AppIcon-Tinted.png` | Tinted appearance | Grayscale on black; iOS applies the tint |
 
 ## Making the final icon
@@ -15,7 +15,7 @@ The repository ships **placeholder** icons (an eight-pointed star) in
    No rounded corners, no transparency, no text.
 2. Export three variants:
    - **Light:** sand background `#F6F1EA` → `#EFE6D8`, sage motif `#8FA998`
-   - **Dark:** night blue `#0F1B2A`, gold motif `#C9A96E`. A transparent background is allowed for dark;
+   - **Dark:** charcoal `#0E1110` → `#171B1A`, green motif `#8CC3A5` (matches the app's dark mode). A transparent background is allowed for dark;
      iOS fills it with its own dark backdrop.
    - **Tinted:** grayscale motif (light grey on black). iOS colors it with the user's tint.
 3. Replace the three PNGs, keeping the file names, or drag them into Xcode's AppIcon slots
