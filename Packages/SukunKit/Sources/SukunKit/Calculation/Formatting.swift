@@ -1,0 +1,76 @@
+import Foundation
+
+/// Formats prayer times honoring the user's 12/24h preference and the location's time zone.
+public struct PrayerTimeFormatter: Sendable {
+    public let clockFormat: ClockFormat
+    public let timeZone: TimeZone
+    public let locale: Locale
+
+    public init(clockFormat: ClockFormat, timeZone: TimeZone, locale: Locale = .current) {
+        self.clockFormat = clockFormat
+        self.timeZone = timeZone
+        self.locale = locale
+    }
+
+    public func string(from date: Date) -> String {
+        formatter(includePeriod: true).string(from: date)
+    }
+
+    /// Time without AM/PM marker, for large numerals. Pair with `periodSymbol(for:)`.
+    public func numerals(from date: Date) -> String {
+        formatter(includePeriod: false).string(from: date)
+    }
+
+    /// "AM"/"PM" when a 12-hour clock is in effect, otherwise nil.
+    public func periodSymbol(for date: Date) -> String? {
+        guard uses12Hour else { return nil }
+        let f = DateFormatter()
+        f.locale = locale
+        f.timeZone = timeZone
+        f.dateFormat = "a"
+        return f.string(from: date)
+    }
+
+    public var uses12Hour: Bool {
+        switch clockFormat {
+        case .twelveHour: return true
+        case .twentyFourHour: return false
+        case .system:
+            let format = DateFormatter.dateFormat(fromTemplate: "j", options: 0, locale: locale) ?? ""
+            return format.contains("a")
+        }
+    }
+
+    private func formatter(includePeriod: Bool) -> DateFormatter {
+        let f = DateFormatter()
+        f.locale = locale
+        f.timeZone = timeZone
+        if uses12Hour {
+            f.dateFormat = includePeriod ? "h:mm a" : "h:mm"
+        } else {
+            f.dateFormat = "HH:mm"
+        }
+        return f
+    }
+}
+
+public enum HijriDate {
+    /// Localized Hijri date (Umm al-Qura calendar), e.g. "6 Rajab 1448 AH".
+    public static func string(for date: Date, timeZone: TimeZone, locale: Locale = .current) -> String {
+        var calendar = Calendar(identifier: .islamicUmmAlQura)
+        calendar.timeZone = timeZone
+        calendar.locale = locale
+        let f = DateFormatter()
+        f.calendar = calendar
+        f.locale = locale
+        f.timeZone = timeZone
+        f.setLocalizedDateFormatFromTemplate("dMMMMyG")
+        return f.string(from: date)
+    }
+
+    public static func components(for date: Date, timeZone: TimeZone) -> DateComponents {
+        var calendar = Calendar(identifier: .islamicUmmAlQura)
+        calendar.timeZone = timeZone
+        return calendar.dateComponents([.year, .month, .day], from: date)
+    }
+}
