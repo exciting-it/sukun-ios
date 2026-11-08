@@ -79,6 +79,8 @@ struct PrayerRow: View {
         .animation(.sukun(reduceMotion: reduceMotion), value: isCurrent)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityText)
+        // Voice Control: the row answers to its visible name ("Show actions for Isha" reaches the bell).
+        .accessibilityInputLabels([Text(slot.kind.localizedName)])
         .accessibilityValue(onToggleNotification == nil ? Text(verbatim: "") : (notificationEnabled ? Text("Notification on") : Text("Notification off")))
         .accessibilityAddTraits(isCurrent ? .isSelected : [])
         .accessibilityAction(named: notificationEnabled ? Text("Turn notification off") : Text("Turn notification on")) {

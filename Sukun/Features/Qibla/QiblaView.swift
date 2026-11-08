@@ -4,6 +4,7 @@ import SwiftUI
 struct QiblaView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Environment(\.colorSchemeContrast) private var contrast
     @State private var headingService = HeadingService()
     /// Continuous (unwrapped) heading so the dial never spins the long way round at 359° → 0°.
     @State private var unwrappedHeading: Double = 0
@@ -73,7 +74,7 @@ struct QiblaView: View {
         VStack(spacing: 10) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text("\(Int(bearing.rounded()))°")
-                    .font(.sukunNumerals(bearingSize, weight: .thin))
+                    .font(.sukunNumerals(bearingSize, weight: contrast == .increased ? .light : .thin))
                     .foregroundStyle(Palette.text)
                 Text(point.abbreviation)
                     .font(.sukunTitle)

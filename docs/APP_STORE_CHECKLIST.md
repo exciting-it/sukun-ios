@@ -49,6 +49,11 @@ Debug builds accept `-SukunInitialTab today|qibla|settings`, e.g.
 `xcrun simctl launch booted faith.sukun.ios -AppleLanguages "(de)" -AppleLocale de_DE -SukunInitialTab qibla`.
 The Qibla shot should come from a real device (the simulator has no compass).
 
+## 4b. Accessibility (App Store Connect → Accessibility)
+- [x] Dark Interface, Larger Text, Differentiate Without Color Alone, Reduced Motion, Sufficient Contrast (see `ACCESSIBILITY.md`)
+- [ ] VoiceOver and Voice Control: run the device passes in `ACCESSIBILITY.md`, then tick them
+- [ ] Captions / Audio Descriptions: leave unticked (no audio or video)
+
 ## 5. App Privacy ("nutrition label")
 - [ ] Location is only processed on device and never sent off it, so it isn't "collected" in Apple's sense.
   City search goes to Apple's MapKit, which is Apple's own processing and isn't declared by the app.

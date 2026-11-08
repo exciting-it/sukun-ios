@@ -59,6 +59,8 @@ struct TodayView: View {
             }
             .buttonStyle(.plain)
             .accessibilityLabel(Text("Location: \(snapshot.location.displayName)"))
+            // Voice Control: "Tap Munich" (what's on screen) and "Tap Change location" both work.
+            .accessibilityInputLabels([Text(verbatim: snapshot.location.displayName), Text("Change location")])
             .accessibilityHint(Text("Change location"))
 
             #if DEBUG
@@ -91,6 +93,7 @@ struct TodayView: View {
 /// Between sunrise and Dhuhr no prayer is running, so it features the upcoming Dhuhr instead.
 struct FeaturedPrayerHero: View {
     @Environment(AppModel.self) private var model
+    @Environment(\.colorSchemeContrast) private var contrast
     let snapshot: PrayerSnapshot
     let numeralSize: CGFloat
 
@@ -104,7 +107,7 @@ struct FeaturedPrayerHero: View {
                 .foregroundStyle(isRunning ? Palette.text : Palette.secondaryText)
             HStack(alignment: .firstTextBaseline, spacing: 6) {
                 Text(formatter.numerals(from: featured.date))
-                    .font(.sukunNumerals(numeralSize, weight: .thin))
+                    .font(.sukunNumerals(numeralSize, weight: contrast == .increased ? .light : .thin)) // thin strokes fail contrast; one step heavier with Increase Contrast
                     .foregroundStyle(Palette.text)
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
