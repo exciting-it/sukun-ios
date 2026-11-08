@@ -16,6 +16,7 @@ struct JumuahReminderView: View {
                         get: { reminder != nil },
                         set: { on in Task { await model.setJumuahReminder(on ? .defaultReminder : nil) } }
                     ))
+                    NotificationPermissionRow()
                 } footer: {
                     Text("On Fridays. “Before Dhuhr” follows the season; a set time suits mosques with a fixed khutbah.")
                 }
@@ -48,6 +49,7 @@ struct JumuahReminderView: View {
         .scrollContentBackground(.hidden)
         .background(Palette.background.ignoresSafeArea())
         .navigationTitle("Jumu'ah")
+        .task { await model.refreshNotificationStatus() }
         .navigationBarTitleDisplayMode(.inline)
     }
 

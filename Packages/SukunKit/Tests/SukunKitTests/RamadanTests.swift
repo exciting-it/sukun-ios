@@ -91,4 +91,22 @@ final class RamadanTests: XCTestCase {
         s.adjustments = [.maghrib: 5]
         XCTAssertEqual(ramadan(at: firstDay.addingTimeInterval(12 * 3600), s), .iftar(plainMaghrib.addingTimeInterval(300)))
     }
+
+    /// Row labels ("Iftar", "Suhoor ends") belong to the fasting day shown in the list, not to the countdown:
+    /// the eve's Maghrib is not an Iftar, the last day's Maghrib is.
+    func testRamadanDayFollowsTheListedDayNotTheCountdown() {
+        let s = settings()
+        let eveEvening = PrayerSnapshot(date: time(.maghrib, on: day(firstDay, -1), settings: s).addingTimeInterval(60),
+                                        location: Fixtures.munich, settings: s)!
+        XCTAssertNotNil(eveEvening.ramadan)
+        XCTAssertFalse(eveEvening.isRamadanDay)
+
+        let lastEvening = PrayerSnapshot(date: time(.maghrib, on: lastDay, settings: s).addingTimeInterval(60),
+                                         location: Fixtures.munich, settings: s)!
+        XCTAssertNil(lastEvening.ramadan)
+        XCTAssertTrue(lastEvening.isRamadanDay)
+
+        XCTAssertTrue(PrayerSnapshot(date: day(firstDay, -60), location: Fixtures.munich, settings: settings(.on))!.isRamadanDay)
+        XCTAssertFalse(PrayerSnapshot(date: firstDay, location: Fixtures.munich, settings: settings(.off))!.isRamadanDay)
+    }
 }

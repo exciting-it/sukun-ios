@@ -45,7 +45,9 @@ public enum NotificationPlan {
         guard let end = calendar.date(byAdding: .day, value: days, to: now) else { return [] }
 
         var items: [PlannedNotification] = []
-        var day = calendar.startOfDay(for: now)
+        // Start with yesterday: at high latitudes in summer its Isha can fall after midnight, i.e. after `now`.
+        // The fireDate filter below drops everything already past.
+        var day = calendar.date(byAdding: .day, value: -1, to: calendar.startOfDay(for: now)) ?? calendar.startOfDay(for: now)
         while day < end {
             if let schedule = calculator.schedule(for: day) {
                 items += plan(for: schedule, settings: settings, calendar: calendar, timeZone: location.timeZone)

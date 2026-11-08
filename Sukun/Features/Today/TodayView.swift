@@ -166,7 +166,7 @@ struct PrayerListCard: View {
     }
 
     private func ramadanLabel(for kind: PrayerKind) -> LocalizedStringKey? {
-        guard snapshot.ramadan != nil else { return nil }
+        guard snapshot.isRamadanDay else { return nil }
         switch kind {
         case .fajr: return "Suhoor ends"
         case .maghrib: return "Iftar"

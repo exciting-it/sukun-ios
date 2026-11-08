@@ -137,11 +137,7 @@ struct SettingsView: View {
                 LabeledContent("Jumu'ah reminder") { Text(jumuahSummary) }
             }
 
-            if model.notificationStatus.isDenied {
-                Button("Allow notifications in Settings") {
-                    if let url = URL(string: UIApplication.openNotificationSettingsURLString) { openURL(url) }
-                }
-            }
+            NotificationPermissionRow()
         } header: {
             Text("Notifications")
         } footer: {

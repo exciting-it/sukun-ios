@@ -140,6 +140,24 @@ final class NotificationPlanTests: XCTestCase {
         XCTAssertTrue(berlin.isDate(suhoorDays[0], inSameDayAs: first))
     }
 
+    func testIshaAfterMidnightSurvivesARescheduleJustAfterMidnight() throws {
+        // Munich, 21 June 2027, "middle of the night": Isha of the 20th falls after midnight (~00:12).
+        var s = settings([.isha])
+        s.highLatitude = .middleOfTheNight
+        let calculator = PrayerCalculator(location: Fixtures.munich, settings: s)
+        let isha = try XCTUnwrap(calculator.schedule(for: Fixtures.date(2027, 6, 20, 12, 0, tz: "Europe/Berlin"))?.time(for: .isha))
+        let midnight = Fixtures.date(2027, 6, 21, 0, 0, tz: "Europe/Berlin")
+        try XCTSkipUnless(isha > midnight, "fixture assumption: Isha after midnight")
+        let items = plan(s, now: midnight.addingTimeInterval(60))
+        XCTAssertTrue(prayerSlots(items).contains { $0.date == isha }, "yesterday's Isha after midnight must stay scheduled")
+    }
+
+    func testSuhoorStandsAloneWithoutPrayerToggles() {
+        let items = plan(settings([], ramadan: .on, suhoor: 30), now: Fixtures.date(2026, 12, 15, 10, 0, tz: "Europe/Berlin"))
+        XCTAssertFalse(items.isEmpty)
+        XCTAssertTrue(items.allSatisfy { if case .suhoor = $0.content { true } else { false } })
+    }
+
     func testEmptyWhenNothingEnabled() {
         XCTAssertTrue(plan(settings([]), now: Fixtures.date(2026, 12, 15, 10, 0, tz: "Europe/Berlin")).isEmpty)
     }

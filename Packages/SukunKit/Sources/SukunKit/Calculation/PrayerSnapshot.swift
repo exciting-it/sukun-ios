@@ -65,6 +65,18 @@ public struct PrayerSnapshot: Hashable, Sendable {
         PrayerTimeFormatter(clockFormat: settings.clockFormat, timeZone: location.timeZone)
     }
 
+    /// Whether the listed day (`today`) is a fasting day: drives the "Iftar" / "Suhoor ends" row labels.
+    /// Differs from `ramadan` around Maghrib: the eve's evening already counts down to Suhoor, but that
+    /// Maghrib was no Iftar; the last day's Maghrib was an Iftar even though the countdown has ended.
+    public var isRamadanDay: Bool {
+        switch settings.ramadanMode {
+        case .on: true
+        case .off: false
+        case .automatic: Ramadan.isRamadanDay(today.day, timeZone: location.timeZone,
+                                              adjustmentDays: settings.hijriAdjustmentDays)
+        }
+    }
+
     public var hijriDate: String {
         HijriDate.string(for: date, timeZone: location.timeZone, adjustmentDays: settings.hijriAdjustmentDays)
     }
