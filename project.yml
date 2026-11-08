@@ -1,0 +1,140 @@
+# Generate the Xcode project with:  brew install xcodegen && xcodegen generate
+# Change identifiers in ONE place: the SUKUN_* settings below.
+name: Sukun
+
+options:
+  bundleIdPrefix: com.jasonschell
+  deploymentTarget:
+    iOS: "17.0"
+  developmentLanguage: en
+  createIntermediateGroups: true
+  groupSortPosition: top
+
+settings:
+  base:
+    # ---- Identity: edit these before your first App Store upload (they can't change afterwards) ----
+    SUKUN_BUNDLE_ID: com.jasonschell.sukun
+    SUKUN_APP_GROUP: group.com.jasonschell.sukun
+    DEVELOPMENT_TEAM: ""            # your 10-character Team ID
+    # ------------------------------------------------------------------------------------------------
+    MARKETING_VERSION: "1.0.0"
+    CURRENT_PROJECT_VERSION: "1"
+    SWIFT_VERSION: "5.0"
+    SWIFT_STRICT_CONCURRENCY: minimal
+    TARGETED_DEVICE_FAMILY: "1"
+    CODE_SIGN_STYLE: Automatic
+    LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+    SWIFT_EMIT_LOC_STRINGS: YES
+    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    DEAD_CODE_STRIPPING: YES
+
+packages:
+  SukunKit:
+    path: Packages/SukunKit
+
+targets:
+  Sukun:
+    type: application
+    platform: iOS
+    sources:
+      - path: Sukun
+    dependencies:
+      - package: SukunKit
+      - target: SukunWidgets
+    entitlements:
+      path: Sukun/Sukun.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - $(SUKUN_APP_GROUP)
+    info:
+      path: Sukun/Info.plist
+      properties:
+        CFBundleDisplayName: Sukun
+        CFBundleLocalizations: [en, de]
+        LSApplicationCategoryType: public.app-category.lifestyle
+        ITSAppUsesNonExemptEncryption: false
+        SukunAppGroup: $(SUKUN_APP_GROUP)
+        NSLocationWhenInUseUsageDescription: >-
+          Sukun uses your location to calculate accurate prayer times and the Qibla direction,
+          in the app and in its widgets. Your location stays on your device.
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+        UIBackgroundModes:
+          - fetch
+        BGTaskSchedulerPermittedIdentifiers:
+          - app.sukun.refresh
+        CFBundleURLTypes:
+          - CFBundleURLName: $(PRODUCT_BUNDLE_IDENTIFIER)
+            CFBundleURLSchemes: [sukun]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(SUKUN_BUNDLE_ID)
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ENABLE_PREVIEWS: YES
+
+  SukunWidgets:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: SukunWidgets
+    dependencies:
+      - package: SukunKit
+      - sdk: WidgetKit.framework
+      - sdk: SwiftUI.framework
+    entitlements:
+      path: SukunWidgets/SukunWidgets.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - $(SUKUN_APP_GROUP)
+    info:
+      path: SukunWidgets/Info.plist
+      properties:
+        CFBundleDisplayName: Sukun
+        CFBundleLocalizations: [en, de]
+        SukunAppGroup: $(SUKUN_APP_GROUP)
+        NSWidgetWantsLocation: true
+        NSLocationWhenInUseUsageDescription: >-
+          Sukun uses your location to calculate accurate prayer times and the Qibla direction,
+          in the app and in its widgets. Your location stays on your device.
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(SUKUN_BUNDLE_ID).widgets
+        SKIP_INSTALL: YES
+        ENABLE_PREVIEWS: YES
+
+  SukunTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: SukunTests
+    dependencies:
+      - target: Sukun
+      - package: SukunKit
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(SUKUN_BUNDLE_ID).tests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  Sukun:
+    build:
+      targets:
+        Sukun: all
+        SukunWidgets: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+      gatherCoverageData: true
+      targets:
+        - SukunTests
+        - package: SukunKit/SukunKitTests
+    archive:
+      config: Release
