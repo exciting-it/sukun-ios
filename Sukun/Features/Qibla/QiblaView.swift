@@ -45,8 +45,9 @@ struct QiblaView: View {
                 // The compass shouldn't move: no scrolling or bouncing unless large text needs it.
                 .scrollBounceBehavior(.basedOnSize)
             }
-            .sensoryFeedback(.impact(flexibility: .soft, intensity: 0.7), trigger: isAligned) { _, aligned in
-                aligned && model.settings.qiblaHaptics
+            // A clear double tap ("success") the moment you face the Qibla; nothing when you turn away.
+            .sensoryFeedback(trigger: isAligned) { _, aligned in
+                aligned && model.settings.qiblaHaptics ? .success : nil
             }
             .onAppear { headingService.start() }
             .onDisappear { headingService.stop() }
