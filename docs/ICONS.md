@@ -14,7 +14,7 @@ The repository ships **placeholder** icons (an eight-pointed star) in
 1. Design on a **1024 × 1024 px** canvas. Keep the motif inside the central ~80% (iOS masks the corners).
    No rounded corners, no transparency, no text.
 2. Export three variants:
-   - **Light:** sand background `#F6F1EA` → `#EFE6D8`, sage motif `#8FA998`
+   - **Light:** sand background `#EFE6D8` → `#F6F1EA`, green motif `#4E8A6A` (the app's accent)
    - **Dark:** charcoal `#0E1110` → `#171B1A`, green motif `#8CC3A5` (matches the app's dark mode). A transparent background is allowed for dark;
      iOS fills it with its own dark backdrop.
    - **Tinted:** grayscale motif (light grey on black). iOS colors it with the user's tint.
