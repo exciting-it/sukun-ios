@@ -20,6 +20,8 @@ public struct PrayerSnapshot: Hashable, Sendable {
     /// Last boundary at or before `date` (may be sunrise or yesterday's Isha).
     public let previous: PrayerSlot
     public let period: DayPeriod
+    /// Iftar / Suhoor countdown while Ramadan mode is active, else nil.
+    public let ramadan: RamadanState?
     public let qiblaBearing: Double
     public let qiblaDistanceKilometers: Double
 
@@ -41,6 +43,7 @@ public struct PrayerSnapshot: Hashable, Sendable {
         self.next = next
         self.previous = previous
         self.period = DayPeriod(after: previous.kind)
+        self.ramadan = Ramadan.state(at: date, today: today, calculator: calculator, settings: settings)
         self.qiblaBearing = QiblaCalculator.bearing(from: location.coordinate)
         self.qiblaDistanceKilometers = QiblaCalculator.distanceKilometers(from: location.coordinate)
     }
@@ -62,7 +65,9 @@ public struct PrayerSnapshot: Hashable, Sendable {
         PrayerTimeFormatter(clockFormat: settings.clockFormat, timeZone: location.timeZone)
     }
 
-    public var hijriDate: String { HijriDate.string(for: date, timeZone: location.timeZone) }
+    public var hijriDate: String {
+        HijriDate.string(for: date, timeZone: location.timeZone, adjustmentDays: settings.hijriAdjustmentDays)
+    }
 
     public var qiblaCompassPoint: CompassPoint { CompassPoint(degrees: qiblaBearing) }
 

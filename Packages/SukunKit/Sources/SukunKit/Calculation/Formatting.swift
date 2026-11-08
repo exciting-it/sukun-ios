@@ -66,8 +66,10 @@ public struct PrayerTimeFormatter: Sendable {
 }
 
 public enum HijriDate {
-    /// Localized Hijri date (Umm al-Qura calendar), e.g. "6 Rajab 1448 AH".
-    public static func string(for date: Date, timeZone: TimeZone, locale: Locale = .current) -> String {
+    /// Localized Hijri date (Umm al-Qura calendar), e.g. "6 Rajab 1448 AH". `adjustmentDays` shifts it by whole
+    /// days to match the local start of the month (+1 = one day later than the calendar).
+    public static func string(for date: Date, timeZone: TimeZone, adjustmentDays: Int = 0, locale: Locale = .current) -> String {
+        let date = shifted(date, by: adjustmentDays, timeZone: timeZone)
         var calendar = Calendar(identifier: .islamicUmmAlQura)
         calendar.timeZone = timeZone
         calendar.locale = locale
@@ -79,9 +81,16 @@ public enum HijriDate {
         return f.string(from: date)
     }
 
-    public static func components(for date: Date, timeZone: TimeZone) -> DateComponents {
+    public static func components(for date: Date, timeZone: TimeZone, adjustmentDays: Int = 0) -> DateComponents {
         var calendar = Calendar(identifier: .islamicUmmAlQura)
         calendar.timeZone = timeZone
-        return calendar.dateComponents([.year, .month, .day], from: date)
+        return calendar.dateComponents([.year, .month, .day], from: shifted(date, by: adjustmentDays, timeZone: timeZone))
+    }
+
+    private static func shifted(_ date: Date, by days: Int, timeZone: TimeZone) -> Date {
+        guard days != 0 else { return date }
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = timeZone
+        return calendar.date(byAdding: .day, value: days, to: date) ?? date
     }
 }
