@@ -74,8 +74,19 @@ tests allow ±2 minutes because Adhan applies small per-method safety offsets.
 
 ## Notifications
 
-Local only. iOS caps pending notifications at 64, so Sukun keeps a rolling window of up to 7 days and
-refreshes it when the app becomes active and via a background app refresh task (`faith.sukun.ios.refresh`).
+Local only. `NotificationPlan` (SukunKit) decides what fires when; the app turns it into requests when it
+becomes active and via a background app refresh task (`faith.sukun.ios.refresh`). Rules:
+
+- iOS caps pending notifications at 64; the plan keeps at most 60 over a rolling window of up to 7 days.
+- Per prayer: the prayer notification plus at most one extra. Suhoor (Ramadan) replaces Fajr's early
+  reminder; Jumu'ah (Friday) replaces Dhuhr's. Jumu'ah and Suhoor work without the prayer's own toggle.
+- Reminders whose time has passed are skipped, not sent late. Days and weekdays are the location's.
+
+## Adjustments and Ramadan
+
+Per-time adjustments (−30…+30 min) live in `CalculationConfiguration`, so app, widgets and notifications
+always agree. Ramadan mode (Automatic/On/Off) runs from Maghrib on the eve of 1 Ramadan to Maghrib on its last
+day; the Hijri correction (−2…+2 days) shifts both the displayed date and this window.
 
 ## Privacy
 
