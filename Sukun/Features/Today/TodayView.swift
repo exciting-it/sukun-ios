@@ -67,7 +67,8 @@ struct TodayView: View {
     }
 
     private func footer(_ snapshot: PrayerSnapshot) -> some View {
-        Text(snapshot.configuration.method.localizedName)
+        (Text(snapshot.configuration.method.localizedName)
+            + (snapshot.configuration.isAdjusted ? Text(" · adjusted") : Text(verbatim: "")))
             .font(.caption)
             .foregroundStyle(Palette.secondaryText)
             .multilineTextAlignment(.center)
@@ -100,8 +101,12 @@ struct FeaturedPrayerHero: View {
                         .foregroundStyle(Palette.secondaryText)
                 }
             }
+            // In Ramadan the Suhoor/Iftar line often counts to the same instant (Fajr, Maghrib); show it once.
+            let ramadanCoversHint = snapshot.ramadan?.countdown.date == snapshot.upcoming.date
             Group {
-                if isRunning {
+                if ramadanCoversHint {
+                    EmptyView()
+                } else if isRunning {
                     Text("\(snapshot.upcoming.kind.localizedName) in \(Text(snapshot.upcoming.date, style: .timer))")
                 } else {
                     Text("in \(Text(snapshot.upcoming.date, style: .timer))")
@@ -109,10 +114,25 @@ struct FeaturedPrayerHero: View {
             }
             .font(.sukunBody.monospacedDigit())
             .foregroundStyle(Palette.secondaryText)
+
+            if let ramadan = snapshot.ramadan {
+                RamadanLine(state: ramadan)
+                    .font(.sukunBody.monospacedDigit())
+                    .foregroundStyle(Palette.accentText)
+            }
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityLabel(formatter))
         .accessibilityValue(Text(snapshot.upcoming.date, style: .relative))
+        .accessibilityHint(ramadanHint)
+    }
+
+    private var ramadanHint: Text {
+        switch snapshot.ramadan?.countdown {
+        case .iftar(let date): Text("Iftar in \(Text(date, style: .relative))")
+        case .suhoorEnds(let date): Text("Suhoor ends in \(Text(date, style: .relative))")
+        case nil: Text(verbatim: "")
+        }
     }
 
     private func accessibilityLabel(_ formatter: PrayerTimeFormatter) -> Text {
@@ -137,17 +157,39 @@ struct PrayerListCard: View {
                     isPast: snapshot.isPast(slot),
                     formatter: snapshot.formatter,
                     notificationEnabled: model.settings.notificationsEnabled.contains(slot.kind),
-                    onToggleNotification: toggleAction(for: slot.kind)
+                    onToggleNotification: toggleAction(for: slot.kind),
+                    ramadanLabel: ramadanLabel(for: slot.kind)
                 )
             }
         }
         .sukunCard(padding: 8)
     }
 
+    private func ramadanLabel(for kind: PrayerKind) -> LocalizedStringKey? {
+        guard snapshot.ramadan != nil else { return nil }
+        switch kind {
+        case .fajr: return "Suhoor ends"
+        case .maghrib: return "Iftar"
+        default: return nil
+        }
+    }
+
     private func toggleAction(for kind: PrayerKind) -> ((Bool) -> Void)? {
         guard kind.isObligatory else { return nil }
         return { enabled in
             Task { await model.setNotification(enabled, for: kind) }
+        }
+    }
+}
+
+/// "Iftar in 3:21:10" during the fast, "Suhoor ends in 6:12:40" at night (Ramadan mode).
+struct RamadanLine: View {
+    let state: RamadanState
+
+    var body: some View {
+        switch state.countdown {
+        case .iftar(let date): Text("Iftar in \(Text(date, style: .timer))")
+        case .suhoorEnds(let date): Text("Suhoor ends in \(Text(date, style: .timer))")
         }
     }
 }

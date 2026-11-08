@@ -74,8 +74,14 @@ struct SmallNextPrayerView: View {
             .lineLimit(1)
             .minimumScaleFactor(0.6)
 
-            UpcomingHint(snapshot: snapshot)
-                .font(.system(.footnote, design: .rounded).monospacedDigit())
+            Group {
+                if let ramadan = snapshot.ramadan {
+                    RamadanLine(state: ramadan)
+                } else {
+                    UpcomingHint(snapshot: snapshot)
+                }
+            }
+            .font(.system(.footnote, design: .rounded).monospacedDigit())
                 .foregroundStyle(Palette.secondaryText)
                 .lineLimit(1)
                 .minimumScaleFactor(0.8)
@@ -123,8 +129,14 @@ struct RectangularAccessory: View {
             .widgetAccentable()
             Text(snapshot.formatter.string(from: featured.date))
                 .font(.system(.body, design: .rounded).monospacedDigit())
-            UpcomingHint(snapshot: snapshot)
-                .font(.system(.caption, design: .rounded).monospacedDigit())
+            Group {
+                if let ramadan = snapshot.ramadan {
+                    RamadanLine(state: ramadan)
+                } else {
+                    UpcomingHint(snapshot: snapshot)
+                }
+            }
+            .font(.system(.caption, design: .rounded).monospacedDigit())
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)

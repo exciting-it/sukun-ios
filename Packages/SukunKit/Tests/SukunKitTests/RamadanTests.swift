@@ -84,4 +84,11 @@ final class RamadanTests: XCTestCase {
         XCTAssertNotNil(ramadan(at: rajabNoon, settings(.on)))
         XCTAssertNil(ramadan(at: firstDay.addingTimeInterval(12 * 3600), settings(.off)))
     }
+
+    func testSnapshotRamadanUsesAdjustedTimes() {
+        var s = settings(.on)
+        let plainMaghrib = time(.maghrib, on: firstDay, settings: s)
+        s.adjustments = [.maghrib: 5]
+        XCTAssertEqual(ramadan(at: firstDay.addingTimeInterval(12 * 3600), s), .iftar(plainMaghrib.addingTimeInterval(300)))
+    }
 }

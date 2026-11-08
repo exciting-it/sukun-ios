@@ -8,6 +8,8 @@ struct PrayerRow: View {
     let formatter: PrayerTimeFormatter
     let notificationEnabled: Bool
     let onToggleNotification: ((Bool) -> Void)?
+    /// "Suhoor ends" / "Iftar" under Fajr and Maghrib while Ramadan mode is active.
+    var ramadanLabel: LocalizedStringKey? = nil
 
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
@@ -24,9 +26,16 @@ struct PrayerRow: View {
                     .frame(width: 24)
                     .foregroundStyle(isCurrent ? Palette.accentText : Palette.secondaryText)
                     .accessibilityHidden(true)
-                Text(slot.kind.localizedName)
-                    .font(.system(.body, design: .rounded, weight: isCurrent ? .semibold : .regular))
-                    .foregroundStyle(isCurrent ? Palette.accentText : Palette.text)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text(slot.kind.localizedName)
+                        .font(.system(.body, design: .rounded, weight: isCurrent ? .semibold : .regular))
+                        .foregroundStyle(isCurrent ? Palette.accentText : Palette.text)
+                    if let ramadanLabel {
+                        Text(ramadanLabel)
+                            .font(.system(.caption, design: .rounded))
+                            .foregroundStyle(Palette.secondaryText)
+                    }
+                }
             }
             if !dynamicTypeSize.isAccessibilitySize { Spacer(minLength: 8) }
             HStack(spacing: 12) {

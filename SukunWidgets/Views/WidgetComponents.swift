@@ -141,3 +141,15 @@ struct QiblaArrowDial: View {
         .accessibilityHidden(true)
     }
 }
+
+/// "Iftar in 3:21:10" during the fast, "Suhoor ends in 6:12:40" at night (Ramadan mode).
+struct RamadanLine: View {
+    let state: RamadanState
+
+    var body: some View {
+        switch state.countdown {
+        case .iftar(let date): Text("Iftar in \(Text(date, style: .timer))")
+        case .suhoorEnds(let date): Text("Suhoor ends in \(Text(date, style: .timer))")
+        }
+    }
+}

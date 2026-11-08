@@ -50,10 +50,18 @@ struct OverviewWidgetView: View {
                         .font(.system(.subheadline, design: .rounded, weight: .medium))
                         .foregroundStyle(snapshot.current != nil ? Palette.accentText : Palette.secondaryText)
                         .widgetAccentable()
-                    UpcomingHint(snapshot: snapshot)
-                        .font(.system(.subheadline, design: .rounded).monospacedDigit())
+                    Group {
+                        if let ramadan = snapshot.ramadan {
+                            RamadanLine(state: ramadan)
+                        } else {
+                            UpcomingHint(snapshot: snapshot)
+                        }
+                    }
+                    .font(.system(.subheadline, design: .rounded).monospacedDigit())
                         .foregroundStyle(Palette.secondaryText)
                         .multilineTextAlignment(.trailing)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
                 }
                 .accessibilityElement(children: .combine)
             }
