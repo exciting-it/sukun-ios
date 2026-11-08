@@ -45,9 +45,14 @@ struct PrayerRow: View {
                     .buttonStyle(.plain)
                     .sensoryFeedback(.selection, trigger: notificationEnabled)
                 }
-                Text(formatter.string(from: slot.date))
-                    .font(.sukunTime)
-                    .foregroundStyle(Palette.text)
+                // Fixed-width time column: "5:23 AM" and "11:58 AM" take the same space,
+                // so the bells line up vertically.
+                ZStack(alignment: .trailing) {
+                    ForEach(formatter.widthSamples, id: \.self) { Text($0).hidden() }
+                    Text(formatter.string(from: slot.date))
+                }
+                .font(.sukunTime)
+                .foregroundStyle(Palette.text)
             }
         }
         .padding(.vertical, 6)

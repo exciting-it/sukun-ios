@@ -16,6 +16,17 @@ public struct PrayerTimeFormatter: Sendable {
         formatter(includePeriod: true).string(from: date)
     }
 
+    /// The widest strings this formatter can produce ("12:58 AM/PM", "20:58"). Lay them out hidden behind a
+    /// time to give a column a fixed width, so symbols next to it line up whatever the hour.
+    public var widthSamples: [String] {
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = timeZone
+        let day = cal.startOfDay(for: Date(timeIntervalSinceReferenceDate: 0))
+        return [0, 12, 20].compactMap { hour in
+            cal.date(bySettingHour: hour, minute: 58, second: 0, of: day).map(string(from:))
+        }
+    }
+
     /// Time without AM/PM marker, for large numerals. Pair with `periodSymbol(for:)`.
     public func numerals(from date: Date) -> String {
         formatter(includePeriod: false).string(from: date)

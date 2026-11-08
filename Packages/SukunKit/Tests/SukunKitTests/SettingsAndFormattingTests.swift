@@ -46,6 +46,14 @@ final class SettingsAndFormattingTests: XCTestCase {
         XCTAssertFalse(system.uses12Hour)
     }
 
+    func testWidthSamplesCoverTheWidestTimes() {
+        let tz = TimeZone(identifier: "Europe/Berlin")!
+        let f12 = PrayerTimeFormatter(clockFormat: .twelveHour, timeZone: tz, locale: Locale(identifier: "en_US"))
+        XCTAssertEqual(Set(f12.widthSamples), ["12:58 AM", "12:58 PM", "8:58 PM"])
+        let f24 = PrayerTimeFormatter(clockFormat: .twentyFourHour, timeZone: tz, locale: Locale(identifier: "de_DE"))
+        XCTAssertTrue(f24.widthSamples.contains("20:58"))
+    }
+
     func testHijriDate() {
         let date = Fixtures.date(2026, 12, 15, 12, tz: "Asia/Riyadh")
         let c = HijriDate.components(for: date, timeZone: TimeZone(identifier: "Asia/Riyadh")!)
