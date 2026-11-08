@@ -2,14 +2,15 @@ import SukunKit
 import SwiftUI
 import WidgetKit
 
-/// Small Home Screen widget + all Lock Screen accessories.
+/// Small Home Screen widget + all Lock Screen accessories: the prayer whose time is running and a hint
+/// to the next boundary. The kind id stays "next" so widgets people already placed keep working.
 struct NextPrayerWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: "faith.sukun.widget.next", provider: PrayerTimelineProvider()) { entry in
             NextPrayerWidgetView(entry: entry)
         }
-        .configurationDisplayName("Next Prayer")
-        .description("The upcoming prayer with a live countdown.")
+        .configurationDisplayName("Current Prayer")
+        .description("The prayer whose time is running, and when the next one begins.")
         .supportedFamilies([.systemSmall, .accessoryCircular, .accessoryRectangular, .accessoryInline])
     }
 }
@@ -46,28 +47,25 @@ struct SmallNextPrayerView: View {
 
     var body: some View {
         let formatter = snapshot.formatter
+        let featured = snapshot.featured
+        let isRunning = snapshot.current != nil
         VStack(alignment: .leading, spacing: 0) {
-            HStack(spacing: 4) {
-                Image(systemName: snapshot.next.kind.symbolName)
-                    .font(.caption)
-                Text("Next")
-                    .font(.system(.caption2, design: .rounded, weight: .semibold))
-                    .textCase(.uppercase)
-                    .tracking(1)
+            HStack(spacing: 5) {
+                Image(systemName: featured.kind.symbolName)
+                    .font(.subheadline)
+                Text(featured.kind.localizedName)
+                    .font(.system(.headline, design: .rounded, weight: .medium))
             }
-            .foregroundStyle(Palette.secondaryText)
+            .foregroundStyle(isRunning ? Palette.accentText : Palette.secondaryText)
+            .widgetAccentable()
 
             Spacer(minLength: 4)
 
-            Text(snapshot.next.kind.localizedName)
-                .font(.system(.headline, design: .rounded, weight: .medium))
-                .foregroundStyle(Palette.accentText)
-                .widgetAccentable()
             HStack(alignment: .firstTextBaseline, spacing: 3) {
-                Text(formatter.numerals(from: snapshot.next.date))
+                Text(formatter.numerals(from: featured.date))
                     .font(.system(size: 38, weight: .light, design: .rounded).monospacedDigit())
                     .foregroundStyle(Palette.text)
-                if let period = formatter.periodSymbol(for: snapshot.next.date) {
+                if let period = formatter.periodSymbol(for: featured.date) {
                     Text(period)
                         .font(.system(.caption, design: .rounded))
                         .foregroundStyle(Palette.secondaryText)
@@ -76,36 +74,38 @@ struct SmallNextPrayerView: View {
             .lineLimit(1)
             .minimumScaleFactor(0.6)
 
-            Text(snapshot.next.date, style: .timer)
+            UpcomingHint(snapshot: snapshot)
                 .font(.system(.footnote, design: .rounded).monospacedDigit())
                 .foregroundStyle(Palette.secondaryText)
                 .lineLimit(1)
+                .minimumScaleFactor(0.8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text("Next prayer: \(snapshot.next.kind.localizedName) at \(formatter.string(from: snapshot.next.date))"))
+        .accessibilityLabel(PrayerAccessibility.label(for: snapshot))
     }
 }
 
-/// Countdown ring from the previous boundary to the next prayer.
+/// Countdown ring from the last boundary to the upcoming one (Fajr's ring ends at sunrise).
 struct CircularAccessory: View {
     let snapshot: PrayerSnapshot
 
     var body: some View {
-        ProgressView(timerInterval: snapshot.previous.date...snapshot.next.date, countsDown: false) {
-            Text(snapshot.next.kind.localizedName)
+        let upcoming = snapshot.upcoming
+        ProgressView(timerInterval: snapshot.intervalStart...upcoming.date, countsDown: false) {
+            Text(upcoming.kind.localizedName)
         } currentValueLabel: {
             VStack(spacing: 0) {
-                Image(systemName: snapshot.next.kind.symbolName)
+                Image(systemName: upcoming.kind.symbolName)
                     .font(.system(size: 11))
-                Text(snapshot.formatter.numerals(from: snapshot.next.date))
+                Text(snapshot.formatter.numerals(from: upcoming.date))
                     .font(.system(size: 13, weight: .medium, design: .rounded).monospacedDigit())
                     .minimumScaleFactor(0.6)
             }
         }
         .progressViewStyle(.circular)
         .widgetAccentable()
-        .accessibilityLabel(Text("Next prayer: \(snapshot.next.kind.localizedName) at \(snapshot.formatter.string(from: snapshot.next.date))"))
+        .accessibilityLabel(Text("Next: \(upcoming.kind.localizedName) at \(snapshot.formatter.string(from: upcoming.date))"))
     }
 }
 
@@ -113,33 +113,48 @@ struct RectangularAccessory: View {
     let snapshot: PrayerSnapshot
 
     var body: some View {
+        let featured = snapshot.featured
         VStack(alignment: .leading, spacing: 1) {
             HStack(spacing: 4) {
-                Image(systemName: snapshot.next.kind.symbolName)
-                Text(snapshot.next.kind.localizedName)
+                Image(systemName: featured.kind.symbolName)
+                Text(featured.kind.localizedName)
             }
             .font(.system(.headline, design: .rounded))
             .widgetAccentable()
-            Text(snapshot.formatter.string(from: snapshot.next.date))
+            Text(snapshot.formatter.string(from: featured.date))
                 .font(.system(.body, design: .rounded).monospacedDigit())
-            Text("in \(Text(snapshot.next.date, style: .timer))")
+            UpcomingHint(snapshot: snapshot)
                 .font(.system(.caption, design: .rounded).monospacedDigit())
                 .foregroundStyle(.secondary)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .accessibilityElement(children: .combine)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(PrayerAccessibility.label(for: snapshot))
     }
 }
 
+/// One line next to the Lock Screen clock: when the next boundary is.
 struct InlineAccessory: View {
     let snapshot: PrayerSnapshot
 
     var body: some View {
+        let upcoming = snapshot.upcoming
         Label {
-            Text("\(snapshot.next.kind.localizedName) \(snapshot.formatter.string(from: snapshot.next.date))")
+            Text("\(upcoming.kind.localizedName) \(snapshot.formatter.string(from: upcoming.date))")
         } icon: {
-            Image(systemName: snapshot.next.kind.symbolName)
+            Image(systemName: upcoming.kind.symbolName)
         }
+    }
+}
+
+enum PrayerAccessibility {
+    static func label(for snapshot: PrayerSnapshot) -> Text {
+        let formatter = snapshot.formatter
+        let upcoming = snapshot.upcoming
+        if let current = snapshot.current {
+            return Text("Current prayer: \(current.kind.localizedName) since \(formatter.string(from: current.date)). Next: \(upcoming.kind.localizedName) at \(formatter.string(from: upcoming.date))")
+        }
+        return Text("Next prayer: \(upcoming.kind.localizedName) at \(formatter.string(from: upcoming.date))")
     }
 }
 

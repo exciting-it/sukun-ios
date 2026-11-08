@@ -46,19 +46,21 @@ extension NSColor {
 }
 #endif
 
-/// Sukun's calm palette. Light: warm sand, sage, slate. Dark: night blue, muted gold, soft white.
+/// Sukun's calm palette. Light: warm sand, deep green, slate. Dark: night blue, soft green, soft white.
+/// Green is the single accent in both appearances.
 public enum Palette {
     public static let background = Color.dynamic(light: 0xF6F1EA, dark: 0x0F1B2A)
     /// Card surface, slightly lifted from the background.
     public static let surface = Color.dynamic(light: 0xFFFCF7, dark: 0x16263A, lightAlpha: 0.85, darkAlpha: 0.85)
     /// Accent for fills, rings and indicators.
-    public static let accent = Color.dynamic(light: 0x8FA998, dark: 0xC9A96E)
-    /// Accent dark enough for text on the background (WCAG AA ≥ 4.5:1).
-    public static let accentText = Color.dynamic(light: 0x56715F, dark: 0xD4B57C)
+    public static let accent = Color.dynamic(light: 0x4E8A6A, dark: 0x6FAE8C)
+    /// Accent for text and small symbols (WCAG AA ≥ 4.5:1 on background, cards and highlight).
+    public static let accentText = Color.dynamic(light: 0x2F6B4F, dark: 0x8CC3A5)
     public static let text = Color.dynamic(light: 0x2E3A40, dark: 0xF3F0EA)
     public static let secondaryText = Color.dynamic(light: 0x5F6B70, dark: 0xA7B1BD)
     public static let divider = Color.dynamic(light: 0x2E3A40, dark: 0xF3F0EA, lightAlpha: 0.09, darkAlpha: 0.10)
-    public static let highlight = Color.dynamic(light: 0x8FA998, dark: 0x2E4A6E, lightAlpha: 0.16, darkAlpha: 0.55)
+    /// Soft green wash behind the current prayer.
+    public static let highlight = Color.dynamic(light: 0x2F6B4F, dark: 0x5FA582, lightAlpha: 0.12, darkAlpha: 0.22)
     public static let shadow = Color.dynamic(light: 0x2E3A40, dark: 0x000000, lightAlpha: 0.06, darkAlpha: 0.0)
 
     public static let cornerRadius: CGFloat = 24

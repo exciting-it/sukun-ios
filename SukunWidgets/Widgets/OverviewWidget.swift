@@ -46,11 +46,11 @@ struct OverviewWidgetView: View {
                 }
                 Spacer()
                 VStack(alignment: .trailing, spacing: 2) {
-                    Text(snapshot.next.kind.localizedName)
+                    Text(snapshot.featured.kind.localizedName)
                         .font(.system(.subheadline, design: .rounded, weight: .medium))
-                        .foregroundStyle(Palette.accentText)
+                        .foregroundStyle(snapshot.current != nil ? Palette.accentText : Palette.secondaryText)
                         .widgetAccentable()
-                    Text(snapshot.next.date, style: .timer)
+                    UpcomingHint(snapshot: snapshot)
                         .font(.system(.subheadline, design: .rounded).monospacedDigit())
                         .foregroundStyle(Palette.secondaryText)
                         .multilineTextAlignment(.trailing)
@@ -60,28 +60,16 @@ struct OverviewWidgetView: View {
 
             // Prayer list (rows share the free height so the list fills the widget evenly)
             VStack(spacing: 0) {
-                if snapshot.isShowingTomorrow {
-                    Text("Tomorrow")
-                        .font(.system(.caption2, design: .rounded, weight: .semibold))
-                        .textCase(.uppercase)
-                        .tracking(1)
-                        .foregroundStyle(Palette.secondaryText)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 10)
-                        .padding(.bottom, 2)
-                }
-                ForEach(snapshot.displayDay.slots) { slot in
-                    let isNext = snapshot.isNext(slot)
+                ForEach(snapshot.today.slots) { slot in
+                    let isCurrent = snapshot.isCurrent(slot)
                     HStack {
                         Image(systemName: slot.kind.symbolName)
                             .font(.footnote)
                             .frame(width: 20)
-                            .foregroundStyle(isNext ? Palette.accentText : Palette.secondaryText)
+                            .foregroundStyle(isCurrent ? Palette.accentText : Palette.secondaryText)
                         Text(slot.kind.localizedName)
-                            .font(.system(.footnote, design: .rounded, weight: .semibold))
-                            .textCase(.uppercase)
-                            .tracking(0.8)
-                            .foregroundStyle(isNext ? Palette.accentText : Palette.text)
+                            .font(.system(.subheadline, design: .rounded, weight: isCurrent ? .semibold : .regular))
+                            .foregroundStyle(isCurrent ? Palette.accentText : Palette.text)
                         Spacer()
                         Text(formatter.string(from: slot.date))
                             .font(.system(.body, design: .rounded, weight: .light).monospacedDigit())
@@ -91,10 +79,10 @@ struct OverviewWidgetView: View {
                     .padding(.vertical, 6)
                     .frame(maxHeight: 44)
                     .background {
-                        if isNext { NextHighlight(cornerRadius: 12) }
+                        if isCurrent { CurrentHighlight(cornerRadius: 12) }
                     }
-                    .opacity(slot.date <= snapshot.date && !isNext ? 0.5 : 1)
-                    .widgetAccentable(isNext)
+                    .opacity(snapshot.isPast(slot) ? 0.5 : 1)
+                    .widgetAccentable(isCurrent)
                     .accessibilityElement(children: .combine)
                 }
             }

@@ -27,7 +27,7 @@ struct TodayView: View {
             ScrollView {
                 VStack(spacing: 32) {
                     header(snapshot)
-                    NextPrayerHero(snapshot: snapshot, numeralSize: heroSize)
+                    FeaturedPrayerHero(snapshot: snapshot, numeralSize: heroSize)
                     PrayerListCard(snapshot: snapshot)
                     footer(snapshot)
                 }
@@ -74,35 +74,53 @@ struct TodayView: View {
     }
 }
 
-/// Big, quiet display of the next prayer with a live countdown.
-struct NextPrayerHero: View {
+/// Big, quiet display of the prayer whose time is running, with a small hint to the next boundary.
+/// Between sunrise and Dhuhr no prayer is running, so it features the upcoming Dhuhr instead.
+struct FeaturedPrayerHero: View {
     let snapshot: PrayerSnapshot
     let numeralSize: CGFloat
 
     var body: some View {
         let formatter = snapshot.formatter
+        let featured = snapshot.featured
+        let isRunning = snapshot.current != nil
         VStack(spacing: 8) {
-            Text(snapshot.next.kind.localizedName)
-                .smallCaps(color: Palette.accentText)
+            Text(featured.kind.localizedName)
+                .font(.sukunTitle)
+                .foregroundStyle(isRunning ? Palette.accentText : Palette.secondaryText)
             HStack(alignment: .firstTextBaseline, spacing: 6) {
-                Text(formatter.numerals(from: snapshot.next.date))
+                Text(formatter.numerals(from: featured.date))
                     .font(.sukunNumerals(numeralSize, weight: .thin))
                     .foregroundStyle(Palette.text)
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
-                if let period = formatter.periodSymbol(for: snapshot.next.date) {
+                if let period = formatter.periodSymbol(for: featured.date) {
                     Text(period)
                         .font(.sukunTitle)
                         .foregroundStyle(Palette.secondaryText)
                 }
             }
-            Text("in \(Text(snapshot.next.date, style: .timer))")
-                .font(.sukunBody.monospacedDigit())
-                .foregroundStyle(Palette.secondaryText)
+            Group {
+                if isRunning {
+                    Text("\(snapshot.upcoming.kind.localizedName) in \(Text(snapshot.upcoming.date, style: .timer))")
+                } else {
+                    Text("in \(Text(snapshot.upcoming.date, style: .timer))")
+                }
+            }
+            .font(.sukunBody.monospacedDigit())
+            .foregroundStyle(Palette.secondaryText)
         }
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(Text("Next prayer: \(snapshot.next.kind.localizedName) at \(formatter.string(from: snapshot.next.date))"))
-        .accessibilityValue(Text(snapshot.next.date, style: .relative))
+        .accessibilityLabel(accessibilityLabel(formatter))
+        .accessibilityValue(Text(snapshot.upcoming.date, style: .relative))
+    }
+
+    private func accessibilityLabel(_ formatter: PrayerTimeFormatter) -> Text {
+        let upcoming = snapshot.upcoming
+        if let current = snapshot.current {
+            return Text("Current prayer: \(current.kind.localizedName) since \(formatter.string(from: current.date)). Next: \(upcoming.kind.localizedName) at \(formatter.string(from: upcoming.date))")
+        }
+        return Text("Next prayer: \(upcoming.kind.localizedName) at \(formatter.string(from: upcoming.date))")
     }
 }
 
@@ -111,31 +129,16 @@ struct PrayerListCard: View {
     let snapshot: PrayerSnapshot
 
     var body: some View {
-        let slots = snapshot.displayDay.slots
-        VStack(spacing: 0) {
-            if snapshot.isShowingTomorrow {
-                Text("Tomorrow")
-                    .smallCaps()
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 14)
-                    .padding(.top, 10)
-                    .padding(.bottom, 4)
-            }
-            ForEach(Array(slots.enumerated()), id: \.element.id) { index, slot in
+        VStack(spacing: 2) {
+            ForEach(snapshot.today.slots) { slot in
                 PrayerRow(
                     slot: slot,
-                    isNext: snapshot.isNext(slot),
-                    isPast: slot.date <= snapshot.date,
+                    isCurrent: snapshot.isCurrent(slot),
+                    isPast: snapshot.isPast(slot),
                     formatter: snapshot.formatter,
                     notificationEnabled: model.settings.notificationsEnabled.contains(slot.kind),
                     onToggleNotification: toggleAction(for: slot.kind)
                 )
-                if index < slots.count - 1 {
-                    Rectangle()
-                        .fill(Palette.divider)
-                        .frame(height: 0.5)
-                        .padding(.horizontal, 14)
-                }
             }
         }
         .sukunCard(padding: 8)

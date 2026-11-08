@@ -35,23 +35,6 @@
         }
       }
     },
-    "%@, %@, next prayer": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@, %@, next prayer"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@, %@, nächstes Gebet"
-          }
-        }
-      }
-    },
     "%lld°": {
       "extractionState": "manual",
       "localizations": {
@@ -800,23 +783,6 @@
         }
       }
     },
-    "Tomorrow": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Tomorrow"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Morgen"
-          }
-        }
-      }
-    },
     "Turn left %lld°": {
       "extractionState": "manual",
       "localizations": {
@@ -1340,6 +1306,57 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gerade nicht möglich. Dein Text bleibt erhalten, versuch es später noch mal."
+          }
+        }
+      }
+    },
+    "%@ in %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ in %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ in %@"
+          }
+        }
+      }
+    },
+    "Current prayer: %@ since %@. Next: %@ at %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Current prayer: %@ since %@. Next: %@ at %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktuelles Gebet: %@ seit %@. Als Nächstes: %@ um %@"
+          }
+        }
+      }
+    },
+    "%@, %@, current prayer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@, current prayer"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@, aktuelles Gebet"
           }
         }
       }

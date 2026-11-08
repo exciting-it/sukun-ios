@@ -31,6 +31,11 @@ public extension View {
         modifier(SmallCapsLabel(color: color))
     }
 
+    /// Form / List rows on Sukun's surface color instead of the system grey (night blue in dark mode).
+    func sukunRowBackground() -> some View {
+        listRowBackground(Palette.surface)
+    }
+
     /// Rounded card with a soft shadow (none in dark mode).
     func sukunCard(padding: CGFloat = 20) -> some View {
         self

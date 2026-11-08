@@ -6,11 +6,15 @@ public struct PrayerSnapshot: Hashable, Sendable {
     public let location: StoredLocation
     public let settings: SukunSettings
     public let configuration: CalculationConfiguration
-    /// Schedule of the civil day containing `date`.
+    /// Schedule of the civil day containing `date`. This is the list the UI shows.
     public let today: DaySchedule
-    /// The day whose list should be shown: today, or tomorrow once today's Isha has passed,
-    /// so the upcoming prayer is always part of the visible list.
-    public let displayDay: DaySchedule
+    /// The obligatory prayer whose time is running now, or nil between sunrise and Dhuhr (Fajr ends at
+    /// sunrise; no obligatory prayer is due until Dhuhr). After midnight this is yesterday's Isha, which
+    /// lasts until Fajr, so it may not be part of `today`.
+    public let current: PrayerSlot?
+    /// The next boundary after `date`, sunrise included: the hint "Sunrise in 0:42" during Fajr tells
+    /// when Fajr ends. Between sunrise and Dhuhr it is Dhuhr.
+    public let upcoming: PrayerSlot
     /// Next obligatory prayer after `date` (may be tomorrow's Fajr).
     public let next: PrayerSlot
     /// Last boundary at or before `date` (may be sunrise or yesterday's Isha).
@@ -24,15 +28,16 @@ public struct PrayerSnapshot: Hashable, Sendable {
         guard
             let today = calculator.schedule(for: date),
             let next = calculator.next(after: date),
-            let previous = calculator.previous(atOrBefore: date),
-            let displayDay = today.slots.contains(next) ? today : calculator.schedule(for: next.date)
+            let upcoming = calculator.next(after: date, includeSunrise: true),
+            let previous = calculator.previous(atOrBefore: date)
         else { return nil }
         self.date = date
         self.location = location
         self.settings = settings
         self.configuration = calculator.configuration
         self.today = today
-        self.displayDay = displayDay
+        self.current = previous.kind.isObligatory ? previous : nil
+        self.upcoming = upcoming
         self.next = next
         self.previous = previous
         self.period = DayPeriod(after: previous.kind)
@@ -40,12 +45,15 @@ public struct PrayerSnapshot: Hashable, Sendable {
         self.qiblaDistanceKilometers = QiblaCalculator.distanceKilometers(from: location.coordinate)
     }
 
-    /// Start of the interval the countdown ring measures (last obligatory prayer or sunrise before `next`).
+    /// What the big display features: the current prayer, or the upcoming one when no prayer time is running.
+    public var featured: PrayerSlot { current ?? upcoming }
+
+    /// Start of the interval the countdown ring measures (the last boundary, sunrise included).
     public var intervalStart: Date { previous.date }
 
-    /// 0...1 progress from `previous` to `next`.
+    /// 0...1 progress from `previous` to `upcoming`.
     public var progress: Double {
-        let total = next.date.timeIntervalSince(previous.date)
+        let total = upcoming.date.timeIntervalSince(previous.date)
         guard total > 0 else { return 0 }
         return min(1, max(0, date.timeIntervalSince(previous.date) / total))
     }
@@ -58,10 +66,11 @@ public struct PrayerSnapshot: Hashable, Sendable {
 
     public var qiblaCompassPoint: CompassPoint { CompassPoint(degrees: qiblaBearing) }
 
-    public var isShowingTomorrow: Bool { displayDay.day != today.day }
+    /// True when `slot` is the prayer whose time is running now (the one the UI highlights).
+    public func isCurrent(_ slot: PrayerSlot) -> Bool { slot == current }
 
-    /// True when `slot` is the one the UI should highlight as upcoming.
-    public func isNext(_ slot: PrayerSlot) -> Bool { slot == next }
+    /// True for boundaries of `today` that are over: already started and not the running prayer.
+    public func isPast(_ slot: PrayerSlot) -> Bool { slot.date <= date && slot != current }
 }
 
 /// Widget timeline planning: the instants at which displayed content changes.

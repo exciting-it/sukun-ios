@@ -7,6 +7,7 @@ struct CompassDial: View {
     let rotation: Double
     let qiblaBearing: Double
     let isAligned: Bool
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     var body: some View {
         GeometryReader { proxy in
@@ -23,6 +24,11 @@ struct CompassDial: View {
                     Circle()
                         .fill(Palette.surface)
                         .shadow(color: Palette.shadow, radius: 24, y: 10)
+                    // Calm confirmation: the whole dial takes on a green wash while you face the Qibla.
+                    Circle()
+                        .fill(Palette.highlight)
+                        .opacity(isAligned ? 1 : 0)
+                        .animation(.sukun(reduceMotion: reduceMotion), value: isAligned)
                     Circle()
                         .stroke(Palette.divider, lineWidth: 1)
 

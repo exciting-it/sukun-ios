@@ -12,12 +12,15 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             Form {
-                locationSection
-                calculationSection
-                notificationSection
-                displaySection
-                feedbackSection
-                aboutSection
+                Group {
+                    locationSection
+                    calculationSection
+                    notificationSection
+                    displaySection
+                    feedbackSection
+                    aboutSection
+                }
+                .sukunRowBackground()
             }
             .scrollContentBackground(.hidden)
             .background(Palette.background.ignoresSafeArea())

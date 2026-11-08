@@ -23,7 +23,7 @@ Sukun shows the five daily prayers and the Qibla direction, quietly and accurate
 
 MADE TO BE GLANCED AT
 • Widgets for the Home Screen, Lock Screen and StandBy
-• The next prayer with a live countdown, flipping exactly at each prayer time
+• The prayer whose time is running, with a countdown to the next, flipping exactly at each prayer time
 • A large widget with all prayer times, the Hijri date and the Qibla bearing
 • Widgets follow you when you travel
 
@@ -78,7 +78,7 @@ Sukun zeigt die fünf täglichen Gebete und die Qibla-Richtung – ruhig und gen
 
 GEMACHT FÜR DEN KURZEN BLICK
 • Widgets für Home-Bildschirm, Sperrbildschirm und StandBy
-• Das nächste Gebet mit laufendem Countdown, das genau zur Gebetszeit umspringt
+• Das Gebet, dessen Zeit gerade läuft, mit Countdown zum nächsten; springt genau zur Gebetszeit um
 • Ein großes Widget mit allen Gebetszeiten, dem Hidschri-Datum und der Qibla-Richtung
 • Widgets folgen dir auf Reisen
 

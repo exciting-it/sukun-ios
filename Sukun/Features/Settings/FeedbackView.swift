@@ -52,28 +52,31 @@ struct FeedbackView: View {
                 .listRowInsets(EdgeInsets())
             }
 
-            Section {
-                TextField(placeholder, text: $text, axis: .vertical)
-                    .lineLimit(6...14)
-                    .focused($textFocused)
-                    .accessibilityLabel(Text("Your feedback"))
-            } footer: {
-                if let errorMessage {
-                    Text(errorMessage)
-                        .foregroundStyle(.red)
-                }
-            }
-
-            Section {
-                Toggle("Include technical details", isOn: $includeDiagnostics)
-            } footer: {
-                VStack(alignment: .leading, spacing: 8) {
-                    if includeDiagnostics {
-                        Text("App version, iOS version, device model, language and calculation method. Never your location.")
+            Group {
+                Section {
+                    TextField(placeholder, text: $text, axis: .vertical)
+                        .lineLimit(6...14)
+                        .focused($textFocused)
+                        .accessibilityLabel(Text("Your feedback"))
+                } footer: {
+                    if let errorMessage {
+                        Text(errorMessage)
+                            .foregroundStyle(.red)
                     }
-                    Text("Sent anonymously. If you’d like a reply, write to support@sukun.faith.")
+                }
+
+                Section {
+                    Toggle("Include technical details", isOn: $includeDiagnostics)
+                } footer: {
+                    VStack(alignment: .leading, spacing: 8) {
+                        if includeDiagnostics {
+                            Text("App version, iOS version, device model, language and calculation method. Never your location.")
+                        }
+                        Text("Sent anonymously. If you’d like a reply, write to support@sukun.faith.")
+                    }
                 }
             }
+            .sukunRowBackground()
         }
         .onAppear { textFocused = true }
     }

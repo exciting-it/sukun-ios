@@ -52,23 +52,6 @@
         }
       }
     },
-    "%@, %@, next prayer": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@, %@, next prayer"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%@, %@, nächstes Gebet"
-          }
-        }
-      }
-    },
     "%lld°": {
       "extractionState": "manual",
       "localizations": {
@@ -167,40 +150,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "München"
-          }
-        }
-      }
-    },
-    "Next": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Next"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nächstes"
-          }
-        }
-      }
-    },
-    "Next Prayer": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Next Prayer"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nächstes Gebet"
           }
         }
       }
@@ -324,23 +273,6 @@
         }
       }
     },
-    "The upcoming prayer with a live countdown.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The upcoming prayer with a live countdown."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Das nächste Gebet mit Live-Countdown."
-          }
-        }
-      }
-    },
     "Today’s Prayers": {
       "extractionState": "manual",
       "localizations": {
@@ -375,19 +307,87 @@
         }
       }
     },
-    "Tomorrow": {
+    "Current prayer: %@ since %@. Next: %@ at %@": {
       "extractionState": "manual",
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Tomorrow"
+            "value": "Current prayer: %@ since %@. Next: %@ at %@"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Morgen"
+            "value": "Aktuelles Gebet: %@ seit %@. Als Nächstes: %@ um %@"
+          }
+        }
+      }
+    },
+    "%@, %@, current prayer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@, current prayer"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@, %@, aktuelles Gebet"
+          }
+        }
+      }
+    },
+    "Current Prayer": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Current Prayer"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktuelles Gebet"
+          }
+        }
+      }
+    },
+    "The prayer whose time is running, and when the next one begins.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The prayer whose time is running, and when the next one begins."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Das Gebet, dessen Zeit gerade läuft, und wann das nächste beginnt."
+          }
+        }
+      }
+    },
+    "Next: %@ at %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next: %@ at %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Als Nächstes: %@ um %@"
           }
         }
       }

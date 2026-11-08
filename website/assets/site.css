@@ -6,12 +6,12 @@
   --paper: #f6f1ea;
   --ink: #2e3a40;
   --ink-soft: #5f6b70;
-  --sage: #56715f;
-  --sage-fill: rgba(143, 169, 152, 0.18);
+  --sage: #2f6b4f;
+  --sage-fill: rgba(47, 107, 79, 0.12);
   --night: #0f1b2a;
   --night-ink: #f3f0ea;
   --night-soft: #a7b1bd;
-  --gold: #d4b57c;
+  --gold: #8cc3a5; /* footer links on night blue: Sukun green, dark variant */
   --rule: rgba(46, 58, 64, 0.12);
   --card: rgba(255, 252, 247, 0.72);
 
@@ -29,8 +29,8 @@
     --paper: #0f1b2a;
     --ink: #f3f0ea;
     --ink-soft: #a7b1bd;
-    --sage: #d4b57c;
-    --sage-fill: rgba(46, 74, 110, 0.55);
+    --sage: #8cc3a5;
+    --sage-fill: rgba(95, 165, 130, 0.22);
     --rule: rgba(243, 240, 234, 0.12);
     --card: rgba(22, 38, 58, 0.78);
   }
@@ -238,11 +238,10 @@ address { font-style: normal; }
 
 .day .name {
   flex: 1;
-  font-size: 0.8125rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 1.0625rem;
 }
+
+.day .next .name { font-weight: 600; }
 
 .day time {
   font-size: 1.375rem;

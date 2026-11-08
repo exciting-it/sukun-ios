@@ -39,7 +39,7 @@ struct DayPrayersWidgetView: View {
                     .foregroundStyle(Palette.secondaryText)
                     .lineLimit(1)
                 Spacer()
-                Text("\(snapshot.next.kind.localizedName) in \(Text(snapshot.next.date, style: .timer))")
+                UpcomingHint(snapshot: snapshot, alwaysNamed: true)
                     .font(.system(.caption, design: .rounded).monospacedDigit())
                     .foregroundStyle(Palette.accentText)
                     .multilineTextAlignment(.trailing)
@@ -48,8 +48,9 @@ struct DayPrayersWidgetView: View {
             }
             Spacer(minLength: 0)
             HStack(spacing: 4) {
-                ForEach(snapshot.displayDay.obligatory) { slot in
-                    PrayerTimeStack(slot: slot, formatter: snapshot.formatter, isNext: snapshot.isNext(slot))
+                ForEach(snapshot.today.obligatory) { slot in
+                    PrayerTimeStack(slot: slot, formatter: snapshot.formatter,
+                                    isCurrent: snapshot.isCurrent(slot), isPast: snapshot.isPast(slot))
                 }
             }
             Spacer(minLength: 0)

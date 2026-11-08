@@ -12,41 +12,44 @@ struct CitySearchView: View {
     var body: some View {
         NavigationStack {
             List {
-                if !model.isLocationDenied {
-                    Section {
-                        Button {
-                            model.useDeviceLocation()
-                            dismiss()
-                        } label: {
-                            Label("Use current location", systemImage: "location.fill")
-                                .foregroundStyle(Palette.text)
-                        }
-                    }
-                }
-                Section {
-                    ForEach(results) { result in
-                        Button {
-                            model.useManualLocation(result.location)
-                            dismiss()
-                        } label: {
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text(result.title)
-                                    .font(.sukunBody)
+                Group {
+                    if !model.isLocationDenied {
+                        Section {
+                            Button {
+                                model.useDeviceLocation()
+                                dismiss()
+                            } label: {
+                                Label("Use current location", systemImage: "location.fill")
                                     .foregroundStyle(Palette.text)
-                                if !result.subtitle.isEmpty {
-                                    Text(result.subtitle)
-                                        .font(.footnote)
-                                        .foregroundStyle(Palette.secondaryText)
-                                }
                             }
                         }
-                        .accessibilityLabel(Text("\(result.title), \(result.subtitle)"))
                     }
-                } footer: {
-                    if results.isEmpty && query.count >= 2 && !isSearching {
-                        Text("No places found.")
+                    Section {
+                        ForEach(results) { result in
+                            Button {
+                                model.useManualLocation(result.location)
+                                dismiss()
+                            } label: {
+                                VStack(alignment: .leading, spacing: 2) {
+                                    Text(result.title)
+                                        .font(.sukunBody)
+                                        .foregroundStyle(Palette.text)
+                                    if !result.subtitle.isEmpty {
+                                        Text(result.subtitle)
+                                            .font(.footnote)
+                                            .foregroundStyle(Palette.secondaryText)
+                                    }
+                                }
+                            }
+                            .accessibilityLabel(Text("\(result.title), \(result.subtitle)"))
+                        }
+                    } footer: {
+                        if results.isEmpty && query.count >= 2 && !isSearching {
+                            Text("No places found.")
+                        }
                     }
                 }
+                .sukunRowBackground()
             }
             .scrollContentBackground(.hidden)
             .background(Palette.background)

@@ -18,9 +18,9 @@ extension View {
     }
 }
 
-/// Marks the next prayer. Full color: a soft fill. Tinted / vibrant rendering keeps only alpha, where a fill
+/// Marks the current prayer. Full color: a soft fill. Tinted / vibrant rendering keeps only alpha, where a fill
 /// would turn into a bright slab under same-colored text, so it becomes a hairline outline instead.
-struct NextHighlight: View {
+struct CurrentHighlight: View {
     var cornerRadius: CGFloat
     @Environment(\.widgetRenderingMode) private var renderingMode
 
@@ -50,24 +50,39 @@ struct WidgetSetupView: View {
     }
 }
 
-/// Small-caps name + light numerals for one prayer.
+/// "Maghrib in 1:52:10": the small hint to the next boundary under the current prayer.
+/// Without a running prayer the featured name above already says what's coming, so the hint is just
+/// "in 1:52:10"; pass `alwaysNamed` where no name is shown above it.
+struct UpcomingHint: View {
+    let snapshot: PrayerSnapshot
+    var alwaysNamed = false
+
+    var body: some View {
+        if snapshot.current != nil || alwaysNamed {
+            Text("\(snapshot.upcoming.kind.localizedName) in \(Text(snapshot.upcoming.date, style: .timer))")
+        } else {
+            Text("in \(Text(snapshot.upcoming.date, style: .timer))")
+        }
+    }
+}
+
+/// Name + light numerals for one prayer.
 struct PrayerTimeStack: View {
     let slot: PrayerSlot
     let formatter: PrayerTimeFormatter
-    let isNext: Bool
+    let isCurrent: Bool
+    var isPast = false
     var compact = false
 
     var body: some View {
         VStack(spacing: 4) {
             Text(slot.kind.localizedName)
-                .font(.system(size: compact ? 10 : 11, weight: .semibold, design: .rounded))
-                .textCase(.uppercase)
-                .tracking(0.8)
+                .font(.system(size: compact ? 11 : 12, weight: isCurrent ? .semibold : .medium, design: .rounded))
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
-                .foregroundStyle(isNext ? Palette.accentText : Palette.secondaryText)
+                .foregroundStyle(isCurrent ? Palette.accentText : Palette.secondaryText)
             Text(formatter.numerals(from: slot.date))
-                .font(.system(size: compact ? 15 : 17, weight: isNext ? .regular : .light, design: .rounded).monospacedDigit())
+                .font(.system(size: compact ? 15 : 17, weight: isCurrent ? .regular : .light, design: .rounded).monospacedDigit())
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
                 .foregroundStyle(Palette.text)
@@ -75,12 +90,13 @@ struct PrayerTimeStack: View {
         .padding(.vertical, 8)
         .frame(maxWidth: .infinity)
         .background {
-            if isNext { NextHighlight(cornerRadius: 14) }
+            if isCurrent { CurrentHighlight(cornerRadius: 14) }
         }
-        .widgetAccentable(isNext)
+        .opacity(isPast ? 0.5 : 1)
+        .widgetAccentable(isCurrent)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(isNext
-            ? Text("\(slot.kind.localizedName), \(formatter.string(from: slot.date)), next prayer")
+        .accessibilityLabel(isCurrent
+            ? Text("\(slot.kind.localizedName), \(formatter.string(from: slot.date)), current prayer")
             : Text("\(slot.kind.localizedName), \(formatter.string(from: slot.date))"))
     }
 }
