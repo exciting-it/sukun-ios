@@ -51,6 +51,12 @@ struct QiblaView: View {
             .sensoryFeedback(trigger: isAligned) { _, aligned in
                 aligned && model.settings.qiblaHaptics ? .success : nil
             }
+            .onChange(of: isAligned) { _, aligned in
+                // VoiceOver users hear it wherever focus is, not only while the readout is focused.
+                if aligned {
+                    AccessibilityNotification.Announcement(String(localized: "You are facing the Qibla.")).post()
+                }
+            }
             .onAppear { headingService.start() }
             .onDisappear { headingService.stop() }
             .onChange(of: headingService.heading) { _, newValue in
@@ -72,19 +78,27 @@ struct QiblaView: View {
     private func readout(bearing: Double, distance: Double, offset: Double?, isAligned: Bool) -> some View {
         let point = CompassPoint(degrees: bearing)
         VStack(spacing: 10) {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text("\(Int(bearing.rounded()))°")
-                    .font(.sukunNumerals(bearingSize, weight: contrast == .increased ? .light : .thin))
-                    .foregroundStyle(Palette.text)
-                Text(point.abbreviation)
-                    .font(.sukunTitle)
-                    .foregroundStyle(Palette.secondaryText)
+            // Direction + live guidance form one VoiceOver element: the label is the bearing, the value the guidance
+            // ("Turn right 20°" … "You are facing the Qibla."), re-read while focused because it updates frequently.
+            VStack(spacing: 10) {
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text("\(Int(bearing.rounded()))°")
+                        .font(.sukunNumerals(bearingSize, weight: contrast == .increased ? .light : .thin))
+                        .foregroundStyle(Palette.text)
+                    Text(point.abbreviation)
+                        .font(.sukunTitle)
+                        .foregroundStyle(Palette.secondaryText)
+                }
+                Text(statusText(offset: offset, isAligned: isAligned))
+                    .font(.sukunBody)
+                    .foregroundStyle(isAligned ? Palette.accentText : Palette.secondaryText)
+                    .multilineTextAlignment(.center)
+                    .animation(.sukun(reduceMotion: reduceMotion), value: isAligned)
             }
-            Text(statusText(offset: offset, isAligned: isAligned))
-                .font(.sukunBody)
-                .foregroundStyle(isAligned ? Palette.accentText : Palette.secondaryText)
-                .multilineTextAlignment(.center)
-                .animation(.sukun(reduceMotion: reduceMotion), value: isAligned)
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(Text("Qibla direction \(Int(bearing.rounded())) degrees, \(point.localizedName)"))
+            .accessibilityValue(Text(statusText(offset: offset, isAligned: isAligned)))
+            .accessibilityAddTraits(.updatesFrequently)
 
             Text("\(distance.formatted(.number.precision(.fractionLength(0)))) km to the Kaaba")
                 .font(.sukunCallout)
@@ -103,8 +117,6 @@ struct QiblaView: View {
             }
         }
         .padding(.horizontal, 32)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel(Text("Qibla direction \(Int(bearing.rounded())) degrees, \(point.localizedName)"))
     }
 
     private func statusText(offset: Double?, isAligned: Bool) -> LocalizedStringKey {
