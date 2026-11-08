@@ -6,6 +6,8 @@ struct SettingsView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.openURL) private var openURL
     @State private var showingCitySearch = false
+    @State private var showingFeedback = false
+    private let feedbackConfig = FeedbackConfig.production
 
     var body: some View {
         NavigationStack {
@@ -14,12 +16,14 @@ struct SettingsView: View {
                 calculationSection
                 notificationSection
                 displaySection
+                feedbackSection
                 aboutSection
             }
             .scrollContentBackground(.hidden)
             .background(Palette.background.ignoresSafeArea())
             .navigationTitle("Settings")
             .sheet(isPresented: $showingCitySearch) { CitySearchView() }
+            .sheet(isPresented: $showingFeedback) { FeedbackView() }
             .task { await model.refreshNotificationStatus() }
         }
     }
@@ -124,6 +128,19 @@ struct SettingsView: View {
             }
             Toggle("Background pattern", isOn: model.binding(\.showsPattern))
             Toggle("Haptic feedback on Qibla", isOn: model.binding(\.qiblaHaptics))
+        }
+    }
+
+    // MARK: Feedback
+
+    private var feedbackSection: some View {
+        Section {
+            Button("Send feedback") { showingFeedback = true }
+            if let reviewURL = feedbackConfig.writeReviewURL {
+                Button("Rate Sukun") { openURL(reviewURL) }
+            }
+        } header: {
+            Text("Feedback")
         }
     }
 

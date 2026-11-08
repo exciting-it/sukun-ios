@@ -50,8 +50,14 @@ Debug builds accept `-SukunInitialTab today|qibla|settings`, e.g.
 The Qibla shot should come from a real device (the simulator has no compass).
 
 ## 5. App Privacy ("nutrition label")
-- [ ] **Data Not Collected.** Location is only processed on device and never sent off it, so it isn't "collected"
-  in Apple's sense. City search goes to Apple's MapKit, which is Apple's own processing and isn't declared by the app.
+- [ ] Location is only processed on device and never sent off it, so it isn't "collected" in Apple's sense.
+  City search goes to Apple's MapKit, which is Apple's own processing and isn't declared by the app.
+- [ ] **Feedback form** (Settings → Send feedback, sent to PostHog EU). Apple's optional-disclosure exception
+  needs the user's name in the form, which Sukun doesn't have, so declare it:
+  - *User Content → Other User Content*: App Functionality; **not linked** to the user; not used for tracking
+  - *Diagnostics → Other Diagnostic Data* (app/iOS version, device model): App Functionality; not linked; no tracking
+  - Result on the product page: "Data Not Linked to You". Keep the form free of an email field, or this changes.
+- [ ] PostHog: DPA signed, "Discard client IP data" on, survey "In-App Feedback" launched
 - [ ] Tracking: **No**
 
 ## 6. Export compliance

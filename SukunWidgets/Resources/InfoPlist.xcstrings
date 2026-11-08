@@ -1,40 +1,52 @@
 {
-  "sourceLanguage": "en",
-  "strings": {
-    "CFBundleDisplayName": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sukun"
+  "sourceLanguage" : "en",
+  "strings" : {
+    "CFBundleDisplayName" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sukun"
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sukun"
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sukun"
           }
         }
       }
     },
-    "NSLocationWhenInUseUsageDescription": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sukun uses your location to calculate accurate prayer times and the Qibla direction, in the app and in its widgets. Your location stays on your device."
+    "CFBundleName" : {
+      "comment" : "Bundle name",
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "SukunWidgets"
+          }
+        }
+      }
+    },
+    "NSLocationWhenInUseUsageDescription" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sukun verwendet deinen Standort, um genaue Gebetszeiten und die Qibla-Richtung zu berechnen – in der App und in den Widgets. Dein Standort bleibt auf deinem Gerät."
           }
         },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sukun verwendet deinen Standort, um genaue Gebetszeiten und die Qibla-Richtung zu berechnen – in der App und in den Widgets. Dein Standort bleibt auf deinem Gerät."
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sukun uses your location to calculate accurate prayer times and the Qibla direction, in the app and in its widgets. Your location stays on your device."
           }
         }
       }
     }
   },
-  "version": "1.0"
+  "version" : "1.0"
 }

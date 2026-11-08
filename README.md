@@ -79,9 +79,11 @@ refreshes it when the app becomes active and via a background app refresh task (
 
 ## Privacy
 
-`PrivacyInfo.xcprivacy` (app and widget) declares no tracking and no collected data. The only
-required-reason API is `UserDefaults` (CA92.1, 1C8F.1 for the App Group). City search uses Apple's
-MapKit; nothing is sent to any other service.
+`PrivacyInfo.xcprivacy` (app and widget) declares no tracking. The only required-reason API is
+`UserDefaults` (CA92.1, 1C8F.1 for the App Group). City search uses Apple's MapKit. The only outbound
+request of our own is the optional feedback form (Settings → Send feedback): one HTTPS POST to a PostHog
+survey of type "API" in the EU cloud, no SDK, random id per message, no location. Config lives in
+`Sukun/Services/FeedbackService.swift` (`FeedbackConfig.production`; set `appStoreID` to show "Rate Sukun").
 
 ## Website
 
