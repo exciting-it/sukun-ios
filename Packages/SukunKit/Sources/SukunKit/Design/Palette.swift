@@ -46,21 +46,22 @@ extension NSColor {
 }
 #endif
 
-/// Sukun's calm palette. Light: warm sand, deep green, slate. Dark: deep green-black, soft green, soft white.
-/// Green is the single accent in both appearances.
+/// Sukun's calm palette. Light: warm sand, deep green, slate. Dark: neutral charcoal, soft white, soft green.
+/// Green is the single accent and is reserved for signals: controls, active reminders, the Qibla needle,
+/// the soft wash behind the current prayer. Text, including the current prayer's name, stays neutral.
 public enum Palette {
-    public static let background = Color.dynamic(light: 0xF6F1EA, dark: 0x0D1A15)
+    public static let background = Color.dynamic(light: 0xF6F1EA, dark: 0x111413)
     /// Card surface, slightly lifted from the background.
-    public static let surface = Color.dynamic(light: 0xFFFCF7, dark: 0x163026, lightAlpha: 0.85, darkAlpha: 0.85)
+    public static let surface = Color.dynamic(light: 0xFFFCF7, dark: 0x1B201E, lightAlpha: 0.85, darkAlpha: 0.9)
     /// Accent for fills, rings and indicators.
     public static let accent = Color.dynamic(light: 0x4E8A6A, dark: 0x6FAE8C)
     /// Accent for text and small symbols (WCAG AA ≥ 4.5:1 on background, cards and highlight).
     public static let accentText = Color.dynamic(light: 0x2B6449, dark: 0x8CC3A5)
     public static let text = Color.dynamic(light: 0x2E3A40, dark: 0xF3F0EA)
-    public static let secondaryText = Color.dynamic(light: 0x525D62, dark: 0xA6B8AE)
+    public static let secondaryText = Color.dynamic(light: 0x525D62, dark: 0xA4AAA7)
     public static let divider = Color.dynamic(light: 0x2E3A40, dark: 0xF3F0EA, lightAlpha: 0.09, darkAlpha: 0.10)
     /// Soft green wash behind the current prayer.
-    public static let highlight = Color.dynamic(light: 0x2B6449, dark: 0x6FB892, lightAlpha: 0.12, darkAlpha: 0.20)
+    public static let highlight = Color.dynamic(light: 0x2B6449, dark: 0x6FB892, lightAlpha: 0.12, darkAlpha: 0.16)
     public static let shadow = Color.dynamic(light: 0x2E3A40, dark: 0x000000, lightAlpha: 0.06, darkAlpha: 0.0)
 
     public static let cornerRadius: CGFloat = 24

@@ -44,7 +44,7 @@ struct CompassDial: View {
                     ForEach(Cardinal.allCases, id: \.self) { cardinal in
                         Text(cardinal.label)
                             .font(.system(size: cardinal == .north ? 17 : 14, weight: cardinal == .north ? .semibold : .regular, design: .rounded))
-                            .foregroundStyle(cardinal == .north ? Palette.accentText : Palette.secondaryText)
+                            .foregroundStyle(cardinal == .north ? Palette.text : Palette.secondaryText)
                             .rotationEffect(.degrees(-(cardinal.degrees + rotation)))
                             .offset(y: -radius + 40)
                             .rotationEffect(.degrees(cardinal.degrees))

@@ -48,7 +48,7 @@ struct OverviewWidgetView: View {
                 VStack(alignment: .trailing, spacing: 2) {
                     Text(snapshot.featured.kind.localizedName)
                         .font(.system(.subheadline, design: .rounded, weight: .medium))
-                        .foregroundStyle(snapshot.current != nil ? Palette.accentText : Palette.secondaryText)
+                        .foregroundStyle(snapshot.current != nil ? Palette.text : Palette.secondaryText)
                         .widgetAccentable()
                     Group {
                         if let ramadan = snapshot.ramadan {
@@ -74,10 +74,10 @@ struct OverviewWidgetView: View {
                         Image(systemName: slot.kind.symbolName)
                             .font(.footnote)
                             .frame(width: 20)
-                            .foregroundStyle(isCurrent ? Palette.accentText : Palette.secondaryText)
+                            .foregroundStyle(isCurrent ? Palette.text : Palette.secondaryText)
                         Text(slot.kind.localizedName)
                             .font(.system(.subheadline, design: .rounded, weight: isCurrent ? .semibold : .regular))
-                            .foregroundStyle(isCurrent ? Palette.accentText : Palette.text)
+                            .foregroundStyle(Palette.text)
                         Spacer()
                         Text(formatter.string(from: slot.date))
                             .font(.system(.body, design: .rounded, weight: .light).monospacedDigit())

@@ -29,7 +29,7 @@ struct QiblaWidgetView: View {
                             .foregroundStyle(Palette.text)
                         Text(snapshot.qiblaCompassPoint.abbreviation)
                             .font(.system(.caption, design: .rounded, weight: .semibold))
-                            .foregroundStyle(Palette.accentText)
+                            .foregroundStyle(Palette.secondaryText)
                             .widgetAccentable()
                     }
                 }

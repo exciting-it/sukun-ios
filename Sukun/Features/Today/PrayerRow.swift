@@ -24,12 +24,12 @@ struct PrayerRow: View {
                 Image(systemName: slot.kind.symbolName)
                     .font(.body)
                     .frame(width: 24)
-                    .foregroundStyle(isCurrent ? Palette.accentText : Palette.secondaryText)
+                    .foregroundStyle(isCurrent ? Palette.text : Palette.secondaryText)
                     .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 1) {
                     Text(slot.kind.localizedName)
                         .font(.system(.body, design: .rounded, weight: isCurrent ? .semibold : .regular))
-                        .foregroundStyle(isCurrent ? Palette.accentText : Palette.text)
+                        .foregroundStyle(Palette.text)
                     if let ramadanLabel {
                         Text(ramadanLabel)
                             .font(.system(.caption, design: .rounded))

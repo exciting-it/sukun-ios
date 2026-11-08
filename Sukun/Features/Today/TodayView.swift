@@ -98,7 +98,7 @@ struct FeaturedPrayerHero: View {
         VStack(spacing: 8) {
             Text(featured.kind.localizedName)
                 .font(.sukunTitle)
-                .foregroundStyle(isRunning ? Palette.accentText : Palette.secondaryText)
+                .foregroundStyle(isRunning ? Palette.text : Palette.secondaryText)
             HStack(alignment: .firstTextBaseline, spacing: 6) {
                 Text(formatter.numerals(from: featured.date))
                     .font(.sukunNumerals(numeralSize, weight: .thin))
@@ -128,7 +128,7 @@ struct FeaturedPrayerHero: View {
             if let ramadan = snapshot.ramadan {
                 RamadanLine(state: ramadan)
                     .font(.sukunBody.monospacedDigit())
-                    .foregroundStyle(Palette.accentText)
+                    .foregroundStyle(Palette.text)
             }
         }
         .accessibilityElement(children: .ignore)

@@ -47,7 +47,7 @@ struct DayPrayersWidgetView: View {
                     }
                 }
                     .font(.system(.caption, design: .rounded).monospacedDigit())
-                    .foregroundStyle(Palette.accentText)
+                    .foregroundStyle(Palette.secondaryText)
                     .multilineTextAlignment(.trailing)
                     .lineLimit(1)
                     .widgetAccentable()

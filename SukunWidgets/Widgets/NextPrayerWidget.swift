@@ -56,7 +56,7 @@ struct SmallNextPrayerView: View {
                 Text(featured.kind.localizedName)
                     .font(.system(.headline, design: .rounded, weight: .medium))
             }
-            .foregroundStyle(isRunning ? Palette.accentText : Palette.secondaryText)
+            .foregroundStyle(isRunning ? Palette.text : Palette.secondaryText)
             .widgetAccentable()
 
             Spacer(minLength: 4)

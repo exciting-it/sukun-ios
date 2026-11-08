@@ -5,12 +5,12 @@ public extension DayPeriod {
     /// Top color of the background gradient; the bottom always melts into `Palette.background`.
     var gradientTop: Color {
         switch self {
-        case .dawn: Color.dynamic(light: 0xE8D2DB, dark: 0x3A2E48)       // rose / muted violet dawn
-        case .morning: Color.dynamic(light: 0xF2E2C6, dark: 0x1C3A32)    // pale gold / teal green
-        case .midday: Color.dynamic(light: 0xE1EBDD, dark: 0x1B3B2D)     // sage / green
-        case .afternoon: Color.dynamic(light: 0xF0DDBF, dark: 0x2F3726)  // warm sand / olive
+        case .dawn: Color.dynamic(light: 0xE8D2DB, dark: 0x352A42)       // rose / muted violet
+        case .morning: Color.dynamic(light: 0xF2E2C6, dark: 0x3A2C1E)    // pale gold / warm amber
+        case .midday: Color.dynamic(light: 0xE1EBDD, dark: 0x1E2B36)     // sage / slate blue
+        case .afternoon: Color.dynamic(light: 0xF0DDBF, dark: 0x3B2F1C)  // warm sand / ochre
         case .dusk: Color.dynamic(light: 0xF0CDB2, dark: 0x4A302C)       // apricot / warm rust
-        case .night: Color.dynamic(light: 0xD9DEE6, dark: 0x07130F)      // cool grey / near-black green
+        case .night: Color.dynamic(light: 0xD9DEE6, dark: 0x0B0E0D)      // cool grey / near-black
         }
     }
 }

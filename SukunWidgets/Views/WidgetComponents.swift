@@ -90,7 +90,7 @@ struct PrayerTimeStack: View {
                 .font(.system(size: compact ? 11 : 12, weight: isCurrent ? .semibold : .medium, design: .rounded))
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
-                .foregroundStyle(isCurrent ? Palette.accentText : Palette.secondaryText)
+                .foregroundStyle(isCurrent ? Palette.text : Palette.secondaryText)
             Text(formatter.numerals(from: slot.date))
                 .font(.system(size: compact ? 15 : 17, weight: isCurrent ? .regular : .light, design: .rounded).monospacedDigit())
                 .lineLimit(1)
