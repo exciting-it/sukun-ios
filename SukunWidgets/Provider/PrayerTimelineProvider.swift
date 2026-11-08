@@ -44,6 +44,8 @@ struct PrayerTimelineProvider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<PrayerEntry>) -> Void) {
+        // WidgetKit's completion handler may be called from any thread; it's just not annotated @Sendable.
+        nonisolated(unsafe) let completion = completion
         Task { @MainActor in
             let now = Date()
             let settings = SharedStore.shared.settings

@@ -58,7 +58,7 @@ public enum Palette {
     public static let text = Color.dynamic(light: 0x2E3A40, dark: 0xF3F0EA)
     public static let secondaryText = Color.dynamic(light: 0x5F6B70, dark: 0xA7B1BD)
     public static let divider = Color.dynamic(light: 0x2E3A40, dark: 0xF3F0EA, lightAlpha: 0.09, darkAlpha: 0.10)
-    public static let highlight = Color.dynamic(light: 0x8FA998, dark: 0xC9A96E, lightAlpha: 0.16, darkAlpha: 0.14)
+    public static let highlight = Color.dynamic(light: 0x8FA998, dark: 0x2E4A6E, lightAlpha: 0.16, darkAlpha: 0.55)
     public static let shadow = Color.dynamic(light: 0x2E3A40, dark: 0x000000, lightAlpha: 0.06, darkAlpha: 0.0)
 
     public static let cornerRadius: CGFloat = 24

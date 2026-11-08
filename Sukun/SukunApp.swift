@@ -31,7 +31,16 @@ enum AppTab: String, Hashable {
 
 struct RootView: View {
     @Environment(AppModel.self) private var model
-    @State private var tab: AppTab = .today
+    @State private var tab: AppTab = Self.initialTab
+
+    /// Debug builds accept `-SukunInitialTab qibla` (simulator screenshots, UI checks).
+    private static var initialTab: AppTab {
+        #if DEBUG
+        UserDefaults.standard.string(forKey: "SukunInitialTab").flatMap(AppTab.init(rawValue:)) ?? .today
+        #else
+        .today
+        #endif
+    }
 
     var body: some View {
         Group {

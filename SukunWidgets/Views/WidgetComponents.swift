@@ -18,6 +18,22 @@ extension View {
     }
 }
 
+/// Marks the next prayer. Full color: a soft fill. Tinted / vibrant rendering keeps only alpha, where a fill
+/// would turn into a bright slab under same-colored text, so it becomes a hairline outline instead.
+struct NextHighlight: View {
+    var cornerRadius: CGFloat
+    @Environment(\.widgetRenderingMode) private var renderingMode
+
+    var body: some View {
+        let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+        if renderingMode == .fullColor {
+            shape.fill(Palette.highlight)
+        } else {
+            shape.strokeBorder(.white.opacity(0.45), lineWidth: 1)
+        }
+    }
+}
+
 /// Shown until the app has a location.
 struct WidgetSetupView: View {
     var body: some View {
@@ -59,10 +75,7 @@ struct PrayerTimeStack: View {
         .padding(.vertical, 8)
         .frame(maxWidth: .infinity)
         .background {
-            if isNext {
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .fill(Palette.highlight)
-            }
+            if isNext { NextHighlight(cornerRadius: 14) }
         }
         .widgetAccentable(isNext)
         .accessibilityElement(children: .ignore)
@@ -100,7 +113,7 @@ struct QiblaArrowDial: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: size * 0.22, height: size * 0.32)
-                    .foregroundStyle(Palette.accent)
+                    .foregroundStyle(Palette.accentText)
                     .offset(y: -size * 0.12)
                     .rotationEffect(.degrees(bearing))
                     .widgetAccentable()

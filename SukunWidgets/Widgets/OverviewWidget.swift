@@ -58,8 +58,18 @@ struct OverviewWidgetView: View {
                 .accessibilityElement(children: .combine)
             }
 
-            // Prayer list
+            // Prayer list (rows share the free height so the list fills the widget evenly)
             VStack(spacing: 0) {
+                if snapshot.isShowingTomorrow {
+                    Text("Tomorrow")
+                        .font(.system(.caption2, design: .rounded, weight: .semibold))
+                        .textCase(.uppercase)
+                        .tracking(1)
+                        .foregroundStyle(Palette.secondaryText)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 10)
+                        .padding(.bottom, 2)
+                }
                 ForEach(snapshot.displayDay.slots) { slot in
                     let isNext = snapshot.isNext(slot)
                     HStack {
@@ -78,11 +88,10 @@ struct OverviewWidgetView: View {
                             .foregroundStyle(Palette.text)
                     }
                     .padding(.horizontal, 10)
-                    .padding(.vertical, 7)
+                    .padding(.vertical, 6)
+                    .frame(maxHeight: 44)
                     .background {
-                        if isNext {
-                            RoundedRectangle(cornerRadius: 12, style: .continuous).fill(Palette.highlight)
-                        }
+                        if isNext { NextHighlight(cornerRadius: 12) }
                     }
                     .opacity(slot.date <= snapshot.date && !isNext ? 0.5 : 1)
                     .widgetAccentable(isNext)
@@ -90,7 +99,7 @@ struct OverviewWidgetView: View {
                 }
             }
 
-            Spacer(minLength: 0)
+            .frame(maxHeight: .infinity, alignment: .top)
 
             // Qibla footer
             HStack(spacing: 10) {

@@ -52,10 +52,12 @@ public enum LocationResolver {
         geocodeTimeout: TimeInterval = 5
     ) async -> StoredLocation {
         let coordinate = Coordinate(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+        // Stamp with the fix's own time: a cached (stale) fix must not count as fresh and block the next refresh.
+        let fixDate = min(location.timestamp, Date())
         if let previous, previous.coordinate.distanceKilometers(to: coordinate) < reuseRadiusKm {
             var updated = previous
             updated.coordinate = coordinate
-            updated.updatedAt = Date()
+            updated.updatedAt = fixDate
             return updated
         }
         let placemark = await reverseGeocode(location, timeout: geocodeTimeout)
@@ -64,7 +66,8 @@ public enum LocationResolver {
             name: placemark?.locality ?? placemark?.subAdministrativeArea ?? placemark?.administrativeArea,
             countryCode: placemark?.isoCountryCode,
             timeZoneIdentifier: placemark?.timeZone?.identifier ?? TimeZone.current.identifier,
-            source: .gps
+            source: .gps,
+            updatedAt: fixDate
         )
     }
 
