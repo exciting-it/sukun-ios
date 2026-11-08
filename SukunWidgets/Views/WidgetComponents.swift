@@ -53,12 +53,22 @@ struct WidgetSetupView: View {
 /// "Maghrib in 1:52:10": the small hint to the next boundary under the current prayer.
 /// Without a running prayer the featured name above already says what's coming, so the hint is just
 /// "in 1:52:10"; pass `alwaysNamed` where no name is shown above it.
+///
+/// With the display off (Always-On, `isLuminanceReduced`) iOS updates widgets rarely and writes timers out as
+/// "6 hours, 14 minutes", which doesn't fit. Then it shows the clock time instead: "Fajr 05:29".
 struct UpcomingHint: View {
     let snapshot: PrayerSnapshot
     var alwaysNamed = false
+    @Environment(\.isLuminanceReduced) private var isLuminanceReduced
 
     var body: some View {
-        if snapshot.current != nil || alwaysNamed {
+        let named = snapshot.current != nil || alwaysNamed
+        if isLuminanceReduced {
+            if named {
+                Text(verbatim: "\(snapshot.upcoming.kind.localizedName) \(snapshot.formatter.string(from: snapshot.upcoming.date))")
+            }
+            // Unnamed hint sits under the featured name and time, which already say it all.
+        } else if named {
             Text("\(snapshot.upcoming.kind.localizedName) in \(Text(snapshot.upcoming.date, style: .timer))")
         } else {
             Text("in \(Text(snapshot.upcoming.date, style: .timer))")
@@ -145,11 +155,16 @@ struct QiblaArrowDial: View {
 /// "Iftar in 3:21:10" during the fast, "Suhoor ends in 6:12:40" at night (Ramadan mode).
 struct RamadanLine: View {
     let state: RamadanState
+    let formatter: PrayerTimeFormatter
+    @Environment(\.isLuminanceReduced) private var isLuminanceReduced
 
     var body: some View {
-        switch state.countdown {
-        case .iftar(let date): Text("Iftar in \(Text(date, style: .timer))")
-        case .suhoorEnds(let date): Text("Suhoor ends in \(Text(date, style: .timer))")
+        // Display off: short clock time instead of a spelled-out timer (see UpcomingHint).
+        switch (state.countdown, isLuminanceReduced) {
+        case (.iftar(let date), false): Text("Iftar in \(Text(date, style: .timer))")
+        case (.suhoorEnds(let date), false): Text("Suhoor ends in \(Text(date, style: .timer))")
+        case (.iftar(let date), true): Text("Iftar \(formatter.string(from: date))")
+        case (.suhoorEnds(let date), true): Text("Suhoor ends \(formatter.string(from: date))")
         }
     }
 }

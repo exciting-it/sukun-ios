@@ -459,6 +459,40 @@
           }
         }
       }
+    },
+    "Iftar %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iftar %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Iftar %@"
+          }
+        }
+      }
+    },
+    "Suhoor ends %@": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suhoor ends %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suhoor endet %@"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

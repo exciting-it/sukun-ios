@@ -52,7 +52,7 @@ struct OverviewWidgetView: View {
                         .widgetAccentable()
                     Group {
                         if let ramadan = snapshot.ramadan {
-                            RamadanLine(state: ramadan)
+                            RamadanLine(state: ramadan, formatter: snapshot.formatter)
                         } else {
                             UpcomingHint(snapshot: snapshot)
                         }

@@ -76,7 +76,7 @@ struct SmallNextPrayerView: View {
 
             Group {
                 if let ramadan = snapshot.ramadan {
-                    RamadanLine(state: ramadan)
+                    RamadanLine(state: ramadan, formatter: snapshot.formatter)
                 } else {
                     UpcomingHint(snapshot: snapshot)
                 }
@@ -131,7 +131,7 @@ struct RectangularAccessory: View {
                 .font(.system(.body, design: .rounded).monospacedDigit())
             Group {
                 if let ramadan = snapshot.ramadan {
-                    RamadanLine(state: ramadan)
+                    RamadanLine(state: ramadan, formatter: snapshot.formatter)
                 } else {
                     UpcomingHint(snapshot: snapshot)
                 }
