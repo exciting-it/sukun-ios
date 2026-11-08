@@ -18,8 +18,8 @@ Before the first run, set your identity in **one place**, the `settings.base` bl
 
 | Setting | Example | Notes |
 |---|---|---|
-| `SUKUN_BUNDLE_ID` | `com.jasonschell.sukun` | Reverse-DNS, globally unique, **cannot change after the first App Store upload** |
-| `SUKUN_APP_GROUP` | `group.com.jasonschell.sukun` | Must start with `group.`; shared by app and widget |
+| `SUKUN_BUNDLE_ID` | `faith.sukun.ios` | Reverse-DNS, globally unique, **cannot change after the first App Store upload** |
+| `SUKUN_APP_GROUP` | `group.faith.sukun` | Must start with `group.`; shared by app and widget |
 | `DEVELOPMENT_TEAM` | `5A57FGF7LP` | Your Team ID (developer.apple.com → Membership) |
 
 Re-run `xcodegen generate` after editing `project.yml`. With automatic signing, Xcode registers the
@@ -74,7 +74,7 @@ tests allow ±2 minutes because Adhan applies small per-method safety offsets.
 ## Notifications
 
 Local only. iOS caps pending notifications at 64, so Sukun keeps a rolling window of up to 7 days and
-refreshes it when the app becomes active and via a background app refresh task (`app.sukun.refresh`).
+refreshes it when the app becomes active and via a background app refresh task (`faith.sukun.ios.refresh`).
 
 ## Privacy
 

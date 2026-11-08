@@ -5,7 +5,7 @@ import WidgetKit
 /// Small: static arrow pointing to the Qibla relative to north.
 struct QiblaWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "app.sukun.widget.qibla", provider: PrayerTimelineProvider()) { entry in
+        StaticConfiguration(kind: "faith.sukun.widget.qibla", provider: PrayerTimelineProvider()) { entry in
             QiblaWidgetView(entry: entry)
         }
         .configurationDisplayName("Qibla")

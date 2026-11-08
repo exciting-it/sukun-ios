@@ -5,7 +5,7 @@ import WidgetKit
 /// Periodic background refresh that keeps the rolling notification window filled
 /// even if the app isn't opened for a week.
 enum BackgroundRefresh {
-    static let identifier = "app.sukun.refresh"
+    static let identifier = "faith.sukun.ios.refresh"
 
     static func schedule() {
         let request = BGAppRefreshTaskRequest(identifier: identifier)

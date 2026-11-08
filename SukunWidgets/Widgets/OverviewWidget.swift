@@ -5,7 +5,7 @@ import WidgetKit
 /// Large: next prayer, the full day, Hijri date and Qibla bearing.
 struct OverviewWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "app.sukun.widget.overview", provider: PrayerTimelineProvider()) { entry in
+        StaticConfiguration(kind: "faith.sukun.widget.overview", provider: PrayerTimelineProvider()) { entry in
             OverviewWidgetView(entry: entry)
         }
         .configurationDisplayName("Overview")

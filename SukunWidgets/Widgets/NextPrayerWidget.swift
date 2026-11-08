@@ -5,7 +5,7 @@ import WidgetKit
 /// Small Home Screen widget + all Lock Screen accessories.
 struct NextPrayerWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "app.sukun.widget.next", provider: PrayerTimelineProvider()) { entry in
+        StaticConfiguration(kind: "faith.sukun.widget.next", provider: PrayerTimelineProvider()) { entry in
             NextPrayerWidgetView(entry: entry)
         }
         .configurationDisplayName("Next Prayer")

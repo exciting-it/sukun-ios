@@ -22,7 +22,7 @@
 - [ ] Name: **Sukun** (30 chars max). Subtitle e.g. "Prayer Times & Qibla" / "Gebetszeiten & Qibla"
 - [ ] Category: Lifestyle (secondary: Reference or Utilities)
 - [ ] Description, keywords (prayer, salah, namaz, adhan, qibla, widget, gebetszeiten, …), promotional text
-- [ ] Support URL (required) and Privacy Policy URL (required even when no data is collected; a simple page that says so is enough)
+- [ ] Support URL (e.g. https://sukun.faith/support) and Privacy Policy URL (e.g. https://sukun.faith/privacy), both required even when no data is collected; a simple page that says so is enough
 - [ ] Age rating questionnaire → 4+
 - [ ] Price: free; availability: all regions
 - [ ] Copyright line

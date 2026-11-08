@@ -3,7 +3,7 @@ import Foundation
 public enum AppGroup {
     /// Read from the `SukunAppGroup` Info.plist key so the identifier lives in one place (project.yml).
     public static var identifier: String {
-        (Bundle.main.object(forInfoDictionaryKey: "SukunAppGroup") as? String) ?? "group.app.sukun"
+        (Bundle.main.object(forInfoDictionaryKey: "SukunAppGroup") as? String) ?? "group.faith.sukun"
     }
 }
 

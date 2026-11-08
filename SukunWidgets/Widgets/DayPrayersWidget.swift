@@ -5,7 +5,7 @@ import WidgetKit
 /// Medium: the five prayers of the day, the next one highlighted.
 struct DayPrayersWidget: Widget {
     var body: some WidgetConfiguration {
-        StaticConfiguration(kind: "app.sukun.widget.day", provider: PrayerTimelineProvider()) { entry in
+        StaticConfiguration(kind: "faith.sukun.widget.day", provider: PrayerTimelineProvider()) { entry in
             DayPrayersWidgetView(entry: entry)
         }
         .configurationDisplayName("Today’s Prayers")
