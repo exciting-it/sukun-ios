@@ -38,6 +38,29 @@ final class AppModel {
         return gpsLocation ?? settings.manualLocation
     }
 
+    // MARK: Design preview (debug builds only expose the UI; release keeps the offset at 0)
+
+    /// Which time of day the preview shows, nil = live.
+    private(set) var designPreview: PrayerKind?
+    /// Virtual time minus real time while previewing.
+    private(set) var previewOffset: TimeInterval = 0
+
+    /// Jumps the app's clock to 10 minutes after `kind` today, so Today and Qibla look as they would then.
+    func setDesignPreview(_ kind: PrayerKind?, now: Date = Date()) {
+        designPreview = kind
+        guard let kind, let target = snapshot(at: now)?.today.time(for: kind) else {
+            previewOffset = 0
+            return
+        }
+        previewOffset = target.addingTimeInterval(600).timeIntervalSince(now)
+    }
+
+    /// The moment the UI should show for a real clock time.
+    func now(_ real: Date = Date()) -> Date { real.addingTimeInterval(previewOffset) }
+
+    /// Maps a virtual date back to the real clock, for `Text(date, style: .timer)` countdowns.
+    func realDate(_ virtual: Date) -> Date { virtual.addingTimeInterval(-previewOffset) }
+
     func snapshot(at date: Date) -> PrayerSnapshot? {
         guard let location else { return nil }
         return PrayerSnapshot(date: date, location: location, settings: settings)

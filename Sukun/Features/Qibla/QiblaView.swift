@@ -19,7 +19,7 @@ struct QiblaView: View {
             let isAligned = offset.map { abs($0) <= alignmentTolerance } ?? false
 
             ZStack {
-                TimeOfDayBackground(period: model.snapshot(at: .now)?.period ?? .midday,
+                TimeOfDayBackground(period: model.snapshot(at: model.now())?.period ?? .midday,
                                     showsPattern: model.settings.showsPattern)
                 ScrollView {
                     VStack(spacing: 32) {
@@ -42,6 +42,8 @@ struct QiblaView: View {
                     .padding(.bottom, 32)
                 }
                 .scrollIndicators(.hidden)
+                // The compass shouldn't move: no scrolling or bouncing unless large text needs it.
+                .scrollBounceBehavior(.basedOnSize)
             }
             .sensoryFeedback(.impact(flexibility: .soft, intensity: 0.7), trigger: isAligned) { _, aligned in
                 aligned && model.settings.qiblaHaptics

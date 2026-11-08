@@ -43,6 +43,24 @@ final class AppModelTests: XCTestCase {
         XCTAssertNil(allowed.settings.earlyReminderMinutes, "turning off never needs permission")
     }
 
+    func testDesignPreviewMovesNowToTheChosenPrayer() throws {
+        let (model, _) = makeModel()
+        let munich = StoredLocation(coordinate: Coordinate(latitude: 48.1351, longitude: 11.5820),
+                                    name: "München", countryCode: "DE", timeZoneIdentifier: "Europe/Berlin", source: .manual)
+        model.useManualLocation(munich)
+        let realNow = Fixtures.date(2026, 12, 15, 22, 0, tz: "Europe/Berlin")
+        let asr = try XCTUnwrap(model.snapshot(at: realNow)?.today.time(for: .asr))
+
+        model.setDesignPreview(.asr, now: realNow)
+        XCTAssertEqual(model.now(realNow), asr.addingTimeInterval(600))
+        XCTAssertEqual(model.snapshot(at: model.now(realNow))?.current?.kind, .asr)
+        XCTAssertEqual(model.realDate(asr), asr.addingTimeInterval(realNow.timeIntervalSince(asr) - 600),
+                       "timers count from the real clock, so virtual dates map back")
+
+        model.setDesignPreview(nil, now: realNow)
+        XCTAssertEqual(model.now(realNow), realNow)
+    }
+
     func testSettingsBindingWritesThrough() {
         let (model, store) = makeModel()
         model.binding(\.clockFormat).wrappedValue = .twentyFourHour

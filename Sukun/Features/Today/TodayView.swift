@@ -9,7 +9,7 @@ struct TodayView: View {
     var body: some View {
         // Prayer times fall on whole minutes, so a per-minute timeline is enough to move the highlight.
         TimelineView(.everyMinute) { context in
-            if let snapshot = model.snapshot(at: context.date) {
+            if let snapshot = model.snapshot(at: model.now(context.date)) {
                 content(snapshot)
             } else {
                 ContentUnavailableView("Prayer times unavailable", systemImage: "moon.zzz",
@@ -37,6 +37,8 @@ struct TodayView: View {
                 .frame(maxWidth: .infinity)
             }
             .scrollIndicators(.hidden)
+            // No rubber-banding when everything fits; scrolls (and bounces) only when it doesn't (large text).
+            .scrollBounceBehavior(.basedOnSize)
         }
     }
 
@@ -56,6 +58,13 @@ struct TodayView: View {
             .accessibilityLabel(Text("Location: \(snapshot.location.displayName)"))
             .accessibilityHint(Text("Change location"))
 
+            #if DEBUG
+            if let preview = model.designPreview {
+                Text(verbatim: "Design preview: \(preview.localizedName) + 10 min")
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(.orange)
+            }
+            #endif
             Text(snapshot.hijriDate)
                 .font(.sukunCallout)
                 .foregroundStyle(Palette.text)
@@ -78,6 +87,7 @@ struct TodayView: View {
 /// Big, quiet display of the prayer whose time is running, with a small hint to the next boundary.
 /// Between sunrise and Dhuhr no prayer is running, so it features the upcoming Dhuhr instead.
 struct FeaturedPrayerHero: View {
+    @Environment(AppModel.self) private var model
     let snapshot: PrayerSnapshot
     let numeralSize: CGFloat
 
@@ -107,9 +117,9 @@ struct FeaturedPrayerHero: View {
                 if ramadanCoversHint {
                     EmptyView()
                 } else if isRunning {
-                    Text("\(snapshot.upcoming.kind.localizedName) in \(Text(snapshot.upcoming.date, style: .timer))")
+                    Text("\(snapshot.upcoming.kind.localizedName) in \(Text(model.realDate(snapshot.upcoming.date), style: .timer))")
                 } else {
-                    Text("in \(Text(snapshot.upcoming.date, style: .timer))")
+                    Text("in \(Text(model.realDate(snapshot.upcoming.date), style: .timer))")
                 }
             }
             .font(.sukunBody.monospacedDigit())
@@ -123,14 +133,14 @@ struct FeaturedPrayerHero: View {
         }
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityLabel(formatter))
-        .accessibilityValue(Text(snapshot.upcoming.date, style: .relative))
+        .accessibilityValue(Text(model.realDate(snapshot.upcoming.date), style: .relative))
         .accessibilityHint(ramadanHint)
     }
 
     private var ramadanHint: Text {
         switch snapshot.ramadan?.countdown {
-        case .iftar(let date): Text("Iftar in \(Text(date, style: .relative))")
-        case .suhoorEnds(let date): Text("Suhoor ends in \(Text(date, style: .relative))")
+        case .iftar(let date): Text("Iftar in \(Text(model.realDate(date), style: .relative))")
+        case .suhoorEnds(let date): Text("Suhoor ends in \(Text(model.realDate(date), style: .relative))")
         case nil: Text(verbatim: "")
         }
     }
@@ -184,12 +194,13 @@ struct PrayerListCard: View {
 
 /// "Iftar in 3:21:10" during the fast, "Suhoor ends in 6:12:40" at night (Ramadan mode).
 struct RamadanLine: View {
+    @Environment(AppModel.self) private var model
     let state: RamadanState
 
     var body: some View {
         switch state.countdown {
-        case .iftar(let date): Text("Iftar in \(Text(date, style: .timer))")
-        case .suhoorEnds(let date): Text("Suhoor ends in \(Text(date, style: .timer))")
+        case .iftar(let date): Text("Iftar in \(Text(model.realDate(date), style: .timer))")
+        case .suhoorEnds(let date): Text("Suhoor ends in \(Text(model.realDate(date), style: .timer))")
         }
     }
 }

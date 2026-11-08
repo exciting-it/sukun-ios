@@ -20,6 +20,9 @@ struct SettingsView: View {
                     displaySection
                     feedbackSection
                     aboutSection
+                    #if DEBUG
+                    designPreviewSection
+                    #endif
                 }
                 .sukunRowBackground()
             }
@@ -185,6 +188,28 @@ struct SettingsView: View {
             Text("Ramadan mode shows Suhoor and Iftar times. If Ramadan starts a day earlier or later where you live, adjust the Hijri date.")
         }
     }
+
+    #if DEBUG
+    // MARK: Design preview (debug builds only)
+
+    private var designPreviewSection: some View {
+        Section {
+            Picker(selection: Binding(
+                get: { model.designPreview },
+                set: { model.setDesignPreview($0) }
+            )) {
+                Text(verbatim: "Live").tag(PrayerKind?.none)
+                ForEach(PrayerKind.allCases) { Text($0.localizedName).tag(PrayerKind?.some($0)) }
+            } label: {
+                Text(verbatim: "Time of day")
+            }
+        } header: {
+            Text(verbatim: "Design preview")
+        } footer: {
+            Text(verbatim: "Debug builds only. Today and Qibla show the app 10 minutes after the chosen time. Widgets and reminders are not affected.")
+        }
+    }
+    #endif
 
     // MARK: Display
 
