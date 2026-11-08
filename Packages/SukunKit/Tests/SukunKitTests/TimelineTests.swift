@@ -44,4 +44,17 @@ final class TimelineTests: XCTestCase {
         let schedule = calculator.schedule(for: instant)!
         XCTAssertEqual(schedule.day, Fixtures.date(2026, 12, 16, tz: "Asia/Riyadh"))
     }
+
+    func testDisplayDaySwitchesToTomorrowAfterIsha() {
+        let beforeIsha = PrayerSnapshot(date: Fixtures.date(2026, 12, 15, 17, 0, tz: "Europe/Berlin"),
+                                        location: Fixtures.munich, settings: settings)!
+        XCTAssertFalse(beforeIsha.isShowingTomorrow)
+        XCTAssertTrue(beforeIsha.displayDay.slots.contains(beforeIsha.next))
+
+        let afterIsha = PrayerSnapshot(date: Fixtures.date(2026, 12, 15, 21, 0, tz: "Europe/Berlin"),
+                                       location: Fixtures.munich, settings: settings)!
+        XCTAssertTrue(afterIsha.isShowingTomorrow)
+        XCTAssertEqual(afterIsha.displayDay.day, Fixtures.date(2026, 12, 16, tz: "Europe/Berlin"))
+        XCTAssertTrue(afterIsha.displayDay.slots.contains(afterIsha.next))
+    }
 }

@@ -8,6 +8,9 @@ public struct PrayerSnapshot: Hashable, Sendable {
     public let configuration: CalculationConfiguration
     /// Schedule of the civil day containing `date`.
     public let today: DaySchedule
+    /// The day whose list should be shown: today, or tomorrow once today's Isha has passed,
+    /// so the upcoming prayer is always part of the visible list.
+    public let displayDay: DaySchedule
     /// Next obligatory prayer after `date` (may be tomorrow's Fajr).
     public let next: PrayerSlot
     /// Last boundary at or before `date` (may be sunrise or yesterday's Isha).
@@ -21,13 +24,15 @@ public struct PrayerSnapshot: Hashable, Sendable {
         guard
             let today = calculator.schedule(for: date),
             let next = calculator.next(after: date),
-            let previous = calculator.previous(atOrBefore: date)
+            let previous = calculator.previous(atOrBefore: date),
+            let displayDay = today.slots.contains(next) ? today : calculator.schedule(for: next.date)
         else { return nil }
         self.date = date
         self.location = location
         self.settings = settings
         self.configuration = calculator.configuration
         self.today = today
+        self.displayDay = displayDay
         self.next = next
         self.previous = previous
         self.period = DayPeriod(after: previous.kind)
@@ -52,6 +57,8 @@ public struct PrayerSnapshot: Hashable, Sendable {
     public var hijriDate: String { HijriDate.string(for: date, timeZone: location.timeZone) }
 
     public var qiblaCompassPoint: CompassPoint { CompassPoint(degrees: qiblaBearing) }
+
+    public var isShowingTomorrow: Bool { displayDay.day != today.day }
 
     /// True when `slot` is the one the UI should highlight as upcoming.
     public func isNext(_ slot: PrayerSlot) -> Bool { slot == next }
