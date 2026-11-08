@@ -95,14 +95,13 @@ struct PrayerTimeStack: View {
                 .font(.system(size: compact ? 15 : 17, weight: isCurrent ? .regular : .light, design: .rounded).monospacedDigit())
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
-                .foregroundStyle(Palette.text)
+                .foregroundStyle(isPast ? Palette.secondaryText : Palette.text)
         }
         .padding(.vertical, 8)
         .frame(maxWidth: .infinity)
         .background {
             if isCurrent { CurrentHighlight(cornerRadius: 14) }
         }
-        .opacity(isPast ? 0.5 : 1)
         .widgetAccentable(isCurrent)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(isCurrent

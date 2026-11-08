@@ -29,7 +29,7 @@ struct PrayerRow: View {
                 VStack(alignment: .leading, spacing: 1) {
                     Text(slot.kind.localizedName)
                         .font(.system(.body, design: .rounded, weight: isCurrent ? .semibold : .regular))
-                        .foregroundStyle(Palette.text)
+                        .foregroundStyle(textColor)
                     if let ramadanLabel {
                         Text(ramadanLabel)
                             .font(.system(.caption, design: .rounded))
@@ -61,7 +61,7 @@ struct PrayerRow: View {
                     Text(formatter.string(from: slot.date))
                 }
                 .font(.sukunTime)
-                .foregroundStyle(Palette.text)
+                .foregroundStyle(textColor)
             }
         }
         .padding(.vertical, 6)
@@ -73,7 +73,6 @@ struct PrayerRow: View {
                     .fill(Palette.highlight)
             }
         }
-        .opacity(isPast ? 0.5 : 1)
         .animation(.sukun(reduceMotion: reduceMotion), value: isCurrent)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityText)
@@ -83,6 +82,9 @@ struct PrayerRow: View {
             onToggleNotification?(!notificationEnabled)
         }
     }
+
+    /// Past prayers recede in color, not opacity, so they stay readable (WCAG AA).
+    private var textColor: Color { isPast ? Palette.secondaryText : Palette.text }
 
     private var accessibilityText: Text {
         let time = formatter.string(from: slot.date)

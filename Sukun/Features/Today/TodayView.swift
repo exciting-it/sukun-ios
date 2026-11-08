@@ -53,6 +53,9 @@ struct TodayView: View {
                     Text(snapshot.location.displayName)
                 }
                 .smallCaps(color: Palette.secondaryText)
+                .frame(minHeight: 44)
+                .padding(.horizontal, 12)
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             .accessibilityLabel(Text("Location: \(snapshot.location.displayName)"))

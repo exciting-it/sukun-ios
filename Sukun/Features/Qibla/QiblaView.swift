@@ -8,6 +8,7 @@ struct QiblaView: View {
     /// Continuous (unwrapped) heading so the dial never spins the long way round at 359° → 0°.
     @State private var unwrappedHeading: Double = 0
     @State private var hasHeading = false
+    @ScaledMetric(relativeTo: .largeTitle) private var bearingSize: CGFloat = 52
 
     private let alignmentTolerance = 3.0
 
@@ -72,7 +73,7 @@ struct QiblaView: View {
         VStack(spacing: 10) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text("\(Int(bearing.rounded()))°")
-                    .font(.sukunNumerals(52, weight: .thin))
+                    .font(.sukunNumerals(bearingSize, weight: .thin))
                     .foregroundStyle(Palette.text)
                 Text(point.abbreviation)
                     .font(.sukunTitle)

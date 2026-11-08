@@ -70,6 +70,7 @@ struct OverviewWidgetView: View {
             VStack(spacing: 0) {
                 ForEach(snapshot.today.slots) { slot in
                     let isCurrent = snapshot.isCurrent(slot)
+                    let textColor = snapshot.isPast(slot) ? Palette.secondaryText : Palette.text
                     HStack {
                         Image(systemName: slot.kind.symbolName)
                             .font(.footnote)
@@ -77,11 +78,11 @@ struct OverviewWidgetView: View {
                             .foregroundStyle(isCurrent ? Palette.text : Palette.secondaryText)
                         Text(slot.kind.localizedName)
                             .font(.system(.subheadline, design: .rounded, weight: isCurrent ? .semibold : .regular))
-                            .foregroundStyle(Palette.text)
+                            .foregroundStyle(textColor)
                         Spacer()
                         Text(formatter.string(from: slot.date))
                             .font(.system(.body, design: .rounded, weight: .light).monospacedDigit())
-                            .foregroundStyle(Palette.text)
+                            .foregroundStyle(textColor)
                     }
                     .padding(.horizontal, 10)
                     .padding(.vertical, 6)
@@ -89,7 +90,6 @@ struct OverviewWidgetView: View {
                     .background {
                         if isCurrent { CurrentHighlight(cornerRadius: 12) }
                     }
-                    .opacity(snapshot.isPast(slot) ? 0.5 : 1)
                     .widgetAccentable(isCurrent)
                     .accessibilityElement(children: .combine)
                 }
