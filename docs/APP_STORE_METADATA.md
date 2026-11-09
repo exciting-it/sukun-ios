@@ -4,6 +4,10 @@ Paste into App Store Connect → App Information / Version (English (U.S.) prima
 Limits: name 30, subtitle 30, promotional text 170, keywords 100 (comma-separated, no spaces), description 4000.
 Run `python3 docs/check_metadata.py` after editing to verify the limits.
 
+Price: 1.99 € (paid app, no in-app purchases). Donation promise in the texts: 50 % of the developer's proceeds
+(what Apple pays out, after commission and VAT) go to Islamic Relief projects. Keep the donation receipts;
+update these texts if the promise changes.
+
 ## English (U.S.)
 
 ### Name
@@ -13,7 +17,7 @@ Sukun: Prayer Times & Qibla
 Calm salah widgets & reminders
 
 ### Promotional text
-Made by a revert who kept missing prayers: the current prayer, the next one and the Qibla. No ads, no subscription, no distractions.
+Made by a revert who kept missing prayers: the current prayer, the next one and the Qibla. No ads, no subscription. Half of my proceeds go to Islamic Relief.
 
 ### Keywords
 salat,namaz,adhan,azan,kiblat,muslim,islam,islamic,fajr,ramadan,iftar,suhoor,jumuah,hijri,mosque
@@ -24,6 +28,8 @@ I reverted to Islam in March 2026. All I wanted was for my Lock Screen to tell m
 Too often I missed a prayer. The apps I tried were full of ads, their widgets didn't update reliably, or the useful parts sat behind a subscription.
 
 So I built Sukun: prayer times and a Qibla compass, nothing else. No ads, no subscription, no account. Sukun means stillness, a quiet reminder to pause, five times a day.
+
+One price, no in-app purchases, no subscription. Half of what I earn from Sukun goes to Islamic Relief projects.
 
 MADE TO BE GLANCED AT
 • Widgets for the Home Screen, Lock Screen and StandBy
@@ -55,7 +61,7 @@ PRIVATE BY DESIGN
 • Your location stays on your iPhone
 • Prefer not to share your location? Choose your city instead
 
-Free, with no in-app purchases. Available in English, German and Arabic. Supports Dark Mode, Dynamic Type, VoiceOver and Voice Control.
+Available in English, German and Arabic. Supports Dark Mode, Dynamic Type, VoiceOver and Voice Control.
 
 ### What’s New (1.0.0)
 First release.
@@ -77,7 +83,7 @@ Sukun: Gebetszeiten & Qibla
 Namaz-Widgets, ruhig & privat
 
 ### Werbetext
-Von einem Revert, der zu oft Gebete verpasst hat: das aktuelle Gebet, das nächste und die Qibla. Keine Werbung, kein Abo, keine Ablenkung.
+Von einem Revert, der zu oft Gebete verpasst hat: das aktuelle Gebet, das nächste und die Qibla. Ohne Werbung, ohne Abo. Die Hälfte meiner Erlöse geht an Islamic Relief.
 
 ### Schlüsselwörter
 gebet,salah,salat,adhan,ezan,azan,kibla,muslim,islam,ramadan,iftar,sahur,hidschri,moschee,kompass
@@ -88,6 +94,8 @@ Im März 2026 bin ich zum Islam zurückgekehrt. Ich wollte nur, dass mir mein Sp
 Zu oft habe ich ein Gebet verpasst. Die Apps, die ich ausprobiert habe, waren voller Werbung, ihre Widgets haben sich nicht zuverlässig aktualisiert, oder das Wichtigste lag hinter einem Abo.
 
 Also habe ich Sukun gebaut: Gebetszeiten und ein Qibla-Kompass, sonst nichts. Keine Werbung, kein Abo, kein Konto. Sukun bedeutet Stille, eine ruhige Erinnerung, fünfmal am Tag innezuhalten.
+
+Ein Preis, keine In-App-Käufe, kein Abo. Die Hälfte meines Erlöses aus Sukun geht an Projekte von Islamic Relief.
 
 GEMACHT FÜR DEN KURZEN BLICK
 • Widgets für Home-Bildschirm, Sperrbildschirm und StandBy
@@ -119,7 +127,7 @@ PRIVAT VON GRUND AUF
 • Dein Standort bleibt auf deinem iPhone
 • Lieber ohne Standort? Wähle stattdessen deine Stadt
 
-Kostenlos, ohne In-App-Käufe. Auf Deutsch, Englisch und Arabisch. Unterstützt Dunkelmodus, Dynamic Type, VoiceOver und Sprachsteuerung.
+Auf Deutsch, Englisch und Arabisch. Unterstützt Dunkelmodus, Dynamic Type, VoiceOver und Sprachsteuerung.
 
 ### Neuerungen (1.0.0)
 Erste Version.

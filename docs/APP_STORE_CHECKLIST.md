@@ -31,7 +31,8 @@ Drafts for every field: [`APP_STORE_METADATA.md`](APP_STORE_METADATA.md) (limits
 - [ ] Description, keywords (prayer, salah, namaz, adhan, qibla, widget, gebetszeiten, …), promotional text
 - [ ] Support URL https://sukun.faith/support/ and Privacy Policy URL https://sukun.faith/privacy/ (`website/`, see README), both required even when no data is collected; a simple page that says so is enough
 - [ ] Age rating questionnaire → 4+
-- [ ] Price: free; availability: all regions
+- [ ] Price: 1.99 € tier; availability: all regions
+- [ ] Paid Applications Agreement, tax forms and bank account in App Store Connect → Business (required before a paid app can go live)
 - [ ] Copyright line
 
 ## 4. Screenshots

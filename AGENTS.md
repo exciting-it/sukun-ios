@@ -13,6 +13,8 @@ Lock Screen widgets. Name: "Sukun" (سكون, stillness). Domain sukun.faith.
 - iOS 17+, iPhone only (`TARGETED_DEVICE_FAMILY: 1`, `UIRequiresFullScreen`), SwiftUI + WidgetKit.
 - Version 1.0.0 (build 1), release in preparation (see `docs/APP_STORE_CHECKLIST.md`).
 - Languages: English (source), German, Arabic (RTL).
+- Paid app, 1.99 €, no in-app purchases, no subscription, no ads. The owner donates 50 % of proceeds to
+  Islamic Relief projects; the App Store texts say so (keep them true).
 
 **Principles (the product is these principles; don't trade them away for features):**
 - **Calm:** neutral surfaces, one quiet green accent for signals only, thin numerals, little motion.
@@ -133,6 +135,8 @@ python3 docs/check_metadata.py                      # App Store text limits
 - No encryption documentation needed (`ITSAppUsesNonExemptEncryption` = NO, standard HTTPS only).
 - No push notifications/APNs; local notifications are enough.
 - App Store name "Sukun: Prayer Times & Qibla" (not just "Sukun").
+- No ads, no subscription, no in-app purchases (one-time price). Marketing tells the owner's story as a revert
+  (say "revert", never "new Muslim" or "convert").
 
 ## 7. Localization
 
