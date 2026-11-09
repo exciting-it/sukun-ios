@@ -3,7 +3,7 @@ import Foundation
 import SukunKit
 
 /// Debug-only launch arguments for App Store screenshots in the simulator:
-/// `-SukunScreenshotCity london|berlin|dubai` sets a manual location and a few reminders,
+/// `-SukunScreenshotCity london|berlin|berlin-ar|dubai` sets a manual location and a few reminders,
 /// `-SukunDesignPreview asr` shows that time of day, `-SukunRamadan on` forces Ramadan mode,
 /// `-SukunScreenshotDay 2027-02-20` previews another date, `-SukunPreviewMinutes 60` lands that many minutes after
 /// the previewed prayer (default 10; e.g. `sunrise` + 60 shows Duha), `-SukunFakeQiblaOffset 0` simulates a compass reading that many degrees off the Qibla.
@@ -45,6 +45,7 @@ enum ScreenshotMode {
         switch city {
         case "london": (lat, lon, name, country, zone) = (51.5074, -0.1278, "London", "GB", "Europe/London")
         case "berlin": (lat, lon, name, country, zone) = (52.52, 13.405, "Berlin", "DE", "Europe/Berlin")
+        case "berlin-ar": (lat, lon, name, country, zone) = (52.52, 13.405, "برلين", "DE", "Europe/Berlin")
         case "dubai": (lat, lon, name, country, zone) = (25.2048, 55.2708, "دبي", "AE", "Asia/Dubai")
         default: return nil
         }

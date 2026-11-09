@@ -128,7 +128,32 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: $(SUKUN_BUNDLE_ID).tests
         GENERATE_INFOPLIST_FILE: YES
 
+  # Not part of the Sukun scheme's tests: drives SpringBoard to place real widgets for App Store screenshots
+  # (scripts/widget-screenshots.sh).
+  SukunScreenshotUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: SukunScreenshotUITests
+    dependencies:
+      - target: Sukun
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: $(SUKUN_BUNDLE_ID).screenshot-uitests
+        GENERATE_INFOPLIST_FILE: YES
+        TEST_TARGET_NAME: Sukun
+
 schemes:
+  SukunScreenshots:
+    build:
+      targets:
+        Sukun: all
+        SukunWidgets: all
+        SukunScreenshotUITests: [test]
+    test:
+      config: Debug
+      targets:
+        - SukunScreenshotUITests
   Sukun:
     build:
       targets:

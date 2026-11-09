@@ -101,9 +101,10 @@ python3 docs/check_metadata.py                      # App Store text limits
 - `PrayerRowAccessibilityTests` switch on automation accessibility (`_AXSSetAutomationEnabled`) to inspect
   the real UIKit accessibility tree SwiftUI builds; reuse that pattern for VoiceOver checks.
 - Debug launch arguments (DEBUG builds only, see `ScreenshotMode.swift`, `RootView`):
-  `-SukunInitialTab today|qibla|settings`, `-SukunScreenshotCity london|berlin|dubai`,
+  `-SukunInitialTab today|qibla|settings`, `-SukunScreenshotCity london|berlin|berlin-ar|dubai`,
   `-SukunDesignPreview fajr|sunrise|dhuhr|asr|maghrib|isha`, `-SukunScreenshotDay 2027-02-20`, `-SukunPreviewMinutes 90` (minutes after the previewed prayer, `m5` = 5 before),
   `-SukunFakeQiblaOffset 0` (simulated compass), plus `-AppleLanguages "(ar)" -AppleLocale ar_AE`.
+- Widget screenshots: `scripts/widget-screenshots.sh` (UI test target `SukunScreenshotUITests`, scheme `SukunScreenshots`) erases the simulator per language, places real widgets on the Home and Lock Screen via SpringBoard and writes `6-home.png` / `7-lock.png`. Widgets show the real current time (run it when the moment looks good). SpringBoard labels are matched in en/de/ar; the app is called سكون in Arabic.
 - Screenshots: `scripts/app-store-screenshots.sh` (header explains usage) → `docs/screenshots/`. Set the
   simulator UDID in the script. Status bar clock is synced to the time shown on screen.
 - Simulator gotchas: no compass (use the fake offset); writing app prefs with `defaults` doesn't stick,
