@@ -27,6 +27,12 @@ Before the first run, set your identity in **one place**, the `settings.base` bl
 Re-run `xcodegen generate` after editing `project.yml`. With automatic signing, Xcode registers the
 App IDs and the App Group for you.
 
+## Xcode Cloud
+
+`Sukun.xcodeproj` isn't committed. `ci_scripts/ci_post_clone.sh` installs XcodeGen, generates the project and
+provides `Package.resolved` (Xcode Cloud doesn't resolve packages on its own). Workflow: scheme `Sukun`,
+action Archive (iOS), distribution App Store Connect.
+
 ## Layout
 
 ```

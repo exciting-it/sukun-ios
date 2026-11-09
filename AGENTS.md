@@ -171,6 +171,8 @@ python3 docs/check_metadata.py                      # App Store text limits
 
 - The owner writes in German; reply in the language they use. Keep explanations short and concrete.
 - Ask before changing anything in Sections 5–6. Prefer small commits with a clear message.
-- Regenerate the project (`xcodegen generate`) instead of editing `Sukun.xcodeproj`.
+- Regenerate the project (`xcodegen generate`) instead of editing `Sukun.xcodeproj`. Xcode Cloud does the same in
+  `ci_scripts/ci_post_clone.sh` (installs XcodeGen, generates, copies SukunKit's `Package.resolved` into the project).
+  Keep that script working when you add dependencies.
 - Generated files (Info.plists, entitlements) and `.superpowers/` are git-ignored.
 - Never commit secrets. The PostHog project key in `FeedbackService.swift` is a public ingestion key by design.
