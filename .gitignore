@@ -25,3 +25,8 @@ SukunWidgets/SukunWidgets.entitlements
 
 # Agent working files (plan execution ledgers)
 .superpowers/
+
+# Cloudflare / Node
+node_modules/
+.wrangler/
+.dev.vars*

@@ -107,13 +107,21 @@ survey of type "API" in the EU cloud, no SDK, random id per message, no location
 ## Website
 
 `website/` is plain HTML and CSS with no build step and no third-party requests (system fonts, inline SVG,
-no scripts, no cookies). `.github/workflows/pages.yml` publishes it to GitHub Pages on every push that
-touches `website/`.
+no scripts, no cookies). It is deployed to **Cloudflare Workers** as static assets (no Worker script):
+`wrangler.jsonc` in the repo root, security and cache headers in `website/_headers`, short redirects in
+`website/_redirects`, files that must not be uploaded in `website/.assetsignore`.
 
-One-time setup: repository Settings → Pages → Source **GitHub Actions**, custom domain `sukun.faith`
-(`website/CNAME`), then at your DNS provider point the apex at GitHub Pages (A records 185.199.108.153,
-185.199.109.153, 185.199.110.153, 185.199.111.153) and enable **Enforce HTTPS**.
-Pages for a private repository needs a paid GitHub plan.
+```bash
+npm install          # installs Wrangler (pinned in package.json / package-lock.json)
+npm run dev          # local preview on http://localhost:8787
+npx wrangler login   # once
+npm run deploy       # publishes to sukun.faith and www.sukun.faith
+```
+
+One-time setup: add `sukun.faith` to your Cloudflare account and switch the domain's nameservers to
+Cloudflare. The first deploy then creates the custom domains (DNS records and certificates) from
+`wrangler.jsonc`. For automatic deploys on push, connect the repository under Workers & Pages → the Worker →
+Settings → Builds (deploy command `npx wrangler deploy`, root directory `/`).
 
 Before publishing, replace the highlighted placeholders (name, address) in the privacy and imprint pages
 and make sure `support@sukun.faith` receives mail.

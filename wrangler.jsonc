@@ -1,0 +1,19 @@
+{
+	// sukun.faith: the static website in ./website, served by Cloudflare Workers (static assets only, no Worker script).
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "sukun-website",
+	"compatibility_date": "2026-11-09",
+	"assets": {
+		"directory": "./website",
+		// /privacy/ serves privacy/index.html; unknown paths get website/404.html with status 404.
+		"html_handling": "auto-trailing-slash",
+		"not_found_handling": "404-page"
+	},
+	// The zone sukun.faith must be on Cloudflare (nameservers) for these custom domains.
+	"routes": [
+		{ "pattern": "sukun.faith", "custom_domain": true },
+		{ "pattern": "www.sukun.faith", "custom_domain": true }
+	],
+	"workers_dev": true,
+	"preview_urls": false
+}
