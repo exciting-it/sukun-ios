@@ -4,7 +4,9 @@ Calm, private prayer times and Qibla for iPhone — built around Home Screen and
 
 - Fully offline calculation with [Adhan](https://github.com/batoulapps/adhan-swift)
 - No backend, no accounts, no analytics, no tracking
-- iOS 17+, SwiftUI, WidgetKit · English & German
+- iOS 17+, SwiftUI, WidgetKit · English, German & Arabic
+
+AI agents and new contributors: start with [AGENTS.md](AGENTS.md).
 
 ## Getting started
 
