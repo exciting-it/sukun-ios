@@ -39,6 +39,8 @@ struct SettingsView: View {
                 .sukunRowBackground()
             }
             .scrollContentBackground(.hidden)
+            // The first group has no header, so give it room below the large title.
+            .contentMargins(.top, 16, for: .scrollContent)
             .background(Palette.background.ignoresSafeArea())
             .navigationTitle("Settings")
             .sheet(isPresented: $showingCitySearch) { CitySearchView() }
