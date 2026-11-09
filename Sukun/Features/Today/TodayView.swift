@@ -1,3 +1,4 @@
+import StoreKit
 import SukunKit
 import SwiftUI
 
@@ -5,6 +6,10 @@ struct TodayView: View {
     @Environment(AppModel.self) private var model
     @ScaledMetric(relativeTo: .largeTitle) private var heroSize: CGFloat = 68
     @State private var showingLocationPicker = false
+    @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.requestReview) private var requestReview
+    /// Counts returns to Today (tab switches) so the review check runs again then.
+    @State private var visits = 0
 
     var body: some View {
         // Prayer times fall on whole minutes, so a per-minute timeline is enough to move the highlight.
@@ -19,6 +24,22 @@ struct TodayView: View {
         .sheet(isPresented: $showingLocationPicker) {
             CitySearchView()
         }
+        .onAppear { visits += 1 }
+        .task(id: "\(visits)-\(scenePhase == .active)") { await askForReviewIfDue() }
+    }
+
+    /// Apple's rating dialog, at a calm moment: Today has been in front for a few seconds, a prayer is running and
+    /// nothing else is open. `ReviewPrompt` decides whether it's due at all (and iOS whether it really appears).
+    private func askForReviewIfDue() async {
+        guard scenePhase == .active else { return }
+        try? await Task.sleep(for: .seconds(3))
+        guard !Task.isCancelled, scenePhase == .active, !showingLocationPicker, model.designPreview == nil else { return }
+        let prompt = ReviewPrompt.shared
+        let version = ReviewPrompt.appVersion
+        let prayerIsRunning = model.snapshot(at: model.now())?.current != nil
+        guard prompt.shouldAsk(now: Date(), version: version, prayerIsRunning: prayerIsRunning) else { return }
+        prompt.recordAsked(version: version)
+        requestReview()
     }
 
     private func content(_ snapshot: PrayerSnapshot) -> some View {

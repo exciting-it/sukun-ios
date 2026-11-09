@@ -129,6 +129,9 @@ struct FeedbackView: View {
         do {
             try await service.send(kind: kind, text: text, diagnostics: diagnostics)
             didSend = true
+            if kind == .problem || kind == .wrongTimes {
+                ReviewPrompt.shared.recordProblemReport(Date()) // don't ask them for a rating right after
+            }
         } catch let error as URLError where error.code == .notConnectedToInternet || error.code == .networkConnectionLost {
             errorMessage = "No connection. Your text is kept, try again later."
         } catch {

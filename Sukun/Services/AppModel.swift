@@ -76,6 +76,7 @@ final class AppModel {
     // MARK: Lifecycle
 
     func sceneDidBecomeActive() {
+        ReviewPrompt.shared.recordActiveDay(Date())
         Task {
             await refreshLocationIfPossible()
             await refreshNotificationStatus()
