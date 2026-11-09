@@ -29,7 +29,7 @@ Too often I missed a prayer. The apps I tried were full of ads, their widgets di
 
 So I built Sukun: prayer times and a Qibla compass, nothing else. No ads, no subscription, no account. Sukun means stillness, a quiet reminder to pause, five times a day.
 
-One price, no in-app purchases, no subscription. Half of what I earn from Sukun goes to Islamic Relief projects.
+One price, no in-app purchases. Half of what I earn from Sukun goes to Islamic Relief projects.
 
 MADE TO BE GLANCED AT
 • Widgets for the Home Screen, Lock Screen and StandBy
@@ -95,7 +95,7 @@ Zu oft habe ich ein Gebet verpasst. Die Apps, die ich ausprobiert habe, waren vo
 
 Also habe ich Sukun gebaut: Gebetszeiten und ein Qibla-Kompass, sonst nichts. Keine Werbung, kein Abo, kein Konto. Sukun bedeutet Stille, eine ruhige Erinnerung, fünfmal am Tag innezuhalten.
 
-Ein Preis, keine In-App-Käufe, kein Abo. Die Hälfte meines Erlöses aus Sukun geht an Projekte von Islamic Relief.
+Ein Preis, keine In-App-Käufe. Die Hälfte meines Erlöses aus Sukun geht an Projekte von Islamic Relief.
 
 GEMACHT FÜR DEN KURZEN BLICK
 • Widgets für Home-Bildschirm, Sperrbildschirm und StandBy
