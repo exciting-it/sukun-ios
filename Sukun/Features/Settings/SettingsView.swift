@@ -17,6 +17,9 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Group {
+                    if widgetsLackLocation && !model.isLocationDenied {
+                        widgetLocationCard
+                    }
                     morningSection
                     locationSection
                     calculationSection
@@ -37,6 +40,42 @@ struct SettingsView: View {
             .sheet(isPresented: $showingCitySearch) { CitySearchView() }
             .sheet(isPresented: $showingFeedback) { FeedbackView() }
             .task { await model.refreshNotificationStatus() }
+            .task(id: model.settings.useManualLocation) { await checkWidgetLocation() }
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
+                Task { await checkWidgetLocation() } // back from iOS Settings: hide the card once fixed
+            }
+        }
+    }
+
+    // MARK: Widget location
+
+    /// First thing in Settings while it applies: without it, widgets and reminders stay on the last place when
+    /// travelling. Calm, but impossible to miss.
+    private var widgetLocationCard: some View {
+        Section {
+            VStack(alignment: .leading, spacing: 12) {
+                Label {
+                    Text("Widgets can’t follow you")
+                        .font(.headline)
+                        .foregroundStyle(Palette.text)
+                } icon: {
+                    Image(systemName: "location.slash")
+                        .foregroundStyle(Palette.accentText)
+                }
+                Text("When you travel, your widgets and reminders stay on your last place. In Settings, choose Location → “While Using the App or Widgets”.")
+                    .font(.subheadline)
+                    .foregroundStyle(Palette.secondaryText)
+                    .fixedSize(horizontal: false, vertical: true)
+                Button {
+                    if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
+                } label: {
+                    Text("Open Settings")
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(Palette.accentText)
+            }
+            .padding(.vertical, 6)
         }
     }
 
@@ -76,25 +115,22 @@ struct SettingsView: View {
                 Button("Allow location access in Settings") {
                     if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
                 }
-            } else if widgetsLackLocation {
-                Button("Let widgets use your location") {
-                    if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
-                }
             }
         } header: {
             Text("Location")
         } footer: {
-            if widgetsLackLocation && !model.isLocationDenied {
-                Text("Your widgets show your last place. Choose “While Using the App or Widgets” so widgets and reminders follow you when you travel. Your location never leaves this device.")
-            } else {
-                Text("Your location never leaves this device.")
-            }
+            Text("Your location never leaves this device.")
         }
-        .task(id: model.settings.useManualLocation) { await checkWidgetLocation() }
     }
 
     /// Only relevant with the device location in use: a chosen city is meant to stay put.
     private func checkWidgetLocation() async {
+        #if DEBUG
+        if UserDefaults.standard.bool(forKey: "SukunForceWidgetHint") { // -SukunForceWidgetHint YES (screenshots)
+            widgetsLackLocation = true
+            return
+        }
+        #endif
         guard !model.settings.useManualLocation, model.locationService.isAuthorized else {
             widgetsLackLocation = false
             return
@@ -242,6 +278,11 @@ struct SettingsView: View {
                 ForEach(PrayerKind.allCases) { Text($0.localizedName).tag(PrayerKind?.some($0)) }
             } label: {
                 Text(verbatim: "Time of day")
+            }
+            NavigationLink {
+                PendingRemindersView()
+            } label: {
+                Text(verbatim: "Pending reminders")
             }
         } header: {
             Text(verbatim: "Design preview")

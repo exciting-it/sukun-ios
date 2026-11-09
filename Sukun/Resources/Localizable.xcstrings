@@ -2506,46 +2506,46 @@
         }
       }
     },
-    "Let widgets use your location": {
+    "Widgets can’t follow you": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Let widgets use your location"
+            "value": "Widgets can’t follow you"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Standort für Widgets erlauben"
+            "value": "Widgets können dir nicht folgen"
           }
         },
         "ar": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "السماح للأدوات باستخدام موقعك"
+            "value": "لا تستطيع الأدوات مرافقتك"
           }
         }
       }
     },
-    "Your widgets show your last place. Choose “While Using the App or Widgets” so widgets and reminders follow you when you travel. Your location never leaves this device.": {
+    "When you travel, your widgets and reminders stay on your last place. In Settings, choose Location → “While Using the App or Widgets”.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Your widgets show your last place. Choose “While Using the App or Widgets” so widgets and reminders follow you when you travel. Your location never leaves this device."
+            "value": "When you travel, your widgets and reminders stay on your last place. In Settings, choose Location → “While Using the App or Widgets”."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Deine Widgets zeigen deinen letzten Ort. Wähle „Beim Verwenden der App oder Widgets“, damit Widgets und Erinnerungen dir auf Reisen folgen. Dein Standort verlässt nie dieses Gerät."
+            "value": "Auf Reisen bleiben Widgets und Erinnerungen bei deinem letzten Ort. Wähle in den Einstellungen Ort → „Beim Verwenden der App oder Widgets“."
           }
         },
         "ar": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "تعرض أدواتك آخر مكان لك. اختر „أثناء استخدام التطبيق أو الأدوات“ لتتبعك الأدوات والتذكيرات عند السفر. لا يغادر موقعك هذا الجهاز أبدًا."
+            "value": "عند السفر تبقى أدواتك وتذكيراتك على آخر مكان لك. في الإعدادات اختر الموقع ← «أثناء استخدام التطبيق أو الأدوات»."
           }
         }
       }
