@@ -22,7 +22,9 @@ public final class SharedStore: @unchecked Sendable {
         static let settings = "sukun.settings.v1"
         static let gpsLocation = "sukun.gpsLocation.v1"
         static let onboardingDone = "sukun.onboardingDone"
-        static let notificationStamp = "sukun.notificationStamp.v1"
+        static let notificationStamp = "sukun.notificationStamp.v2"
+        static let rescheduleLog = "sukun.rescheduleLog.v1"
+        static let diagnosticNotifications = "sukun.diagnosticNotifications"
     }
 
     public init(defaults: UserDefaults) {
@@ -44,6 +46,22 @@ public final class SharedStore: @unchecked Sendable {
     public var notificationStamp: NotificationStamp? {
         get { read(NotificationStamp.self, Key.notificationStamp) }
         set { write(newValue, Key.notificationStamp) }
+    }
+
+    /// Newest first, at most `RescheduleRecord.limit` entries.
+    public var rescheduleLog: [RescheduleRecord] {
+        get { read([RescheduleRecord].self, Key.rescheduleLog) ?? [] }
+        set { write(Array(newValue.prefix(RescheduleRecord.limit)), Key.rescheduleLog) }
+    }
+
+    public func appendRescheduleRecord(_ record: RescheduleRecord) {
+        rescheduleLog = [record] + rescheduleLog
+    }
+
+    /// Testers only (diagnostics): the widget posts a quiet notification whenever it plans reminders.
+    public var diagnosticNotifications: Bool {
+        get { defaults.bool(forKey: Key.diagnosticNotifications) }
+        set { defaults.set(newValue, forKey: Key.diagnosticNotifications) }
     }
 
     public var hasCompletedOnboarding: Bool {

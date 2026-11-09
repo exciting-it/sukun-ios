@@ -17,6 +17,7 @@
 - [ ] Lock Screen circular / rectangular / inline
 - [ ] Notifications fire at prayer time with the app closed; toggling off removes them
 - [ ] Swipe the app away, keep a widget placed, don't open the app for 8+ days: reminders still arrive at prayer times (the plan only covers 7 days, so this proves the widget rescheduled)
+  - Faster check (TestFlight): Settings → Diagnostics → turn on "Notify me when the widget plans", swipe the app away, travel or wait until fewer than 3 days of reminders are left; a quiet "Sukun diagnostics" note appears in Notification Center. Afterwards the log under Diagnostics shows the widget runs.
 - [ ] Travel (or change location to another city with GPS): within ~3 h the widget shows the new place and reminders carry the new place name and times, without opening the app
 - [x] Largest Dynamic Type (AX5) on Today, Qibla, Settings (simulator: everything scrolls, nothing truncated)
 - [ ] VoiceOver pass on all three tabs (real device)

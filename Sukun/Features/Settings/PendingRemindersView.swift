@@ -1,13 +1,15 @@
-#if DEBUG
 import SukunKit
 import SwiftUI
 import UserNotifications
 
-/// Debug builds only: what iOS has scheduled for Sukun right now. iOS itself has no screen for this.
+/// Debug and TestFlight builds: what iOS has scheduled for Sukun right now (iOS itself has no screen for this),
+/// and who planned it when. The log shows widget runs even after opening the app, which only plans again when needed.
 struct PendingRemindersView: View {
     @Environment(AppModel.self) private var model
     @State private var requests: [UNNotificationRequest] = []
     @State private var stamp: NotificationStamp?
+    @State private var log: [RescheduleRecord] = []
+    @State private var diagnosticNotifications = SharedStore.shared.diagnosticNotifications
 
     var body: some View {
         List {
@@ -19,12 +21,36 @@ struct PendingRemindersView: View {
                 }
                 Button(String("Reschedule now")) {
                     Task {
-                        await NotificationScheduler.reschedule(settings: model.settings, location: model.location)
+                        await NotificationScheduler.reschedule(settings: model.settings, location: model.location,
+                                                               source: .manual)
                         await load()
                     }
                 }
             } footer: {
                 Text(verbatim: "Times in this device’s time zone. The app, background refresh and widgets replace this list when place, settings or the remaining days change.")
+            }
+
+            Section {
+                Toggle(String("Notify me when the widget plans"), isOn: $diagnosticNotifications)
+                    .onChange(of: diagnosticNotifications) { _, on in SharedStore.shared.diagnosticNotifications = on }
+                ForEach(Array(log.enumerated()), id: \.offset) { _, record in
+                    HStack(alignment: .firstTextBaseline) {
+                        Text(verbatim: record.source.rawValue.capitalized)
+                            .font(.body.weight(record.source == .widget ? .semibold : .regular))
+                        Spacer()
+                        VStack(alignment: .trailing, spacing: 1) {
+                            Text(verbatim: record.date.formatted(date: .abbreviated, time: .shortened))
+                                .font(.caption.monospacedDigit())
+                            Text(verbatim: "\(record.count) · \(record.place ?? "no name")")
+                                .font(.caption)
+                                .foregroundStyle(Palette.secondaryText)
+                        }
+                    }
+                }
+            } header: {
+                Text(verbatim: "Who planned when")
+            } footer: {
+                Text(verbatim: "Newest first. Opening the app plans again only when the place, settings or permission changed, or fewer than 3 days are left, so earlier widget runs stay visible. The notification arrives quietly in Notification Center, no need to open the app.")
             }
 
             Section(String("Scheduled")) {
@@ -46,7 +72,7 @@ struct PendingRemindersView: View {
                 }
             }
         }
-        .navigationTitle(Text(verbatim: "Pending reminders"))
+        .navigationTitle(Text(verbatim: "Diagnostics"))
         .refreshable { await load() }
         .task { await load() }
     }
@@ -66,6 +92,6 @@ struct PendingRemindersView: View {
             .filter { $0.identifier.hasPrefix("sukun.") }
             .sorted { (fireDate($0) ?? .distantFuture) < (fireDate($1) ?? .distantFuture) }
         stamp = SharedStore.shared.notificationStamp
+        log = SharedStore.shared.rescheduleLog
     }
 }
-#endif

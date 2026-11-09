@@ -57,7 +57,7 @@ struct PrayerTimelineProvider: TimelineProvider {
 
             // iOS wakes widgets even when the app was swiped away for weeks: keep reminders planned and let them
             // follow travel (new place, time zone, or fewer than 3 days left). No-op when nothing changed.
-            await NotificationScheduler.refreshIfNeeded(location: location, store: SharedStore.shared, now: now)
+            await NotificationScheduler.refreshIfNeeded(location: location, store: SharedStore.shared, now: now, source: .widget)
 
             let entries = PrayerTimeline
                 .snapshots(from: now, hours: Self.horizonHours, location: location, settings: settings)

@@ -79,7 +79,8 @@ final class AppModel {
         Task {
             await refreshLocationIfPossible()
             await refreshNotificationStatus()
-            await NotificationScheduler.reschedule(settings: settings, location: location)
+            // Only when place, settings, permission or remaining days changed; settings edits reschedule directly.
+            await NotificationScheduler.refreshIfNeeded(location: location, source: .app)
         }
     }
 

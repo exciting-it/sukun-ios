@@ -25,11 +25,11 @@ struct LocationSetupView: View {
                 Spacer()
                 VStack(spacing: 14) {
                     if model.isLocationDenied {
-                        Text("Location access is off. Choose your city instead, or allow location access in Settings.")
+                        Text("Location access is off. Choose your city instead, or allow location access in iOS Settings.")
                             .font(.sukunCallout)
                             .foregroundStyle(Palette.secondaryText)
                             .multilineTextAlignment(.center)
-                        Button("Open Settings") {
+                        Button("Open iOS Settings") {
                             if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
                         }
                         .buttonStyle(SukunSecondaryButtonStyle())

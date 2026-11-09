@@ -11,6 +11,7 @@ struct SettingsView: View {
     @State private var showingFeedback = false
     /// The app may use the location, but the user declined it for widgets while having some placed.
     @State private var widgetsLackLocation = false
+    @State private var showsDiagnostics = false
     private let feedbackConfig = FeedbackConfig.production
 
     var body: some View {
@@ -31,6 +32,9 @@ struct SettingsView: View {
                     #if DEBUG
                     designPreviewSection
                     #endif
+                    if showsDiagnostics {
+                        diagnosticsSection
+                    }
                 }
                 .sukunRowBackground()
             }
@@ -39,7 +43,10 @@ struct SettingsView: View {
             .navigationTitle("Settings")
             .sheet(isPresented: $showingCitySearch) { CitySearchView() }
             .sheet(isPresented: $showingFeedback) { FeedbackView() }
-            .task { await model.refreshNotificationStatus() }
+            .task {
+                await model.refreshNotificationStatus()
+                showsDiagnostics = await Diagnostics.isAvailable()
+            }
             .task(id: model.settings.useManualLocation) { await checkWidgetLocation() }
             .onReceive(NotificationCenter.default.publisher(for: UIApplication.didBecomeActiveNotification)) { _ in
                 Task { await checkWidgetLocation() } // back from iOS Settings: hide the card once fixed
@@ -62,14 +69,14 @@ struct SettingsView: View {
                     Image(systemName: "location.slash")
                         .foregroundStyle(Palette.accentText)
                 }
-                Text("When you travel, your widgets and reminders stay on your last place. In Settings, choose Location → “While Using the App or Widgets”.")
+                Text("When you travel, your widgets and reminders stay on your last place. In iOS Settings, choose Location → “While Using the App or Widgets”.")
                     .font(.subheadline)
                     .foregroundStyle(Palette.secondaryText)
                     .fixedSize(horizontal: false, vertical: true)
                 Button {
                     if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
                 } label: {
-                    Text("Open Settings")
+                    Text("Open iOS Settings")
                         .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.borderedProminent)
@@ -112,7 +119,7 @@ struct SettingsView: View {
                     .disabled(model.isLocationDenied)
             }
             if model.isLocationDenied {
-                Button("Allow location access in Settings") {
+                Button("Allow location access in iOS Settings") {
                     if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
                 }
             }
@@ -279,11 +286,6 @@ struct SettingsView: View {
             } label: {
                 Text(verbatim: "Time of day")
             }
-            NavigationLink {
-                PendingRemindersView()
-            } label: {
-                Text(verbatim: "Pending reminders")
-            }
         } header: {
             Text(verbatim: "Design preview")
         } footer: {
@@ -291,6 +293,22 @@ struct SettingsView: View {
         }
     }
     #endif
+
+    // MARK: Diagnostics (debug and TestFlight builds)
+
+    private var diagnosticsSection: some View {
+        Section {
+            NavigationLink {
+                PendingRemindersView()
+            } label: {
+                Text(verbatim: "Pending reminders")
+            }
+        } header: {
+            Text(verbatim: "Diagnostics")
+        } footer: {
+            Text(verbatim: "Testers only (debug and TestFlight builds). Not shown in the App Store version.")
+        }
+    }
 
     // MARK: Display
 

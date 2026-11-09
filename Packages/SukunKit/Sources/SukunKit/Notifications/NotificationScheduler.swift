@@ -24,7 +24,8 @@ public enum NotificationScheduler {
 
     /// Replaces all pending Sukun notifications with a fresh plan and records what it was planned for.
     public static func reschedule(settings: SukunSettings, location: StoredLocation?,
-                                  store: SharedStore = .shared, now: Date = Date()) async {
+                                  store: SharedStore = .shared, now: Date = Date(),
+                                  source: RescheduleRecord.Source = .app) async {
         let center = UNUserNotificationCenter.current()
         let existing = await center.pendingNotificationRequests()
             .map(\.identifier)
@@ -36,10 +37,12 @@ public enum NotificationScheduler {
             return
         }
         let plan = NotificationPlan.make(settings: settings, location: location, now: now)
-        store.notificationStamp = NotificationStamp(location: location, settings: settings, plan: plan)
-        guard !plan.isEmpty else { return }
-        let status = await center.notificationSettings().authorizationStatus
-        guard status == .authorized || status == .provisional || status == .ephemeral else { return }
+        let authorized = await isAuthorized(center)
+        store.notificationStamp = NotificationStamp(location: location, settings: settings, plan: plan,
+                                                    authorized: authorized)
+        store.appendRescheduleRecord(RescheduleRecord(date: now, source: source, place: location.name,
+                                                      count: authorized ? plan.count : 0))
+        guard !plan.isEmpty, authorized else { return }
 
         let formatter = PrayerTimeFormatter(clockFormat: settings.clockFormat, timeZone: location.timeZone)
         for item in plan {
@@ -66,13 +69,39 @@ public enum NotificationScheduler {
         }
     }
 
-    /// For the widget extension: plans again only when location, settings or the remaining lead changed.
-    public static func refreshIfNeeded(location: StoredLocation?, store: SharedStore = .shared, now: Date = Date()) async {
-        guard let location else { return }
+    /// Plans again only when the place, settings, permission or the remaining lead changed, so opening the app
+    /// or reloading a widget doesn't churn the schedule. Returns whether it planned.
+    @discardableResult
+    public static func refreshIfNeeded(location: StoredLocation?, store: SharedStore = .shared, now: Date = Date(),
+                                       source: RescheduleRecord.Source) async -> Bool {
+        guard let location else { return false }
         let settings = store.settings
-        guard NotificationStamp.needsReschedule(store.notificationStamp, location: location,
-                                                settings: settings, now: now) else { return }
-        await reschedule(settings: settings, location: location, store: store, now: now)
+        let center = UNUserNotificationCenter.current()
+        guard NotificationStamp.needsReschedule(store.notificationStamp, location: location, settings: settings,
+                                                now: now, authorized: await isAuthorized(center)) else { return false }
+        await reschedule(settings: settings, location: location, store: store, now: now, source: source)
+        if source == .widget, store.diagnosticNotifications {
+            await postDiagnostic(store: store, location: location, center: center)
+        }
+        return true
+    }
+
+    private static func isAuthorized(_ center: UNUserNotificationCenter) async -> Bool {
+        let status = await center.notificationSettings().authorizationStatus
+        return status == .authorized || status == .provisional || status == .ephemeral
+    }
+
+    /// Testers only: a quiet note in Notification Center, visible without opening the app.
+    private static func postDiagnostic(store: SharedStore, location: StoredLocation,
+                                       center: UNUserNotificationCenter) async {
+        let content = UNMutableNotificationContent()
+        content.title = "Sukun diagnostics"
+        content.body = "Widget planned \(store.rescheduleLog.first?.count ?? 0) reminders for \(location.name ?? "an unnamed place") (\(location.timeZoneIdentifier))."
+        content.interruptionLevel = .passive
+        content.threadIdentifier = "sukun.diagnostics"
+        let request = UNNotificationRequest(identifier: "diagnostic.\(UUID().uuidString)", content: content,
+                                            trigger: UNTimeIntervalNotificationTrigger(timeInterval: 1, repeats: false))
+        try? await center.add(request)
     }
 }
 #endif

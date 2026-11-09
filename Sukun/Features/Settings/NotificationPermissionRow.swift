@@ -9,7 +9,7 @@ struct NotificationPermissionRow: View {
 
     var body: some View {
         if model.notificationStatus.isDenied {
-            Button("Allow notifications in Settings") {
+            Button("Allow notifications in iOS Settings") {
                 if let url = URL(string: UIApplication.openNotificationSettingsURLString) { openURL(url) }
             }
         }

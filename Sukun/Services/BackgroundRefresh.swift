@@ -16,7 +16,7 @@ enum BackgroundRefresh {
     static func perform() async {
         schedule()
         let store = SharedStore.shared
-        await NotificationScheduler.reschedule(settings: store.settings, location: store.effectiveLocation)
+        await NotificationScheduler.refreshIfNeeded(location: store.effectiveLocation, store: store, source: .background)
         WidgetCenter.shared.reloadAllTimelines()
     }
 }

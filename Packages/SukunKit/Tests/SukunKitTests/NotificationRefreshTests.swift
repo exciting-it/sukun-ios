@@ -105,3 +105,39 @@ extension Optional where Wrapped == NotificationStamp {
         NotificationStamp.needsReschedule(self, location: location, settings: settings, now: now)
     }
 }
+
+final class RescheduleLogTests: XCTestCase {
+    private func store() -> SharedStore {
+        SharedStore(defaults: UserDefaults(suiteName: "sukun.log.\(UUID().uuidString)")!)
+    }
+
+    func testLogKeepsTheNewestThirtyNewestFirst() {
+        let s = store()
+        XCTAssertEqual(s.rescheduleLog, [])
+        for i in 0..<35 {
+            s.appendRescheduleRecord(RescheduleRecord(date: Date(timeIntervalSince1970: Double(i)), source: .widget,
+                                                      place: "Dubai", count: i))
+        }
+        XCTAssertEqual(s.rescheduleLog.count, RescheduleRecord.limit)
+        XCTAssertEqual(s.rescheduleLog.first?.count, 34)
+        XCTAssertEqual(s.rescheduleLog.last?.count, 5)
+    }
+
+    func testDiagnosticNotificationsOffByDefault() {
+        let s = store()
+        XCTAssertFalse(s.diagnosticNotifications)
+        s.diagnosticNotifications = true
+        XCTAssertTrue(s.diagnosticNotifications)
+    }
+
+    func testPermissionChangeTriggersReschedule() {
+        let now = Fixtures.date(2026, 12, 15, 12, tz: "Europe/Berlin")
+        var settings = Fixtures.settings(method: .muslimWorldLeague)
+        settings.notificationsEnabled = [.isha]
+        let plan = NotificationPlan.make(settings: settings, location: Fixtures.munich, now: now)
+        let denied = NotificationStamp(location: Fixtures.munich, settings: settings, plan: plan, authorized: false)
+        XCTAssertTrue(denied.needsReschedule(location: Fixtures.munich, settings: settings, now: now, authorized: true),
+                      "notifications allowed later in iOS Settings")
+        XCTAssertFalse(denied.needsReschedule(location: Fixtures.munich, settings: settings, now: now, authorized: false))
+    }
+}

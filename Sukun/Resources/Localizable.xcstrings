@@ -116,52 +116,6 @@
         }
       }
     },
-    "Allow location access in Settings": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Allow location access in Settings"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ortungszugriff in den Einstellungen erlauben"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "اسمح بالوصول إلى الموقع في الإعدادات"
-          }
-        }
-      }
-    },
-    "Allow notifications in Settings": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Allow notifications in Settings"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mitteilungen in den Einstellungen erlauben"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "اسمح بالإشعارات في الإعدادات"
-          }
-        }
-      }
-    },
     "Asr time": {
       "extractionState": "manual",
       "localizations": {
@@ -507,29 +461,6 @@
         }
       }
     },
-    "Location access is off. Choose your city instead, or allow location access in Settings.": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Location access is off. Choose your city instead, or allow location access in Settings."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Der Ortungszugriff ist deaktiviert. Wähle stattdessen deine Stadt oder erlaube den Zugriff in den Einstellungen."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "الوصول إلى الموقع متوقف. اختر مدينتك بدلًا من ذلك، أو اسمح بالوصول إلى الموقع في الإعدادات."
-          }
-        }
-      }
-    },
     "Location: %@": {
       "extractionState": "manual",
       "localizations": {
@@ -756,29 +687,6 @@
           "stringUnit": {
             "state": "needs_review",
             "value": "الإشعارات"
-          }
-        }
-      }
-    },
-    "Open Settings": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Open Settings"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Einstellungen öffnen"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "فتح الإعدادات"
           }
         }
       }
@@ -2528,24 +2436,115 @@
         }
       }
     },
-    "When you travel, your widgets and reminders stay on your last place. In Settings, choose Location → “While Using the App or Widgets”.": {
+    "When you travel, your widgets and reminders stay on your last place. In iOS Settings, choose Location → “While Using the App or Widgets”.": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "When you travel, your widgets and reminders stay on your last place. In Settings, choose Location → “While Using the App or Widgets”."
+            "value": "When you travel, your widgets and reminders stay on your last place. In iOS Settings, choose Location → “While Using the App or Widgets”."
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Auf Reisen bleiben Widgets und Erinnerungen bei deinem letzten Ort. Wähle in den Einstellungen Ort → „Beim Verwenden der App oder Widgets“."
+            "value": "Auf Reisen bleiben Widgets und Erinnerungen bei deinem letzten Ort. Wähle in den iOS-Einstellungen Ort → „Beim Verwenden der App oder Widgets“."
           }
         },
         "ar": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "عند السفر تبقى أدواتك وتذكيراتك على آخر مكان لك. في الإعدادات اختر الموقع ← «أثناء استخدام التطبيق أو الأدوات»."
+            "value": "عند السفر تبقى أدواتك وتذكيراتك على آخر مكان لك. في إعدادات iOS اختر الموقع ← «أثناء استخدام التطبيق أو الأدوات»."
+          }
+        }
+      }
+    },
+    "Open iOS Settings": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open iOS Settings"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "iOS-Einstellungen öffnen"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "فتح إعدادات iOS"
+          }
+        }
+      }
+    },
+    "Allow location access in iOS Settings": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow location access in iOS Settings"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standortzugriff in den iOS-Einstellungen erlauben"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "السماح بالوصول إلى الموقع في إعدادات iOS"
+          }
+        }
+      }
+    },
+    "Allow notifications in iOS Settings": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow notifications in iOS Settings"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mitteilungen in den iOS-Einstellungen erlauben"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "السماح بالإشعارات في إعدادات iOS"
+          }
+        }
+      }
+    },
+    "Location access is off. Choose your city instead, or allow location access in iOS Settings.": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Location access is off. Choose your city instead, or allow location access in iOS Settings."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Standortzugriff ist aus. Wähle stattdessen deine Stadt oder erlaube den Standortzugriff in den iOS-Einstellungen."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الوصول إلى الموقع متوقف. اختر مدينتك بدلًا من ذلك أو اسمح بالوصول إلى الموقع في إعدادات iOS."
           }
         }
       }
