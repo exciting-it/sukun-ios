@@ -90,7 +90,8 @@ struct TodayView: View {
 }
 
 /// Big, quiet display of the prayer whose time is running, with a small hint to the next boundary.
-/// Between sunrise and Dhuhr no prayer is running, so it features the upcoming Dhuhr instead.
+/// Between sunrise and Dhuhr no prayer is running: it names the morning state instead (Sunrise, Duha,
+/// Shortly before Dhuhr, or Morning), never Dhuhr as if it had begun.
 struct FeaturedPrayerHero: View {
     @Environment(AppModel.self) private var model
     @Environment(\.colorSchemeContrast) private var contrast
@@ -99,19 +100,19 @@ struct FeaturedPrayerHero: View {
 
     var body: some View {
         let formatter = snapshot.formatter
-        let featured = snapshot.featured
-        let isRunning = snapshot.current != nil
+        let headlineDate = snapshot.headlineDate
+        let isRunning = snapshot.current != nil || snapshot.morning != nil
         VStack(spacing: 8) {
-            Text(featured.kind.localizedName)
+            Text(verbatim: snapshot.headline)
                 .font(.sukunTitle)
                 .foregroundStyle(isRunning ? Palette.text : Palette.secondaryText)
             HStack(alignment: .firstTextBaseline, spacing: 6) {
-                Text(formatter.numerals(from: featured.date))
+                Text(formatter.numerals(from: headlineDate))
                     .font(.sukunNumerals(numeralSize, weight: contrast == .increased ? .light : .thin)) // thin strokes fail contrast; one step heavier with Increase Contrast
                     .foregroundStyle(Palette.text)
                     .minimumScaleFactor(0.6)
                     .lineLimit(1)
-                if let period = formatter.periodSymbol(for: featured.date) {
+                if let period = formatter.periodSymbol(for: headlineDate) {
                     Text(period)
                         .font(.sukunTitle)
                         .foregroundStyle(Palette.secondaryText)
@@ -120,7 +121,9 @@ struct FeaturedPrayerHero: View {
             // In Ramadan the Suhoor/Iftar line often counts to the same instant (Fajr, Maghrib); show it once.
             let ramadanCoversHint = snapshot.ramadan?.countdown.date == snapshot.upcoming.date
             Group {
-                if ramadanCoversHint {
+                if let noPrayerLine = snapshot.noPrayerLine {
+                    Text(verbatim: noPrayerLine)
+                } else if ramadanCoversHint {
                     EmptyView()
                 } else if isRunning {
                     Text("\(snapshot.upcoming.kind.localizedName) in \(Text(model.realDate(snapshot.upcoming.date), style: .timer))")
@@ -152,6 +155,7 @@ struct FeaturedPrayerHero: View {
     }
 
     private func accessibilityLabel(_ formatter: PrayerTimeFormatter) -> Text {
+        if let morning = snapshot.morningAccessibilityText { return Text(verbatim: morning) }
         let upcoming = snapshot.upcoming
         if let current = snapshot.current {
             return Text("Current prayer: \(current.kind.localizedName) since \(formatter.string(from: current.date)). Next: \(upcoming.kind.localizedName) at \(formatter.string(from: upcoming.date))")

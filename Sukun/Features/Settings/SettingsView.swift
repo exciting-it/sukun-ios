@@ -13,6 +13,7 @@ struct SettingsView: View {
         NavigationStack {
             Form {
                 Group {
+                    morningSection
                     locationSection
                     calculationSection
                     notificationSection
@@ -32,6 +33,17 @@ struct SettingsView: View {
             .sheet(isPresented: $showingCitySearch) { CitySearchView() }
             .sheet(isPresented: $showingFeedback) { FeedbackView() }
             .task { await model.refreshNotificationStatus() }
+        }
+    }
+
+    // MARK: Morning
+
+    /// First on purpose: many people don't know these times exist, so the switch should be seen right away.
+    private var morningSection: some View {
+        Section {
+            Toggle("Duha and no-prayer times", isOn: model.binding(\.showsMorningPeriods))
+        } footer: {
+            Text("Shows the Duha time in the morning and the short times at sunrise and before Dhuhr when one doesn’t pray.")
         }
     }
 

@@ -99,6 +99,8 @@ public struct SukunSettings: Codable, Hashable, Sendable {
     public var suhoorReminderMinutes: Int?
     /// Shifts the Hijri calendar by whole days (-2…2) to match the local start of the month.
     public var hijriAdjustmentDays: Int = 0
+    /// Name the morning (Sunrise, Duha, Shortly before Dhuhr) with its no-prayer times. On for everyone by default.
+    public var showsMorningPeriods: Bool = true
 
     public init() {}
 
@@ -110,6 +112,7 @@ public struct SukunSettings: Codable, Hashable, Sendable {
         case method, madhab, highLatitude, clockFormat, useManualLocation, manualLocation
         case notificationsEnabled, showsPattern, qiblaHaptics
         case adjustments, earlyReminderMinutes, jumuahReminder, ramadanMode, suhoorReminderMinutes, hijriAdjustmentDays
+        case showsMorningPeriods
     }
 
     public init(from decoder: Decoder) throws {
@@ -141,6 +144,7 @@ public struct SukunSettings: Codable, Hashable, Sendable {
         let hijri = ReminderChoices.hijriAdjustmentRange
         let rawHijri = (try? c.decodeIfPresent(Int.self, forKey: .hijriAdjustmentDays)) ?? d.hijriAdjustmentDays
         hijriAdjustmentDays = min(max(rawHijri, hijri.lowerBound), hijri.upperBound)
+        showsMorningPeriods = (try? c.decodeIfPresent(Bool.self, forKey: .showsMorningPeriods)) ?? d.showsMorningPeriods
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -161,5 +165,6 @@ public struct SukunSettings: Codable, Hashable, Sendable {
         try c.encode(ramadanMode, forKey: .ramadanMode)
         try c.encodeIfPresent(suhoorReminderMinutes, forKey: .suhoorReminderMinutes)
         try c.encode(hijriAdjustmentDays, forKey: .hijriAdjustmentDays)
+        try c.encode(showsMorningPeriods, forKey: .showsMorningPeriods)
     }
 }

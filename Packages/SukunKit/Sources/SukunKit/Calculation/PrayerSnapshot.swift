@@ -20,6 +20,8 @@ public struct PrayerSnapshot: Hashable, Sendable {
     /// Last boundary at or before `date` (may be sunrise or yesterday's Isha).
     public let previous: PrayerSlot
     public let period: DayPeriod
+    /// Between sunrise and Dhuhr: the named morning state (Sunrise / Duha / Shortly before Dhuhr, or Morning).
+    public let morning: MorningPeriod?
     /// Iftar / Suhoor countdown while Ramadan mode is active, else nil.
     public let ramadan: RamadanState?
     public let qiblaBearing: Double
@@ -43,13 +45,26 @@ public struct PrayerSnapshot: Hashable, Sendable {
         self.next = next
         self.previous = previous
         self.period = DayPeriod(after: previous.kind)
+        self.morning = previous.kind == .sunrise && upcoming.kind == .dhuhr
+            ? MorningPeriod.periods(sunrise: previous.date, dhuhr: upcoming.date, detailed: settings.showsMorningPeriods)
+                .first { $0.start <= date && date < $0.end }
+            : nil
         self.ramadan = Ramadan.state(at: date, today: today, calculator: calculator, settings: settings)
         self.qiblaBearing = QiblaCalculator.bearing(from: location.coordinate)
         self.qiblaDistanceKilometers = QiblaCalculator.distanceKilometers(from: location.coordinate)
     }
 
     /// What the big display features: the current prayer, or the upcoming one when no prayer time is running.
+    /// Displays should use `headline` / `headlineDate`, which name the morning state instead.
     public var featured: PrayerSlot { current ?? upcoming }
+
+    /// Title of the big display: the running prayer, or the morning state between sunrise and Dhuhr.
+    public var headline: String { morning?.kind.title ?? featured.kind.localizedName }
+
+    /// The time under the title: when the running prayer or the morning state began.
+    public var headlineDate: Date { morning?.start ?? featured.date }
+
+    public var headlineSymbol: String { morning?.kind.symbolName ?? featured.kind.symbolName }
 
     /// Start of the interval the countdown ring measures (the last boundary, sunrise included).
     public var intervalStart: Date { previous.date }
@@ -102,6 +117,14 @@ public enum PrayerTimeline {
         let end = now.addingTimeInterval(hours * 3600)
         let calculator = PrayerCalculator(location: location, settings: settings)
         var dates = calculator.slots(from: now, to: end).map(\.date)
+        // Morning states switch between boundaries too (Sunrise → Duha → Shortly before Dhuhr).
+        let around = calculator.slots(from: now.addingTimeInterval(-86_400), to: end)
+        for (index, slot) in around.enumerated() where slot.kind == .sunrise {
+            guard let dhuhr = around[(index + 1)...].first(where: { $0.kind == .dhuhr }) else { continue }
+            dates += MorningPeriod.periods(sunrise: slot.date, dhuhr: dhuhr.date, detailed: settings.showsMorningPeriods)
+                .map(\.start)
+                .filter { $0 > now && $0 < end }
+        }
 
         var cal = Calendar(identifier: .gregorian)
         cal.timeZone = location.timeZone

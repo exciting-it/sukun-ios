@@ -47,13 +47,13 @@ struct SmallNextPrayerView: View {
 
     var body: some View {
         let formatter = snapshot.formatter
-        let featured = snapshot.featured
-        let isRunning = snapshot.current != nil
+        let headlineDate = snapshot.headlineDate
+        let isRunning = snapshot.current != nil || snapshot.morning != nil
         VStack(alignment: .leading, spacing: 0) {
             HStack(spacing: 5) {
-                Image(systemName: featured.kind.symbolName)
+                Image(systemName: snapshot.headlineSymbol)
                     .font(.subheadline)
-                Text(featured.kind.localizedName)
+                Text(verbatim: snapshot.headline)
                     .font(.system(.headline, design: .rounded, weight: .medium))
             }
             .foregroundStyle(isRunning ? Palette.text : Palette.secondaryText)
@@ -62,10 +62,10 @@ struct SmallNextPrayerView: View {
             Spacer(minLength: 4)
 
             HStack(alignment: .firstTextBaseline, spacing: 3) {
-                Text(formatter.numerals(from: featured.date))
+                Text(formatter.numerals(from: headlineDate))
                     .font(.system(size: 38, weight: .light, design: .rounded).monospacedDigit())
                     .foregroundStyle(Palette.text)
-                if let period = formatter.periodSymbol(for: featured.date) {
+                if let period = formatter.periodSymbol(for: headlineDate) {
                     Text(period)
                         .font(.system(.caption, design: .rounded))
                         .foregroundStyle(Palette.secondaryText)
@@ -74,13 +74,7 @@ struct SmallNextPrayerView: View {
             .lineLimit(1)
             .minimumScaleFactor(0.6)
 
-            Group {
-                if let ramadan = snapshot.ramadan {
-                    RamadanLine(state: ramadan, formatter: snapshot.formatter)
-                } else {
-                    UpcomingHint(snapshot: snapshot)
-                }
-            }
+            StatusLine(snapshot: snapshot)
             .font(.system(.footnote, design: .rounded).monospacedDigit())
                 .foregroundStyle(Palette.secondaryText)
                 .lineLimit(1)
@@ -119,23 +113,16 @@ struct RectangularAccessory: View {
     let snapshot: PrayerSnapshot
 
     var body: some View {
-        let featured = snapshot.featured
         VStack(alignment: .leading, spacing: 1) {
             HStack(spacing: 4) {
-                Image(systemName: featured.kind.symbolName)
-                Text(featured.kind.localizedName)
+                Image(systemName: snapshot.headlineSymbol)
+                Text(verbatim: snapshot.headline)
             }
             .font(.system(.headline, design: .rounded))
             .widgetAccentable()
-            Text(snapshot.formatter.string(from: featured.date))
+            Text(snapshot.formatter.string(from: snapshot.headlineDate))
                 .font(.system(.body, design: .rounded).monospacedDigit())
-            Group {
-                if let ramadan = snapshot.ramadan {
-                    RamadanLine(state: ramadan, formatter: snapshot.formatter)
-                } else {
-                    UpcomingHint(snapshot: snapshot)
-                }
-            }
+            StatusLine(snapshot: snapshot)
             .font(.system(.caption, design: .rounded).monospacedDigit())
                 .foregroundStyle(.secondary)
         }
@@ -151,16 +138,27 @@ struct InlineAccessory: View {
 
     var body: some View {
         let upcoming = snapshot.upcoming
-        Label {
-            Text("\(upcoming.kind.localizedName) \(snapshot.formatter.string(from: upcoming.date))")
-        } icon: {
-            Image(systemName: upcoming.kind.symbolName)
+        if let noPrayerLine = snapshot.noPrayerLine {
+            Label { Text(verbatim: noPrayerLine) } icon: { Image(systemName: snapshot.headlineSymbol) }
+        } else if let morning = snapshot.morning, morning.kind == .duha {
+            Label {
+                Text(verbatim: "\(morning.kind.title) · \(upcoming.kind.localizedName) \(snapshot.formatter.string(from: upcoming.date))")
+            } icon: {
+                Image(systemName: morning.kind.symbolName)
+            }
+        } else {
+            Label {
+                Text("\(upcoming.kind.localizedName) \(snapshot.formatter.string(from: upcoming.date))")
+            } icon: {
+                Image(systemName: upcoming.kind.symbolName)
+            }
         }
     }
 }
 
 enum PrayerAccessibility {
     static func label(for snapshot: PrayerSnapshot) -> Text {
+        if let morning = snapshot.morningAccessibilityText { return Text(verbatim: morning) }
         let formatter = snapshot.formatter
         let upcoming = snapshot.upcoming
         if let current = snapshot.current {

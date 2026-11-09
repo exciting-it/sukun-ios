@@ -47,13 +47,13 @@ final class AppModel {
 
     /// Jumps the app's clock to 10 minutes after `kind` today, so Today and Qibla look as they would then.
     /// `day` picks another date (screenshots of a Ramadan day); default is today.
-    func setDesignPreview(_ kind: PrayerKind?, now: Date = Date(), day: Date? = nil) {
+    func setDesignPreview(_ kind: PrayerKind?, now: Date = Date(), day: Date? = nil, minutesAfter: Double = 10) {
         designPreview = kind
         guard let kind, let target = snapshot(at: day ?? now)?.today.time(for: kind) else {
             previewOffset = 0
             return
         }
-        previewOffset = target.addingTimeInterval(600).timeIntervalSince(now)
+        previewOffset = target.addingTimeInterval(minutesAfter * 60).timeIntervalSince(now)
     }
 
     /// The moment the UI should show for a real clock time.

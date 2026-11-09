@@ -10,8 +10,8 @@ final class TimelineTests: XCTestCase {
         XCTAssertEqual(dates.first, now)
         XCTAssertEqual(dates, dates.sorted())
         XCTAssertEqual(Set(dates).count, dates.count)
-        // 6 boundaries per day * 2 days + 2 midnights + now = 15 (±1 depending on where `now` falls)
-        XCTAssert((13...16).contains(dates.count), "count \(dates.count)")
+        // (6 boundaries + 2 morning-period switches) per day * 2 days + 2 midnights + now = 19 (±2 by where `now` falls)
+        XCTAssert((17...20).contains(dates.count), "count \(dates.count)")
         XCTAssert(dates.contains(Fixtures.date(2026, 12, 16, 0, 0, tz: "Europe/Berlin")))
         XCTAssert(dates.allSatisfy { $0 < now.addingTimeInterval(48 * 3600) })
     }

@@ -46,17 +46,11 @@ struct OverviewWidgetView: View {
                 }
                 Spacer()
                 VStack(alignment: .trailing, spacing: 2) {
-                    Text(snapshot.featured.kind.localizedName)
+                    Text(verbatim: snapshot.headline)
                         .font(.system(.subheadline, design: .rounded, weight: .medium))
-                        .foregroundStyle(snapshot.current != nil ? Palette.text : Palette.secondaryText)
+                        .foregroundStyle(snapshot.current != nil || snapshot.morning != nil ? Palette.text : Palette.secondaryText)
                         .widgetAccentable()
-                    Group {
-                        if let ramadan = snapshot.ramadan {
-                            RamadanLine(state: ramadan, formatter: snapshot.formatter)
-                        } else {
-                            UpcomingHint(snapshot: snapshot)
-                        }
-                    }
+                    StatusLine(snapshot: snapshot)
                     .font(.system(.subheadline, design: .rounded).monospacedDigit())
                         .foregroundStyle(Palette.secondaryText)
                         .multilineTextAlignment(.trailing)

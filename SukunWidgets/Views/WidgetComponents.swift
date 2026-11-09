@@ -62,8 +62,11 @@ struct UpcomingHint: View {
     @Environment(\.isLuminanceReduced) private var isLuminanceReduced
 
     var body: some View {
-        let named = snapshot.current != nil || alwaysNamed
-        if isLuminanceReduced {
+        // The morning title above names a state, not a prayer, so the hint names Dhuhr.
+        let named = snapshot.current != nil || snapshot.morning != nil || alwaysNamed
+        if let noPrayerLine = snapshot.noPrayerLine {
+            Text(verbatim: noPrayerLine) // static, fine on Always-On too
+        } else if isLuminanceReduced {
             if named {
                 Text(verbatim: "\(snapshot.upcoming.kind.localizedName) \(snapshot.formatter.string(from: snapshot.upcoming.date))")
             }
@@ -72,6 +75,21 @@ struct UpcomingHint: View {
             Text("\(snapshot.upcoming.kind.localizedName) in \(Text(snapshot.upcoming.date, style: .timer))")
         } else {
             Text("in \(Text(snapshot.upcoming.date, style: .timer))")
+        }
+    }
+}
+
+/// The one line under a widget's title: the Ramadan countdown while fasting, else the hint to the next
+/// boundary. During the two short no-prayer windows "No prayer until …" wins over the Ramadan line.
+struct StatusLine: View {
+    let snapshot: PrayerSnapshot
+    var alwaysNamed = false
+
+    var body: some View {
+        if snapshot.noPrayerLine == nil, let ramadan = snapshot.ramadan {
+            RamadanLine(state: ramadan, formatter: snapshot.formatter)
+        } else {
+            UpcomingHint(snapshot: snapshot, alwaysNamed: alwaysNamed)
         }
     }
 }

@@ -2599,6 +2599,50 @@
           }
         }
       }
+    },
+    "Duha and no-prayer times": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duha and no-prayer times"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duha und Gebetspausen"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الضحى وأوقات النهي عن الصلاة"
+          }
+        }
+      }
+    },
+    "Shows the Duha time in the morning and the short times at sunrise and before Dhuhr when one doesn’t pray.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Shows the Duha time in the morning and the short times at sunrise and before Dhuhr when one doesn’t pray."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zeigt am Vormittag die Duha-Zeit und die kurzen Zeiten bei Sonnenaufgang und vor Dhuhr, in denen man nicht betet."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "يعرض وقت الضحى صباحًا والأوقات القصيرة عند الشروق وقبيل الظهر التي لا يُصلّى فيها."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

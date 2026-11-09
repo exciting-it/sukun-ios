@@ -39,13 +39,7 @@ struct DayPrayersWidgetView: View {
                     .foregroundStyle(Palette.secondaryText)
                     .lineLimit(1)
                 Spacer()
-                Group {
-                    if let ramadan = snapshot.ramadan {
-                        RamadanLine(state: ramadan, formatter: snapshot.formatter)
-                    } else {
-                        UpcomingHint(snapshot: snapshot, alwaysNamed: true)
-                    }
-                }
+                StatusLine(snapshot: snapshot, alwaysNamed: true)
                     .font(.system(.caption, design: .rounded).monospacedDigit())
                     .foregroundStyle(Palette.secondaryText)
                     .multilineTextAlignment(.trailing)

@@ -5,7 +5,8 @@ import SukunKit
 /// Debug-only launch arguments for App Store screenshots in the simulator:
 /// `-SukunScreenshotCity london|berlin|dubai` sets a manual location and a few reminders,
 /// `-SukunDesignPreview asr` shows that time of day, `-SukunRamadan on` forces Ramadan mode,
-/// `-SukunScreenshotDay 2027-02-20` previews another date, `-SukunFakeQiblaOffset 0` simulates a compass reading that many degrees off the Qibla.
+/// `-SukunScreenshotDay 2027-02-20` previews another date, `-SukunPreviewMinutes 60` lands that many minutes after
+/// the previewed prayer (default 10; e.g. `sunrise` + 60 shows Duha), `-SukunFakeQiblaOffset 0` simulates a compass reading that many degrees off the Qibla.
 @MainActor
 enum ScreenshotMode {
     private static let defaults = UserDefaults.standard
@@ -28,7 +29,10 @@ enum ScreenshotMode {
         }
         let day = defaults.string(forKey: "SukunScreenshotDay").flatMap { try? Date("\($0)T12:00:00Z", strategy: .iso8601) }
         if let preview = defaults.string(forKey: "SukunDesignPreview").flatMap(PrayerKind.init(rawValue:)) {
-            model.setDesignPreview(preview, day: day)
+            // "m5" means 5 minutes before (a leading "-" would read as another launch argument).
+            let minutes = defaults.string(forKey: "SukunPreviewMinutes")
+                .flatMap { Double($0.replacingOccurrences(of: "m", with: "-")) } ?? 10
+            model.setDesignPreview(preview, day: day, minutesAfter: minutes)
         }
         // The shooting script reads this to set the simulator's status bar clock to the time on screen.
         let shown = Int(model.now().timeIntervalSince1970)

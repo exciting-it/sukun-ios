@@ -22,14 +22,16 @@ Automated check: `XCUIApplication.performAccessibilityAudit()` on all tabs (ligh
 Settings → Accessibility → VoiceOver on (or triple-click the side button if set up). Do every step without looking.
 
 1. **Onboarding** (delete and reinstall the app): both buttons ("Use my location", "Choose a city") are announced and work. City search: type a city, pick a result.
-2. **Today:** swipe through. Expect: location ("Location: Munich", hint "Change location"), Hijri date, date, the hero ("Current prayer: Isha since 18:25. Next: Fajr at 05:24"), each row ("Fajr, 05:24"; the current one ends with "current prayer", without "Selected").
-3. **Reminders:** a row with a bell reads as a switch ("Isha, 18:14, Notification off, switch button"). Double tap → the
+2. **Morning** (Settings → Design preview → Sunrise, or between sunrise and Dhuhr): the hero reads e.g.
+   "Duha since 07:32. Next: Dhuhr at 11:51." or "Sunrise since 07:17. No prayer until 07:32."
+3. **Today:** swipe through. Expect: location ("Location: Munich", hint "Change location"), Hijri date, date, the hero ("Current prayer: Isha since 18:25. Next: Fajr at 05:24"), each row ("Fajr, 05:24"; the current one ends with "current prayer", without "Selected").
+4. **Reminders:** a row with a bell reads as a switch ("Isha, 18:14, Notification off, switch button"). Double tap → the
    permission prompt appears; allow. Row value now says "Notification on". Also try the Actions rotor on a row: swipe
    up/down → "Turn notification off", double tap. Sunrise has no switch and no action.
-4. **Qibla:** focus the readout: "Qibla direction 130 degrees, Southeast", then the guidance as its value ("Turn right 20°"). Keep it focused and turn: VoiceOver re-reads the guidance as it changes. When aligned, VoiceOver announces "You are facing the Qibla." wherever focus is, and the haptic fires.
-5. **Settings:** change Method, Asr time, Adjust times (stepper: swipe up/down), Remind me before, Jumu'ah reminder (toggle, segmented choice, time picker), Ramadan mode, Hijri date stepper.
-6. **Feedback:** open, choose a type, dictate text, Send, hear "Thank you".
-7. **Widgets:** on the Home Screen, each widget reads as one sentence (e.g. "Current prayer: Asr since 14:19. Next: Maghrib at 16:43").
+5. **Qibla:** focus the readout: "Qibla direction 130 degrees, Southeast", then the guidance as its value ("Turn right 20°"). Keep it focused and turn: VoiceOver re-reads the guidance as it changes. When aligned, VoiceOver announces "You are facing the Qibla." wherever focus is, and the haptic fires.
+6. **Settings:** change Method, Asr time, Adjust times (stepper: swipe up/down), Remind me before, Jumu'ah reminder (toggle, segmented choice, time picker), Ramadan mode, Hijri date stepper.
+7. **Feedback:** open, choose a type, dictate text, Send, hear "Thank you".
+8. **Widgets:** on the Home Screen, each widget reads as one sentence (e.g. "Current prayer: Asr since 14:19. Next: Maghrib at 16:43").
 
 ## Device pass: Voice Control (about 10 minutes)
 
