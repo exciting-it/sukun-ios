@@ -37,7 +37,7 @@ Lock Screen widgets. Name: "Sukun" (سكون, stillness). Domain sukun.faith.
 | Settings | `SettingsView` | Location (city search / GPS), method, Asr (madhab), high latitudes, adjustments, notifications, early/Jumu'ah/Suhoor, Ramadan, Hijri correction, pattern toggle, Qibla haptics, feedback. Debug builds: "Design preview" (jump to a time of day). |
 | Feedback | `FeedbackService`, `FeedbackView` | Native form → one HTTPS POST to a PostHog **API-type survey** (EU cloud, `eu.i.posthog.com/i/v0/e/`, event "survey sent"). No SDK, random id per message, no location. `appStoreID` (nil for now) enables "Rate Sukun". |
 | Widgets | `SukunWidgets/` | Current Prayer (small + Lock Screen circular/rectangular/inline; kind id still `faith.sukun.widget.next`, don't rename: users would lose placed widgets), Today's Prayers (medium), Overview (large), Qibla (small). Timeline: one entry per prayer boundary + midnight for 48 h; countdowns via `Text(.timer)`. Always-On (`isLuminanceReduced`) shows a short clock time instead of a ticking countdown. Tinted/clear modes: highlight becomes an outline (`CurrentHighlight`, `widgetRenderingMode`). No widget style options: iOS Clear/Tinted cover it. |
-| Website | `website/` | Static HTML/CSS EN+DE (home, privacy incl. PostHog feedback, support, imprint: exciting IT — Swetlana Schell, Munich), deployed to Cloudflare Workers static assets (`wrangler.jsonc`, `website/_headers` with a strict CSP, `website/_redirects`; `npm run dev` / `npm run deploy`). No scripts, no cookies: keep it that way, the CSP blocks scripts. |
+| Website | `website/` | Static HTML/CSS EN+DE (home, privacy incl. PostHog feedback, support, imprint: Jason Schell, Munich), deployed to Cloudflare Workers static assets (`wrangler.jsonc`, `website/_headers` with a strict CSP, `website/_redirects`; `npm run dev` / `npm run deploy`). No scripts, no cookies: keep it that way, the CSP blocks scripts. |
 
 ## 3. Architecture and code map
 
@@ -137,6 +137,8 @@ python3 docs/check_metadata.py                      # App Store text limits
 - App Store name "Sukun: Prayer Times & Qibla" (not just "Sukun").
 - No ads, no subscription, no in-app purchases (one-time price). Marketing tells the owner's story as a revert
   (say "revert", never "new Muslim" or "convert").
+- Name Jason Schell everywhere (imprint, privacy, copyright "2026 Jason Schell", store texts). Don't use
+  "exciting IT" or Swetlana Schell in Sukun materials.
 
 ## 7. Localization
 
@@ -175,4 +177,5 @@ python3 docs/check_metadata.py                      # App Store text limits
   `ci_scripts/ci_post_clone.sh` (installs XcodeGen, generates, copies SukunKit's `Package.resolved` into the project).
   Keep that script working when you add dependencies.
 - Generated files (Info.plists, entitlements) and `.superpowers/` are git-ignored.
+- Branch: `main` (default). Tag App Store releases `vX.Y.Z` on the commit of the submitted build.
 - Never commit secrets. The PostHog project key in `FeedbackService.swift` is a public ingestion key by design.

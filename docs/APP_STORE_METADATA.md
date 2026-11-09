@@ -72,7 +72,7 @@ First release.
 - Privacy Policy: https://sukun.faith/privacy/
 
 ### Copyright
-2026 exciting IT
+2026 Jason Schell
 
 ## German
 
