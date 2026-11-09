@@ -137,8 +137,8 @@ python3 docs/check_metadata.py                      # App Store text limits
 - App Store name "Sukun: Prayer Times & Qibla" (not just "Sukun").
 - No ads, no subscription, no in-app purchases (one-time price). Marketing tells the owner's story as a revert
   (say "revert", never "new Muslim" or "convert").
-- Name Jason Schell everywhere (imprint, privacy, copyright "2026 Jason Schell", store texts). Don't use
-  "exciting IT" or Swetlana Schell in Sukun materials.
+- Name Jason Schell everywhere (imprint, privacy, copyright "2026 Jason Schell", store texts). Only the imprint adds
+  "exciting IT - Swetlana Schell" and the VAT ID DE363509747 (owner's wording); nowhere else.
 
 ## 7. Localization
 
