@@ -13,13 +13,17 @@ Sukun: Prayer Times & Qibla
 Calm salah widgets & reminders
 
 ### Promotional text
-Calm, accurate prayer times and the Qibla, right on your Home Screen and Lock Screen. Works offline. No account, no ads, no tracking.
+Made by a revert who kept missing prayers: the current prayer, the next one and the Qibla. No ads, no subscription, no distractions.
 
 ### Keywords
 salat,namaz,adhan,azan,kiblat,muslim,islam,islamic,fajr,ramadan,iftar,suhoor,jumuah,hijri,mosque
 
 ### Description
-Sukun shows the five daily prayers and the Qibla direction, quietly and accurately, where you look most: on your Home Screen and Lock Screen.
+I reverted to Islam in March 2026. All I wanted was for my Lock Screen to tell me which prayer it is and when the next one begins.
+
+Too often I missed a prayer. The apps I tried were full of ads, their widgets didn't update reliably, or the useful parts sat behind a subscription.
+
+So I built Sukun: prayer times and a Qibla compass, nothing else. No ads, no subscription, no account. Sukun means stillness, a quiet reminder to pause, five times a day.
 
 MADE TO BE GLANCED AT
 • Widgets for the Home Screen, Lock Screen and StandBy
@@ -51,7 +55,7 @@ PRIVATE BY DESIGN
 • Your location stays on your iPhone
 • Prefer not to share your location? Choose your city instead
 
-Available in English, German and Arabic. Supports Dark Mode, Dynamic Type, VoiceOver and Voice Control.
+Free, with no in-app purchases. Available in English, German and Arabic. Supports Dark Mode, Dynamic Type, VoiceOver and Voice Control.
 
 ### What’s New (1.0.0)
 First release.
@@ -73,13 +77,17 @@ Sukun: Gebetszeiten & Qibla
 Namaz-Widgets, ruhig & privat
 
 ### Werbetext
-Ruhige, genaue Gebetszeiten und die Qibla, direkt auf deinem Home- und Sperrbildschirm. Funktioniert offline. Kein Konto, keine Werbung, kein Tracking.
+Von einem Revert, der zu oft Gebete verpasst hat: das aktuelle Gebet, das nächste und die Qibla. Keine Werbung, kein Abo, keine Ablenkung.
 
 ### Schlüsselwörter
 gebet,salah,salat,adhan,ezan,azan,kibla,muslim,islam,ramadan,iftar,sahur,hidschri,moschee,kompass
 
 ### Beschreibung
-Sukun zeigt die fünf täglichen Gebete und die Qibla-Richtung – ruhig und genau, dort, wo du am häufigsten hinschaust: auf deinem Home- und Sperrbildschirm.
+Im März 2026 bin ich zum Islam zurückgekehrt. Ich wollte nur, dass mir mein Sperrbildschirm sagt, welches Gebet gerade ist und wann das nächste beginnt.
+
+Zu oft habe ich ein Gebet verpasst. Die Apps, die ich ausprobiert habe, waren voller Werbung, ihre Widgets haben sich nicht zuverlässig aktualisiert, oder das Wichtigste lag hinter einem Abo.
+
+Also habe ich Sukun gebaut: Gebetszeiten und ein Qibla-Kompass, sonst nichts. Keine Werbung, kein Abo, kein Konto. Sukun bedeutet Stille, eine ruhige Erinnerung, fünfmal am Tag innezuhalten.
 
 GEMACHT FÜR DEN KURZEN BLICK
 • Widgets für Home-Bildschirm, Sperrbildschirm und StandBy
@@ -111,7 +119,7 @@ PRIVAT VON GRUND AUF
 • Dein Standort bleibt auf deinem iPhone
 • Lieber ohne Standort? Wähle stattdessen deine Stadt
 
-Auf Deutsch, Englisch und Arabisch. Unterstützt Dunkelmodus, Dynamic Type, VoiceOver und Sprachsteuerung.
+Kostenlos, ohne In-App-Käufe. Auf Deutsch, Englisch und Arabisch. Unterstützt Dunkelmodus, Dynamic Type, VoiceOver und Sprachsteuerung.
 
 ### Neuerungen (1.0.0)
 Erste Version.
