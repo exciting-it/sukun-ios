@@ -123,5 +123,4 @@ Cloudflare. The first deploy then creates the custom domains (DNS records and ce
 `wrangler.jsonc`. For automatic deploys on push, connect the repository under Workers & Pages → the Worker →
 Settings → Builds (deploy command `npx wrangler deploy`, root directory `/`).
 
-Before publishing, replace the highlighted placeholders (name, address) in the privacy and imprint pages
-and make sure `support@sukun.faith` receives mail.
+Provider in imprint and privacy pages: exciting IT — Swetlana Schell, Munich (same as exciting-it.com). Make sure `support@sukun.faith` receives mail.

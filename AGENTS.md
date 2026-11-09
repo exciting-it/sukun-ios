@@ -37,7 +37,7 @@ Lock Screen widgets. Name: "Sukun" (سكون, stillness). Domain sukun.faith.
 | Settings | `SettingsView` | Location (city search / GPS), method, Asr (madhab), high latitudes, adjustments, notifications, early/Jumu'ah/Suhoor, Ramadan, Hijri correction, pattern toggle, Qibla haptics, feedback. Debug builds: "Design preview" (jump to a time of day). |
 | Feedback | `FeedbackService`, `FeedbackView` | Native form → one HTTPS POST to a PostHog **API-type survey** (EU cloud, `eu.i.posthog.com/i/v0/e/`, event "survey sent"). No SDK, random id per message, no location. `appStoreID` (nil for now) enables "Rate Sukun". |
 | Widgets | `SukunWidgets/` | Current Prayer (small + Lock Screen circular/rectangular/inline; kind id still `faith.sukun.widget.next`, don't rename: users would lose placed widgets), Today's Prayers (medium), Overview (large), Qibla (small). Timeline: one entry per prayer boundary + midnight for 48 h; countdowns via `Text(.timer)`. Always-On (`isLuminanceReduced`) shows a short clock time instead of a ticking countdown. Tinted/clear modes: highlight becomes an outline (`CurrentHighlight`, `widgetRenderingMode`). No widget style options: iOS Clear/Tinted cover it. |
-| Website | `website/` | Static HTML/CSS EN+DE (home, privacy incl. PostHog feedback, support, imprint with placeholders), deployed to Cloudflare Workers static assets (`wrangler.jsonc`, `website/_headers` with a strict CSP, `website/_redirects`; `npm run dev` / `npm run deploy`). No scripts, no cookies: keep it that way, the CSP blocks scripts. |
+| Website | `website/` | Static HTML/CSS EN+DE (home, privacy incl. PostHog feedback, support, imprint: exciting IT — Swetlana Schell, Munich), deployed to Cloudflare Workers static assets (`wrangler.jsonc`, `website/_headers` with a strict CSP, `website/_redirects`; `npm run dev` / `npm run deploy`). No scripts, no cookies: keep it that way, the CSP blocks scripts. |
 
 ## 3. Architecture and code map
 
@@ -163,7 +163,7 @@ python3 docs/check_metadata.py                      # App Store text limits
 ## 9. Release status and open items
 
 - Release steps: `docs/APP_STORE_CHECKLIST.md`. Metadata: `docs/APP_STORE_METADATA.md`. Screenshots: `docs/screenshots/`.
-- Open: imprint/privacy placeholders (name, address) on the website; `support@sukun.faith` mailbox;
+- Open: `support@sukun.faith` mailbox;
   PostHog DPA + "Discard client IP data"; App Store ID for "Rate Sukun"; Arabic description/keywords/
   promotional text and Arabic website; marketing screenshots with captions (idea, not started).
 
