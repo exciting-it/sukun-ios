@@ -114,7 +114,7 @@ day; the Hijri correction (−2…+2 days) shifts both the displayed date and th
 `UserDefaults` (CA92.1, 1C8F.1 for the App Group). City search uses Apple's MapKit. The only outbound
 request of our own is the optional feedback form (Settings → Send feedback): one HTTPS POST to a PostHog
 survey of type "API" in the EU cloud, no SDK, random id per message, no location. Config lives in
-`Sukun/Services/FeedbackService.swift` (`FeedbackConfig.production`; set `appStoreID` to show "Rate Sukun").
+`Sukun/Services/FeedbackService.swift` (`FeedbackConfig.production`; `appStoreID` 6832348832 shows "Rate Sukun").
 
 ## Website
 
