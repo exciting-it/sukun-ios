@@ -82,8 +82,20 @@ tests allow ±2 minutes because Adhan applies small per-method safety offsets.
 
 ## Notifications
 
-Local only. `NotificationPlan` (SukunKit) decides what fires when; the app turns it into requests when it
-becomes active and via a background app refresh task (`faith.sukun.ios.refresh`). Rules:
+Local only. `NotificationPlan` (SukunKit) decides what fires when; `NotificationScheduler` (SukunKit) turns it into
+requests. Three callers keep the plan alive:
+
+- the app, whenever it becomes active or a setting changes;
+- a background app refresh task (`faith.sukun.ios.refresh`), which iOS stops running once the app is swiped away;
+- **the widget extension** on every timeline reload: iOS wakes widgets even when the app was swiped away for weeks.
+  It plans again only when the place, time zone or settings differ from `SharedStore.notificationStamp`, or fewer
+  than 3 days of reminders are left. So reminders keep coming and follow travel as long as a widget is placed.
+
+Every plan ends with a quiet "Open Sukun to keep your prayer reminders coming." one hour after the last reminder.
+Each new plan replaces it, so it only shows when nothing planned again (no widget, app never opened).
+
+A nearby GPS fix reuses the stored place unless its name or country is missing (e.g. after landing without
+internet), so the regional method and place name are looked up again once online. Rules:
 
 - iOS caps pending notifications at 64; the plan keeps at most 60 over a rolling window of up to 7 days.
 - Per prayer: the prayer notification plus at most one extra. Suhoor (Ramadan) replaces Fajr's early

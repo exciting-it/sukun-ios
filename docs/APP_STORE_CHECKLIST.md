@@ -16,6 +16,8 @@
   (rendered off-device in light/dark/accented: OK; still check on a real Home Screen and in StandBy)
 - [ ] Lock Screen circular / rectangular / inline
 - [ ] Notifications fire at prayer time with the app closed; toggling off removes them
+- [ ] Swipe the app away, keep a widget placed, wait a day: reminders still pending (Settings → Notifications shows upcoming ones)
+- [ ] Travel (or change location to another city with GPS): within ~3 h the widget shows the new place and reminders carry the new place name and times, without opening the app
 - [x] Largest Dynamic Type (AX5) on Today, Qibla, Settings (simulator: everything scrolls, nothing truncated)
 - [ ] VoiceOver pass on all three tabs (real device)
 - [x] Reduce Motion on: no rotating spring animations; gradient changes without animation (all motion goes

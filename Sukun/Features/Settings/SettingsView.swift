@@ -1,12 +1,16 @@
 import SukunKit
 import SwiftUI
 import UIKit
+import WidgetKit
+import CoreLocation
 
 struct SettingsView: View {
     @Environment(AppModel.self) private var model
     @Environment(\.openURL) private var openURL
     @State private var showingCitySearch = false
     @State private var showingFeedback = false
+    /// The app may use the location, but the user declined it for widgets while having some placed.
+    @State private var widgetsLackLocation = false
     private let feedbackConfig = FeedbackConfig.production
 
     var body: some View {
@@ -72,12 +76,35 @@ struct SettingsView: View {
                 Button("Allow location access in Settings") {
                     if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
                 }
+            } else if widgetsLackLocation {
+                Button("Let widgets use your location") {
+                    if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
+                }
             }
         } header: {
             Text("Location")
         } footer: {
-            Text("Your location never leaves this device.")
+            if widgetsLackLocation && !model.isLocationDenied {
+                Text("Your widgets show your last place. Choose “While Using the App or Widgets” so widgets and reminders follow you when you travel. Your location never leaves this device.")
+            } else {
+                Text("Your location never leaves this device.")
+            }
         }
+        .task(id: model.settings.useManualLocation) { await checkWidgetLocation() }
+    }
+
+    /// Only relevant with the device location in use: a chosen city is meant to stay put.
+    private func checkWidgetLocation() async {
+        guard !model.settings.useManualLocation, model.locationService.isAuthorized else {
+            widgetsLackLocation = false
+            return
+        }
+        let hasWidgets = await withCheckedContinuation { (done: CheckedContinuation<Bool, Never>) in
+            WidgetCenter.shared.getCurrentConfigurations { result in
+                done.resume(returning: !((try? result.get()) ?? []).isEmpty)
+            }
+        }
+        widgetsLackLocation = hasWidgets && !CLLocationManager().isAuthorizedForWidgetUpdates
     }
 
     // MARK: Calculation

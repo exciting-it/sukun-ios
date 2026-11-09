@@ -45,6 +45,13 @@ public enum LocationResolver {
     /// Distance under which a new GPS fix reuses the stored place name / time zone (no re-geocoding).
     static let reuseRadiusKm = 3.0
 
+    /// A nearby fix keeps the stored place, unless that place is incomplete: landing without internet
+    /// leaves no name or country (and so no regional method), which must be looked up again once online.
+    static func canReuse(_ previous: StoredLocation, for coordinate: Coordinate) -> Bool {
+        previous.coordinate.distanceKilometers(to: coordinate) < reuseRadiusKm
+            && previous.name != nil && previous.countryCode != nil
+    }
+
     /// Turns a CLLocation into a `StoredLocation`, reverse-geocoding only when the place actually changed.
     public static func storedLocation(
         for location: CLLocation,
@@ -54,7 +61,7 @@ public enum LocationResolver {
         let coordinate = Coordinate(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
         // Stamp with the fix's own time: a cached (stale) fix must not count as fresh and block the next refresh.
         let fixDate = min(location.timestamp, Date())
-        if let previous, previous.coordinate.distanceKilometers(to: coordinate) < reuseRadiusKm {
+        if let previous, canReuse(previous, for: coordinate) {
             var updated = previous
             updated.coordinate = coordinate
             updated.updatedAt = fixDate

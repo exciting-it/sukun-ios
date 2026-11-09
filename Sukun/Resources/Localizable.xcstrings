@@ -484,29 +484,6 @@
         }
       }
     },
-    "It’s time for %@ · %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "It’s time for %@ · %@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zeit für %@ · %@"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "حان وقت صلاة %1$@ · %2$@"
-          }
-        }
-      }
-    },
     "Location": {
       "extractionState": "manual",
       "localizations": {
@@ -1841,75 +1818,6 @@
         }
       }
     },
-    "Suhoor has ended · %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suhoor has ended · %@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suhoor ist vorbei · %@"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "انتهى وقت السحور · %@"
-          }
-        }
-      }
-    },
-    "Time for Iftar · %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time for Iftar · %@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zeit für Iftar · %@"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "حان وقت الإفطار · %@"
-          }
-        }
-      }
-    },
-    "%@ in %lld min · %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ in %2$lld min · %3$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%1$@ in %2$lld Min. · %3$@"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "%1$@ بعد %2$lld دقيقة · %3$@"
-          }
-        }
-      }
-    },
     "Jumu'ah": {
       "extractionState": "manual",
       "localizations": {
@@ -1933,29 +1841,6 @@
         }
       }
     },
-    "Today · Dhuhr %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Today · Dhuhr %@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Heute · Dhuhr %@"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "اليوم · الظهر %@"
-          }
-        }
-      }
-    },
     "Suhoor": {
       "extractionState": "manual",
       "localizations": {
@@ -1975,29 +1860,6 @@
           "stringUnit": {
             "state": "needs_review",
             "value": "السحور"
-          }
-        }
-      }
-    },
-    "Suhoor ends in %lld min · Fajr %@": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suhoor ends in %1$lld min · Fajr %2$@"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Suhoor endet in %1$lld Min. · Fajr %2$@"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "ينتهي السحور بعد %1$lld دقيقة · الفجر %2$@"
           }
         }
       }
@@ -2640,6 +2502,50 @@
           "stringUnit": {
             "state": "needs_review",
             "value": "يعرض وقت الضحى صباحًا والأوقات القصيرة عند الشروق وقبيل الظهر التي لا يُصلّى فيها."
+          }
+        }
+      }
+    },
+    "Let widgets use your location": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Let widgets use your location"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Standort für Widgets erlauben"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "السماح للأدوات باستخدام موقعك"
+          }
+        }
+      }
+    },
+    "Your widgets show your last place. Choose “While Using the App or Widgets” so widgets and reminders follow you when you travel. Your location never leaves this device.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Your widgets show your last place. Choose “While Using the App or Widgets” so widgets and reminders follow you when you travel. Your location never leaves this device."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Deine Widgets zeigen deinen letzten Ort. Wähle „Beim Verwenden der App oder Widgets“, damit Widgets und Erinnerungen dir auf Reisen folgen. Dein Standort verlässt nie dieses Gerät."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تعرض أدواتك آخر مكان لك. اختر „أثناء استخدام التطبيق أو الأدوات“ لتتبعك الأدوات والتذكيرات عند السفر. لا يغادر موقعك هذا الجهاز أبدًا."
           }
         }
       }

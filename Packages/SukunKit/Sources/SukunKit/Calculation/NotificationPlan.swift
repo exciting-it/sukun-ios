@@ -13,6 +13,8 @@ public struct PlannedNotification: Hashable, Sendable {
         case early(PrayerSlot, minutes: Int)
         case jumuah(dhuhr: PrayerSlot)
         case suhoor(fajr: PrayerSlot, minutes: Int)
+        /// Last item of every plan: fires only if nothing (app, background refresh, widget) planned again.
+        case openApp
     }
 
     public let id: String
@@ -55,12 +57,17 @@ public enum NotificationPlan {
             guard let next = calendar.date(byAdding: .day, value: 1, to: day) else { break }
             day = next
         }
-        return Array(
+        let real = Array(
             items
                 .filter { $0.fireDate > now && $0.fireDate < end }
                 .sorted { $0.fireDate < $1.fireDate }
-                .prefix(budget)
+                .prefix(budget - 1)
         )
+        guard let last = real.last else { return [] }
+        // Each new plan replaces this one, so it only shows when reminders were about to stop for good
+        // (app swiped away for weeks and no widget placed).
+        return real + [PlannedNotification(id: "sukun.openApp", fireDate: last.fireDate.addingTimeInterval(3600),
+                                           content: .openApp)]
     }
 
     private static func plan(

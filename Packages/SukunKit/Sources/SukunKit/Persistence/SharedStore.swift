@@ -22,6 +22,7 @@ public final class SharedStore: @unchecked Sendable {
         static let settings = "sukun.settings.v1"
         static let gpsLocation = "sukun.gpsLocation.v1"
         static let onboardingDone = "sukun.onboardingDone"
+        static let notificationStamp = "sukun.notificationStamp.v1"
     }
 
     public init(defaults: UserDefaults) {
@@ -37,6 +38,12 @@ public final class SharedStore: @unchecked Sendable {
     public var gpsLocation: StoredLocation? {
         get { read(StoredLocation.self, Key.gpsLocation) }
         set { write(newValue, Key.gpsLocation) }
+    }
+
+    /// What the pending notifications were planned for (see `NotificationStamp`).
+    public var notificationStamp: NotificationStamp? {
+        get { read(NotificationStamp.self, Key.notificationStamp) }
+        set { write(newValue, Key.notificationStamp) }
     }
 
     public var hasCompletedOnboarding: Bool {

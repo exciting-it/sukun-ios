@@ -17,6 +17,11 @@ final class NotificationPlanTests: XCTestCase {
         NotificationPlan.make(settings: s, location: location, now: now, days: days)
     }
 
+    /// The plan without its trailing "open Sukun" item (covered in NotificationRefreshTests).
+    private func reminders(_ items: [PlannedNotification]) -> [PlannedNotification] {
+        items.filter { $0.content != .openApp }
+    }
+
     private func calendar(_ tz: String) -> Calendar {
         var cal = Calendar(identifier: .gregorian)
         cal.timeZone = TimeZone(identifier: tz)!
@@ -56,7 +61,7 @@ final class NotificationPlanTests: XCTestCase {
             case .early(let slot, _): extras[slot, default: 0] += 1
             case .jumuah(let dhuhr): extras[dhuhr, default: 0] += 1
             case .suhoor(let fajr, _): extras[fajr, default: 0] += 1
-            case .prayer: break
+            case .prayer, .openApp: break
             }
         }
         XCTAssertTrue(extras.values.allSatisfy { $0 == 1 }, "at most one extra notification per prayer")
@@ -80,7 +85,7 @@ final class NotificationPlanTests: XCTestCase {
     func testJumuahFixedTimeSurvivesDST() {
         // DST ends Sunday 25 Oct 2026 in Europe/Berlin.
         let now = Fixtures.date(2026, 10, 22, 8, 0, tz: "Europe/Berlin")
-        let items = plan(settings([], jumuah: .fixedTime(hour: 12, minute: 45)), now: now, days: 9)
+        let items = reminders(plan(settings([], jumuah: .fixedTime(hour: 12, minute: 45)), now: now, days: 9))
         let berlin = calendar("Europe/Berlin")
         let times = items.map { berlin.dateComponents([.day, .hour, .minute], from: $0.fireDate) }
         XCTAssertEqual(times.map(\.day), [23, 30])
@@ -153,7 +158,7 @@ final class NotificationPlanTests: XCTestCase {
     }
 
     func testSuhoorStandsAloneWithoutPrayerToggles() {
-        let items = plan(settings([], ramadan: .on, suhoor: 30), now: Fixtures.date(2026, 12, 15, 10, 0, tz: "Europe/Berlin"))
+        let items = reminders(plan(settings([], ramadan: .on, suhoor: 30), now: Fixtures.date(2026, 12, 15, 10, 0, tz: "Europe/Berlin")))
         XCTAssertFalse(items.isEmpty)
         XCTAssertTrue(items.allSatisfy { if case .suhoor = $0.content { true } else { false } })
     }
