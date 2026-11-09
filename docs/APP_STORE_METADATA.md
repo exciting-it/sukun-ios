@@ -34,7 +34,7 @@ CALCULATED ON YOUR IPHONE
 • Adjust each time by a few minutes to match your mosque
 
 QIBLA COMPASS
-• Turn until the needle meets the mark; a soft haptic tells you when you’re aligned
+• Turn until the needle meets the mark; a clear haptic tells you when you’re aligned, and VoiceOver says it too
 • Uses true north when location is allowed, with a calibration hint when needed
 • Shows the bearing and the distance to the Kaaba
 
@@ -94,7 +94,7 @@ BERECHNET AUF DEINEM IPHONE
 • Jede Zeit lässt sich um ein paar Minuten an deine Moschee anpassen
 
 QIBLA-KOMPASS
-• Dreh dich, bis die Nadel die Markierung trifft; ein sanftes haptisches Signal zeigt dir, wann du richtig stehst
+• Dreh dich, bis die Nadel die Markierung trifft; ein deutliches haptisches Signal zeigt dir, wann du richtig stehst, und VoiceOver sagt es dir auch
 • Nutzt geografisch Nord, wenn der Standort erlaubt ist, mit Kalibrierhinweis bei Bedarf
 • Zeigt Richtung und Entfernung zur Kaaba
 
