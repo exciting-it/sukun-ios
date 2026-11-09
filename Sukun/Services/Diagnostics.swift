@@ -6,8 +6,14 @@ enum Diagnostics {
         #if DEBUG
         return true
         #else
-        guard let result = try? await AppTransaction.shared, case .verified(let transaction) = result else { return false }
-        return transaction.environment == .sandbox || transaction.environment == .xcode
+        // TestFlight reports the sandbox environment. Accept an unverified answer too: this only reveals a tester
+        // screen, it unlocks nothing, and TestFlight sometimes can't verify the transaction right away.
+        guard let result = try? await AppTransaction.shared else { return false }
+        let environment: AppStore.Environment
+        switch result {
+        case .verified(let transaction), .unverified(let transaction, _): environment = transaction.environment
+        }
+        return environment == .sandbox || environment == .xcode
         #endif
     }
 }
