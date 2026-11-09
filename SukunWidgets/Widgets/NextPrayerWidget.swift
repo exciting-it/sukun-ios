@@ -53,8 +53,10 @@ struct SmallNextPrayerView: View {
             HStack(spacing: 5) {
                 Image(systemName: snapshot.headlineSymbol)
                     .font(.subheadline)
-                Text(verbatim: snapshot.headline)
+                Text(verbatim: snapshot.shortHeadline)
                     .font(.system(.headline, design: .rounded, weight: .medium))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.75)
             }
             .foregroundStyle(isRunning ? Palette.text : Palette.secondaryText)
             .widgetAccentable()
@@ -116,9 +118,11 @@ struct RectangularAccessory: View {
         VStack(alignment: .leading, spacing: 1) {
             HStack(spacing: 4) {
                 Image(systemName: snapshot.headlineSymbol)
-                Text(verbatim: snapshot.headline)
+                Text(verbatim: snapshot.shortHeadline)
             }
             .font(.system(.headline, design: .rounded))
+            .lineLimit(1)
+            .minimumScaleFactor(0.75)
             .widgetAccentable()
             Text(snapshot.formatter.string(from: snapshot.headlineDate))
                 .font(.system(.body, design: .rounded).monospacedDigit())

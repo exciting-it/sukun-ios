@@ -44,6 +44,8 @@ final class MorningPeriodTests: XCTestCase {
         XCTAssertEqual(before?.kind, .beforeDhuhr)
         XCTAssertEqual(before?.start, d - 10 * minute)
         XCTAssertEqual(before?.noPrayerUntil, d)
+        XCTAssertEqual(before?.kind.shortTitle, "Before Dhuhr", "fits the Lock Screen")
+        XCTAssertEqual(MorningPeriod.Kind.duha.shortTitle, MorningPeriod.Kind.duha.title)
         XCTAssertEqual(morning(at: d - 1, settings)?.kind, .beforeDhuhr)
 
         XCTAssertNil(morning(at: d, settings), "Dhuhr is running")

@@ -19,6 +19,14 @@ public struct MorningPeriod: Hashable, Sendable {
             }
         }
 
+        /// For tight spaces (Lock Screen, small widgets): "Before Dhuhr" instead of "Shortly before Dhuhr".
+        public var shortTitle: String {
+            switch self {
+            case .beforeDhuhr: L10n.string("morning.beforeDhuhr.short", default: "Before Dhuhr")
+            default: title
+            }
+        }
+
         public var symbolName: String {
             switch self {
             case .sunrise: PrayerKind.sunrise.symbolName

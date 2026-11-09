@@ -64,6 +64,9 @@ public struct PrayerSnapshot: Hashable, Sendable {
     /// The time under the title: when the running prayer or the morning state began.
     public var headlineDate: Date { morning?.start ?? featured.date }
 
+    /// `headline` for tight spaces (Lock Screen, small widgets).
+    public var shortHeadline: String { morning?.kind.shortTitle ?? featured.kind.localizedName }
+
     public var headlineSymbol: String { morning?.kind.symbolName ?? featured.kind.symbolName }
 
     /// Start of the interval the countdown ring measures (the last boundary, sunrise included).

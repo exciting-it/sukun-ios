@@ -1449,6 +1449,29 @@
           }
         }
       }
+    },
+    "morning.beforeDhuhr.short": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Before Dhuhr"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vor Dhuhr"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "قبيل الظهر"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

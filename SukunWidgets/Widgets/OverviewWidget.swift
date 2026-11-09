@@ -46,7 +46,7 @@ struct OverviewWidgetView: View {
                 }
                 Spacer()
                 VStack(alignment: .trailing, spacing: 2) {
-                    Text(verbatim: snapshot.headline)
+                    Text(verbatim: snapshot.shortHeadline)
                         .font(.system(.subheadline, design: .rounded, weight: .medium))
                         .foregroundStyle(snapshot.current != nil || snapshot.morning != nil ? Palette.text : Palette.secondaryText)
                         .widgetAccentable()
