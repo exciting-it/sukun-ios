@@ -57,7 +57,14 @@ struct QiblaView: View {
                     AccessibilityNotification.Announcement(String(localized: "You are facing the Qibla.")).post()
                 }
             }
-            .onAppear { headingService.start() }
+            .onAppear {
+                #if DEBUG
+                if let offset = ScreenshotMode.fakeQiblaOffset {
+                    headingService.simulatedHeading = (bearing - offset + 360).truncatingRemainder(dividingBy: 360)
+                }
+                #endif
+                headingService.start()
+            }
             .onDisappear { headingService.stop() }
             .onChange(of: headingService.heading) { _, newValue in
                 guard let newValue else { return }

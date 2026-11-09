@@ -11,8 +11,8 @@ Re-evaluate with every update (Apple's rule). State as of version 1.0.0:
 | Differentiate Without Color Alone | Yes | Current prayer: bold + highlight shape; past prayers: faded; Qibla aligned: text + haptic; bell filled vs outline |
 | Reduced Motion | Yes | All motion goes through `Animation.sukun(reduceMotion:)` / `reduceMotion ? nil : …` |
 | Sufficient Contrast | Yes | Colors meet WCAG AA by default. Thin hero numerals and faded past prayers switch to heavier weight / readable grey with **Increase Contrast** (Apple's accepted route for system frameworks). Accessibility audit with Increase Contrast on: no contrast findings at default size; the remaining AX5 findings are elements behind the floating tab bar (readable once scrolled). |
-| VoiceOver | After the device pass below | Labels, values and actions are in place; needs one run on a real iPhone |
-| Voice Control | After the device pass below | Input labels match visible text; bells reachable via "Show actions" |
+| VoiceOver | Yes | Device pass done (version 1.0.0) |
+| Voice Control | Yes | Device pass done (version 1.0.0) |
 | Captions / Audio Descriptions | Not applicable | No audio or video |
 
 Automated check: `XCUIApplication.performAccessibilityAudit()` on all tabs (light/dark, default size and AX5).

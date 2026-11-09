@@ -46,9 +46,10 @@ final class AppModel {
     private(set) var previewOffset: TimeInterval = 0
 
     /// Jumps the app's clock to 10 minutes after `kind` today, so Today and Qibla look as they would then.
-    func setDesignPreview(_ kind: PrayerKind?, now: Date = Date()) {
+    /// `day` picks another date (screenshots of a Ramadan day); default is today.
+    func setDesignPreview(_ kind: PrayerKind?, now: Date = Date(), day: Date? = nil) {
         designPreview = kind
-        guard let kind, let target = snapshot(at: now)?.today.time(for: kind) else {
+        guard let kind, let target = snapshot(at: day ?? now)?.today.time(for: kind) else {
             previewOffset = 0
             return
         }

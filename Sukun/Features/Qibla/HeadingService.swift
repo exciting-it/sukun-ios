@@ -12,9 +12,18 @@ final class HeadingService: NSObject, CLLocationManagerDelegate {
     /// Accuracy in degrees; negative means invalid (needs calibration).
     private(set) var accuracy: Double = -1
     private(set) var usesTrueNorth = false
-    let isAvailable = CLLocationManager.headingAvailable()
+    let isAvailable: Bool
+    #if DEBUG
+    /// Screenshot mode: a fixed reading instead of the compass (see `ScreenshotMode`).
+    var simulatedHeading: Double?
+    #endif
 
     override init() {
+        #if DEBUG
+        isAvailable = ScreenshotMode.fakeQiblaOffset != nil || CLLocationManager.headingAvailable()
+        #else
+        isAvailable = CLLocationManager.headingAvailable()
+        #endif
         super.init()
         manager.delegate = self
         manager.headingFilter = 1
@@ -22,6 +31,14 @@ final class HeadingService: NSObject, CLLocationManagerDelegate {
     }
 
     func start() {
+        #if DEBUG
+        if let simulatedHeading {
+            heading = simulatedHeading
+            accuracy = 5
+            usesTrueNorth = true
+            return
+        }
+        #endif
         guard isAvailable else { return }
         manager.startUpdatingHeading()
     }

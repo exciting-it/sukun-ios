@@ -3,7 +3,15 @@ import SwiftUI
 
 @main
 struct SukunApp: App {
-    @State private var model = AppModel()
+    @State private var model: AppModel
+
+    init() {
+        let model = AppModel()
+        #if DEBUG
+        ScreenshotMode.apply(to: model)
+        #endif
+        _model = State(initialValue: model)
+    }
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {

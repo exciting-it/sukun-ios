@@ -64,7 +64,7 @@ struct TodayView: View {
             .accessibilityHint(Text("Change location"))
 
             #if DEBUG
-            if let preview = model.designPreview {
+            if let preview = model.designPreview, !ScreenshotMode.isActive {
                 Text(verbatim: "Design preview: \(preview.localizedName) + 10 min")
                     .font(.caption2.weight(.semibold))
                     .foregroundStyle(.orange)

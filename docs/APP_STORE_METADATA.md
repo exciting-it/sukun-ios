@@ -51,7 +51,7 @@ PRIVATE BY DESIGN
 • Your location stays on your iPhone
 • Prefer not to share your location? Choose your city instead
 
-Available in English and German. Supports Dark Mode, Dynamic Type and VoiceOver.
+Available in English, German and Arabic. Supports Dark Mode, Dynamic Type, VoiceOver and Voice Control.
 
 ### What’s New (1.0.0)
 First release.
@@ -111,7 +111,7 @@ PRIVAT VON GRUND AUF
 • Dein Standort bleibt auf deinem iPhone
 • Lieber ohne Standort? Wähle stattdessen deine Stadt
 
-Auf Deutsch und Englisch. Unterstützt Dunkelmodus, Dynamic Type und VoiceOver.
+Auf Deutsch, Englisch und Arabisch. Unterstützt Dunkelmodus, Dynamic Type, VoiceOver und Sprachsteuerung.
 
 ### Neuerungen (1.0.0)
 Erste Version.
@@ -122,3 +122,13 @@ Erste Version.
 - Datenschutz: https://sukun.faith/de/datenschutz/
 
 Keywords skip words already in the name and subtitle (Apple indexes those anyway).
+
+## Arabic
+
+Not yet checked by the Arabic reviewer; update with their feedback in the next version.
+
+### Name
+سكون: مواقيت الصلاة والقبلة
+
+### Subtitle
+ودجت وتذكيرات صلاة هادئة
