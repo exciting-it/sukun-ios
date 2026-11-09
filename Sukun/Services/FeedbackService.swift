@@ -20,7 +20,7 @@ struct FeedbackConfig: Sendable {
         surveyID: "01a1bcef-4f96-0000-3cce-9416c0b05a96",
         textQuestionID: "c20f5df2-5355-45ec-8093-1d79bbe8b1ff",
         kindQuestionID: "d4113404-b61f-47f4-a66e-058f851a67fb",
-        appStoreID: nil
+        appStoreID: "6832348832"
     )
 
     var writeReviewURL: URL? {

@@ -46,6 +46,11 @@ final class FeedbackServiceTests: XCTestCase {
         }
     }
 
+    func testProductionRateLinkPointsToSukun() {
+        XCTAssertEqual(FeedbackConfig.production.writeReviewURL?.absoluteString,
+                       "https://apps.apple.com/app/id6832348832?action=write-review")
+    }
+
     func testEmptyTextIsRejected() {
         XCTAssertThrowsError(try service.request(kind: .problem, text: "   \n", diagnostics: nil)) { error in
             XCTAssertEqual(error as? FeedbackError, .emptyText)

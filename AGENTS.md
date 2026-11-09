@@ -168,7 +168,7 @@ python3 docs/check_metadata.py                      # App Store text limits
 
 - Release steps: `docs/APP_STORE_CHECKLIST.md`. Metadata: `docs/APP_STORE_METADATA.md`. Screenshots: `docs/screenshots/`.
 - Open: `support@sukun.faith` mailbox;
-  PostHog DPA + "Discard client IP data"; App Store ID for "Rate Sukun"; Arabic description/keywords/
+  PostHog DPA + "Discard client IP data"; Arabic description/keywords/
   promotional text and Arabic website; marketing screenshots with captions (idea, not started).
 
 ## 10. Working agreements
