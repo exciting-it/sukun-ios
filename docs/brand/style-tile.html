@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sukun Style Tile</title>
+<style>
+  @font-face { font-family: "SukunRounded"; src: url("file:///System/Library/Fonts/SFNSRounded.ttf"); font-weight: 100 900; }
+  @font-face { font-family: "SukunArabic"; src: url("file:///System/Library/Fonts/SFArabicRounded.ttf"); font-weight: 100 900; }
+  :root {
+    --cream: #F6F1EA; --surface: #FFFCF7; --ink: #2E3A40; --muted: #525D62;
+    --green: #4E8A6A; --green-text: #2B6449; --charcoal: #111413; --mint: #6FAE8C; --mint-text: #8CC3A5;
+    --dawn: #E8D2DB; --morning: #F2E2C6; --midday: #E1EBDD; --afternoon: #F0DDBF; --dusk: #F0CDB2; --night: #D9DEE6;
+  }
+  @page { size: 1920px 1080px; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { width: 1920px; height: 1080px; }
+  body {
+    font-family: "SukunRounded", ui-rounded, system-ui, sans-serif; color: var(--ink);
+    background: linear-gradient(180deg, var(--morning) 0%, var(--cream) 42%);
+    padding: 52px 64px; display: grid; grid-template-columns: 1fr 1fr 700px; grid-template-rows: auto auto auto auto;
+    gap: 28px 48px; align-content: start;
+  }
+  header { grid-column: 1 / 3; display: flex; align-items: center; gap: 28px; }
+  header img { width: 96px; height: 96px; border-radius: 26px; box-shadow: 0 12px 30px rgba(46,58,64,.10); }
+  h1 { font-size: 56px; font-weight: 600; letter-spacing: -1px; }
+  h1 span { font-family: "SukunArabic", "SukunRounded"; font-weight: 400; color: var(--muted); font-size: 48px; margin-left: 18px; }
+  .tagline { font-size: 26px; color: var(--muted); margin-top: 6px; }
+  .label { font-size: 15px; font-weight: 600; letter-spacing: 1.6px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+  section { min-width: 0; }
+  .card { background: rgba(255,252,247,.85); border-radius: 22px; padding: 16px 24px; box-shadow: 0 2px 14px rgba(46,58,64,.06); }
+  .swatches { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .sw { border-radius: 16px; overflow: hidden; background: var(--surface); border: 1px solid rgba(46,58,64,.08); }
+  .sw div { height: 56px; }
+  .sw p { font-size: 14px; padding: 8px 11px 9px; line-height: 1.3; }
+  .sw b { display: block; font-weight: 600; }
+  .gradient { height: 84px; border-radius: 18px; margin-top: 8px;
+    background: linear-gradient(90deg, var(--dawn), var(--morning), var(--midday), var(--afternoon), var(--dusk), var(--night)); }
+  .gradient-labels { display: grid; grid-template-columns: repeat(6, 1fr); font-size: 15px; color: var(--muted); margin-top: 10px; }
+  .gradient-labels span b { display: block; color: var(--ink); font-weight: 600; }
+  .type .numerals { font-size: 124px; font-weight: 100; letter-spacing: -2px; line-height: 1; }
+  .type .numerals small { font-size: 26px; font-weight: 400; color: var(--muted); margin-left: 12px; letter-spacing: 0; }
+  .type .headline { font-size: 36px; font-weight: 600; margin-top: 12px; letter-spacing: -.5px; }
+  .type .body { font-size: 20px; color: var(--muted); margin-top: 8px; line-height: 1.45; max-width: 560px; }
+  .type .arabic { font-family: "SukunArabic", "SukunRounded"; font-size: 30px; margin-top: 10px; direction: rtl; text-align: left; }
+  .headlines li { list-style: none; font-size: 21px; font-weight: 500; padding: 8px 0; border-bottom: 1px solid rgba(46,58,64,.08); }
+  .headlines li:last-child { border: 0; }
+  .headlines li em { font-style: normal; color: var(--muted); font-weight: 400; font-size: 16px; display: block; margin-top: 2px; }
+  .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 17px; line-height: 1.45; padding-top: 18px; padding-bottom: 18px; }
+  .rules h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+  .rules .do h3 { color: var(--green-text); } .rules .dont h3 { color: #8A4B3C; }
+  .rules ul { padding-left: 20px; color: var(--muted); }
+  aside { grid-column: 3; grid-row: 1 / 5; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; align-content: start; }
+  aside .label { grid-column: 1 / 4; margin-bottom: 0; }
+  aside img { width: 100%; border-radius: 22px; box-shadow: 0 16px 40px rgba(46,58,64,.16); }
+  aside .story { grid-column: 1 / 4; font-size: 19px; line-height: 1.5; color: var(--muted); margin-top: 6px; }
+  aside .story b { color: var(--ink); font-weight: 600; }
+  footer { grid-column: 1 / 3; grid-row: 5; font-size: 15px; color: var(--muted); }
+</style>
+</head>
+<body>
+  <header>
+    <img src="../../Sukun/Resources/Assets.xcassets/AppIcon.appiconset/AppIcon.png" alt="Sukun app icon">
+    <div>
+      <h1>Sukun<span>سكون</span></h1>
+      <p class="tagline">Calm prayer times &amp; Qibla. “Sukun” means stillness.</p>
+    </div>
+  </header>
+
+  <section>
+    <p class="label">Colors</p>
+    <div class="swatches">
+      <div class="sw"><div style="background:var(--cream)"></div><p><b>Cream</b>#F6F1EA · background</p></div>
+      <div class="sw"><div style="background:var(--surface)"></div><p><b>Surface</b>#FFFCF7 · cards</p></div>
+      <div class="sw"><div style="background:var(--ink)"></div><p><b>Ink</b>#2E3A40 · text</p></div>
+      <div class="sw"><div style="background:var(--muted)"></div><p><b>Muted</b>#525D62 · secondary</p></div>
+      <div class="sw"><div style="background:var(--green)"></div><p><b>Green</b>#4E8A6A · accent</p></div>
+      <div class="sw"><div style="background:var(--green-text)"></div><p><b>Deep green</b>#2B6449 · links</p></div>
+      <div class="sw"><div style="background:var(--charcoal)"></div><p><b>Charcoal</b>#111413 · dark mode</p></div>
+      <div class="sw"><div style="background:var(--mint)"></div><p><b>Mint</b>#6FAE8C · dark accent</p></div>
+    </div>
+    <p class="label" style="margin-top:30px">Time of day: the panorama</p>
+    <div class="gradient"></div>
+    <div class="gradient-labels">
+      <span><b>Fajr</b>#E8D2DB</span><span><b>Morning</b>#F2E2C6</span><span><b>Midday</b>#E1EBDD</span>
+      <span><b>Afternoon</b>#F0DDBF</span><span><b>Dusk</b>#F0CDB2</span><span><b>Night</b>#D9DEE6</span>
+    </div>
+  </section>
+
+  <section class="type">
+    <p class="label">Typography · SF Pro Rounded</p>
+    <div class="numerals">13:57<small>Asr</small></div>
+    <p class="headline">Never miss a prayer again.</p>
+    <p class="body">Short, quiet headlines. Large thin numerals for times, regular weight for text. One green accent, never more.</p>
+    <p class="arabic">سكون · مواقيت الصلاة والقبلة</p>
+  </section>
+
+  <section>
+    <p class="label">Headline ideas (EN / DE)</p>
+    <ul class="card headlines">
+      <li>Never miss a prayer again.<em>Nie wieder ein Gebet verpassen.</em></li>
+      <li>Your prayer, right on your Lock Screen.<em>Dein Gebet, direkt auf dem Sperrbildschirm.</em></li>
+      <li>Prayer times and Qibla. Nothing else.<em>Gebetszeiten und Qibla. Sonst nichts.</em></li>
+      <li>No ads. No subscription.<em>Keine Werbung. Kein Abo.</em></li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="label">Feel</p>
+    <div class="card rules">
+      <div class="do"><h3>Do</h3><ul><li>Calm, lots of space</li><li>Soft time-of-day gradients</li><li>Real app screens, unaltered</li><li>Green only as a signal</li></ul></div>
+      <div class="dont"><h3>Don’t</h3><ul><li>Neon or saturated colors</li><li>Heavy shadows, glow, 3D</li><li>Stock photos, mosques as clip-art</li><li>Busy ornament patterns</li></ul></div>
+    </div>
+  </section>
+
+  <aside>
+    <p class="label">Product</p>
+    <img src="../screenshots/en/1-today.png" alt="Today screen">
+    <img src="../screenshots/en/6-home.png" alt="Home Screen widgets">
+    <img src="../screenshots/en/7-lock.png" alt="Lock Screen widgets">
+    <p class="story"><b>The story:</b> made by a revert who kept missing prayers. No ads, no subscription, no tracking. Half of the proceeds go to Islamic Relief projects.</p>
+    <p class="story" style="font-size:15px">Raw screenshots in EN / DE / AR, incl. Home and Lock Screen widgets and dark mode, are supplied separately.</p>
+  </aside>
+
+</body>
+</html>
