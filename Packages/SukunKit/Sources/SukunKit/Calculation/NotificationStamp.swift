@@ -13,12 +13,16 @@ public struct NotificationStamp: Codable, Hashable, Sendable {
     public var plannedUntil: Date?
     /// Whether notifications were allowed when planned (allowing them later in iOS Settings must plan again).
     public var authorized: Bool
+    /// Whether the Fajr alarm was ringing instead of the Fajr notification (alarm permission can change outside the app).
+    public var fajrAlarmActive: Bool = false
 
     /// Plan again when fewer than this many seconds of reminders are left.
     public static let minimumLead: TimeInterval = 3 * 86_400
 
-    public init(location: StoredLocation, settings: SukunSettings, plan: [PlannedNotification], authorized: Bool = true) {
+    public init(location: StoredLocation, settings: SukunSettings, plan: [PlannedNotification], authorized: Bool = true,
+                fajrAlarmActive: Bool = false) {
         self.authorized = authorized
+        self.fajrAlarmActive = fajrAlarmActive
         coordinate = location.coordinate
         timeZoneIdentifier = location.timeZoneIdentifier
         name = location.name
@@ -29,9 +33,10 @@ public struct NotificationStamp: Codable, Hashable, Sendable {
 
     /// `authorized` nil skips the permission check.
     public func needsReschedule(location: StoredLocation, settings: SukunSettings, now: Date,
-                                authorized: Bool? = nil) -> Bool {
+                                authorized: Bool? = nil, fajrAlarmActive: Bool? = nil) -> Bool {
         if settings != self.settings { return true }
         if let authorized, authorized != self.authorized { return true }
+        if let fajrAlarmActive, fajrAlarmActive != self.fajrAlarmActive { return true }
         if location.timeZoneIdentifier != timeZoneIdentifier || location.name != name
             || location.countryCode != countryCode { return true }
         if location.coordinate.distanceKilometers(to: coordinate) > 1 { return true }
@@ -40,8 +45,10 @@ public struct NotificationStamp: Codable, Hashable, Sendable {
     }
 
     public static func needsReschedule(_ stamp: NotificationStamp?, location: StoredLocation,
-                                       settings: SukunSettings, now: Date, authorized: Bool? = nil) -> Bool {
-        stamp?.needsReschedule(location: location, settings: settings, now: now, authorized: authorized) ?? true
+                                       settings: SukunSettings, now: Date, authorized: Bool? = nil,
+                                       fajrAlarmActive: Bool? = nil) -> Bool {
+        stamp?.needsReschedule(location: location, settings: settings, now: now, authorized: authorized,
+                               fajrAlarmActive: fajrAlarmActive) ?? true
     }
 }
 

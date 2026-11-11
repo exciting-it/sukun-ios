@@ -36,7 +36,8 @@ public enum NotificationPlan {
         settings: SukunSettings,
         location: StoredLocation,
         now: Date,
-        days: Int = 7
+        days: Int = 7,
+        fajrAlarmActive: Bool = false
     ) -> [PlannedNotification] {
         let enabled = settings.notificationsEnabled
         guard !enabled.isEmpty || settings.jumuahReminder != nil || settings.suhoorReminderMinutes != nil else {
@@ -52,7 +53,8 @@ public enum NotificationPlan {
         var day = calendar.date(byAdding: .day, value: -1, to: calendar.startOfDay(for: now)) ?? calendar.startOfDay(for: now)
         while day < end {
             if let schedule = calculator.schedule(for: day) {
-                items += plan(for: schedule, settings: settings, calendar: calendar, timeZone: location.timeZone)
+                items += plan(for: schedule, settings: settings, calendar: calendar, timeZone: location.timeZone,
+                              fajrAlarmActive: fajrAlarmActive)
             }
             guard let next = calendar.date(byAdding: .day, value: 1, to: day) else { break }
             day = next
@@ -74,7 +76,8 @@ public enum NotificationPlan {
         for schedule: DaySchedule,
         settings: SukunSettings,
         calendar: Calendar,
-        timeZone: TimeZone
+        timeZone: TimeZone,
+        fajrAlarmActive: Bool
     ) -> [PlannedNotification] {
         let isFriday = calendar.component(.weekday, from: schedule.day) == 6
         let isRamadanDay: Bool = switch settings.ramadanMode {
@@ -86,7 +89,8 @@ public enum NotificationPlan {
 
         var items: [PlannedNotification] = []
         for slot in schedule.obligatory {
-            let prayerOn = settings.notificationsEnabled.contains(slot.kind)
+            // A Fajr alarm rings instead of the Fajr notification (and its early reminder), never both.
+            let prayerOn = settings.notificationsEnabled.contains(slot.kind) && !(slot.kind == .fajr && fajrAlarmActive)
             if prayerOn {
                 let variant: RamadanVariant? = switch (isRamadanDay, slot.kind) {
                 case (true, .fajr): .suhoorEnded

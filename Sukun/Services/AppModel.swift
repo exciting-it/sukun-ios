@@ -161,6 +161,14 @@ final class AppModel {
         update { $0.jumuahReminder = reminder }
     }
 
+    /// Turning the Fajr alarm on asks for alarm permission (iOS dialog). Returns false when not allowed.
+    @discardableResult
+    func setFajrAlarm(_ minutes: Int?) async -> Bool {
+        if minutes != nil, !(await FajrAlarms.requestAuthorization()) { return false }
+        update { $0.fajrAlarmMinutesBefore = minutes }
+        return true
+    }
+
     func setSuhoorReminder(_ minutes: Int?) async {
         guard await authorizeIfTurningOn(minutes != nil) else { return }
         update { $0.suhoorReminderMinutes = minutes }

@@ -8,5 +8,8 @@ struct SukunWidgetBundle: WidgetBundle {
         DayPrayersWidget()
         OverviewWidget()
         QiblaWidget()
+        if #available(iOS 26.1, *) {
+            FajrAlarmLiveActivity()
+        }
     }
 }

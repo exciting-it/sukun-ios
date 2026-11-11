@@ -59,6 +59,9 @@ targets:
         NSLocationWhenInUseUsageDescription: >-
           Sukun uses your location to calculate accurate prayer times and the Qibla direction,
           in the app and in its widgets. Your location stays on your device.
+        NSAlarmKitUsageDescription: >-
+          Sukun can wake you for Fajr with an alarm that rings even in silent mode.
+        NSSupportsLiveActivities: true
         UILaunchScreen:
           UIColorName: LaunchBackground
         UIApplicationSceneManifest:

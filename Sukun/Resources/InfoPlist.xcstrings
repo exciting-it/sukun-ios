@@ -1,75 +1,98 @@
 {
-  "sourceLanguage" : "en",
-  "strings" : {
-    "CFBundleDisplayName" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "سكون"
+  "sourceLanguage": "en",
+  "strings": {
+    "CFBundleDisplayName": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "سكون"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sukun"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sukun"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sukun"
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sukun"
           }
         }
       }
     },
-    "CFBundleName" : {
-      "comment" : "Bundle name",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "سكون"
+    "CFBundleName": {
+      "comment": "Bundle name",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "سكون"
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sukun"
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sukun"
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sukun"
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sukun"
           }
         }
       }
     },
-    "NSLocationWhenInUseUsageDescription" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ar" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "يستخدم سكون موقعك لحساب مواقيت صلاة دقيقة واتجاه القبلة، في التطبيق وفي أدواته. يبقى موقعك على جهازك."
+    "NSLocationWhenInUseUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "يستخدم سكون موقعك لحساب مواقيت صلاة دقيقة واتجاه القبلة، في التطبيق وفي أدواته. يبقى موقعك على جهازك."
           }
         },
-        "de" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sukun verwendet deinen Standort, um genaue Gebetszeiten und die Qibla-Richtung zu berechnen – in der App und in den Widgets. Dein Standort bleibt auf deinem Gerät."
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sukun verwendet deinen Standort, um genaue Gebetszeiten und die Qibla-Richtung zu berechnen – in der App und in den Widgets. Dein Standort bleibt auf deinem Gerät."
           }
         },
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Sukun uses your location to calculate accurate prayer times and the Qibla direction, in the app and in its widgets. Your location stays on your device."
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sukun uses your location to calculate accurate prayer times and the Qibla direction, in the app and in its widgets. Your location stays on your device."
+          }
+        }
+      }
+    },
+    "NSAlarmKitUsageDescription": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sukun can wake you for Fajr with an alarm that rings even in silent mode."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sukun kann dich mit einem Wecker zu Fajr wecken, der auch im Stumm-Modus klingelt."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "يمكن لسكون إيقاظك لصلاة الفجر بمنبّه يرنّ حتى في الوضع الصامت."
           }
         }
       }
     }
   },
-  "version" : "1.0"
+  "version": "1.0"
 }

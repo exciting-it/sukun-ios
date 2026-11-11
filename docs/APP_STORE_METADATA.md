@@ -51,6 +51,7 @@ QIBLA COMPASS
 GENTLE REMINDERS
 • Optional local notifications at the start of each prayer, per prayer
 • A reminder a few minutes before, and a Friday reminder for Jumu'ah
+• Optional Fajr alarm that wakes you even in silent mode, with snooze (iOS 26.1 and later)
 
 RAMADAN
 • Turns on by itself: Suhoor and Iftar countdowns in the app and widgets
@@ -117,6 +118,7 @@ QIBLA-KOMPASS
 SANFTE ERINNERUNGEN
 • Optionale lokale Mitteilungen zu Beginn jedes Gebets, einzeln wählbar
 • Eine Erinnerung einige Minuten vorher und freitags für Jumu'ah
+• Optionaler Fajr-Wecker, der dich auch im Stumm-Modus weckt, mit Schlummern (ab iOS 26.1)
 
 RAMADAN
 • Schaltet sich von selbst ein: Countdown zu Suhoor und Iftar in App und Widgets

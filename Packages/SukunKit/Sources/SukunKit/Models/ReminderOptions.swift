@@ -40,6 +40,8 @@ public enum ReminderChoices {
     public static let early = [5, 10, 15, 20, 30]
     public static let suhoor = [15, 30, 45, 60]
     public static let suhoorDefault = 30
+    /// Fajr alarm: minutes before Fajr (0 = at Fajr).
+    public static let fajrAlarm = [0, 10, 20, 30]
     public static let adjustmentRange = -30...30
     public static let hijriAdjustmentRange = -2...2
 }

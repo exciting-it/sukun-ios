@@ -10,6 +10,8 @@ struct PendingRemindersView: View {
     @State private var stamp: NotificationStamp?
     @State private var log: [RescheduleRecord] = []
     @State private var diagnosticNotifications = SharedStore.shared.diagnosticNotifications
+    @State private var alarmCount = 0
+    @State private var testAlarmNote: String?
 
     var body: some View {
         List {
@@ -53,6 +55,26 @@ struct PendingRemindersView: View {
                 Text(verbatim: "Newest first. Opening the app plans again only when the place, settings or permission changed, or fewer than 3 days are left, so earlier widget runs stay visible. The notification arrives quietly in Notification Center, no need to open the app.")
             }
 
+            if FajrAlarms.isSupported {
+                Section {
+                    LabeledContent(String("Fajr alarms scheduled"), value: "\(alarmCount)")
+                    LabeledContent(String("Alarm permission"),
+                                   value: FajrAlarms.isAuthorized ? "allowed" : (FajrAlarms.isDenied ? "denied" : "not asked"))
+                    Button(String("Ring a test alarm in 1 minute")) {
+                        Task {
+                            let ok = await FajrAlarms.scheduleTest(in: 60)
+                            testAlarmNote = ok ? "Rings in about a minute. Lock the phone and wait." : "Couldn’t schedule (permission?)."
+                            await load()
+                        }
+                    }
+                    if let testAlarmNote {
+                        Text(verbatim: testAlarmNote).font(.caption).foregroundStyle(Palette.secondaryText)
+                    }
+                } header: {
+                    Text(verbatim: "Fajr alarm")
+                }
+            }
+
             Section(String("Scheduled")) {
                 if requests.isEmpty {
                     Text(verbatim: "Nothing scheduled. Turn on a reminder, and allow notifications.")
@@ -93,5 +115,6 @@ struct PendingRemindersView: View {
             .sorted { (fireDate($0) ?? .distantFuture) < (fireDate($1) ?? .distantFuture) }
         stamp = SharedStore.shared.notificationStamp
         log = SharedStore.shared.rescheduleLog
+        alarmCount = FajrAlarms.scheduledCount
     }
 }

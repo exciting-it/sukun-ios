@@ -2548,6 +2548,116 @@
           }
         }
       }
+    },
+    "Fajr alarm": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fajr alarm"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fajr-Wecker"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "منبّه الفجر"
+          }
+        }
+      }
+    },
+    "At Fajr": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "At Fajr"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zu Fajr"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "عند الفجر"
+          }
+        }
+      }
+    },
+    "%lld min before": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld min before"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld Min. vorher"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "قبل %lld دقيقة"
+          }
+        }
+      }
+    },
+    "Allow alarms in iOS Settings": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow alarms in iOS Settings"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wecker in den iOS-Einstellungen erlauben"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "السماح بالمنبّهات في إعدادات iOS"
+          }
+        }
+      }
+    },
+    "A real alarm that wakes you for Fajr, even in silent mode, with a 5-minute snooze. It replaces the Fajr notification.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A real alarm that wakes you for Fajr, even in silent mode, with a 5-minute snooze. It replaces the Fajr notification."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein echter Wecker, der dich zu Fajr weckt, auch im Stumm-Modus, mit 5 Minuten Schlummern. Er ersetzt die Fajr-Mitteilung."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "منبّه حقيقي يوقظك لصلاة الفجر حتى في الوضع الصامت، مع غفوة لمدة 5 دقائق. يحلّ محلّ إشعار الفجر."
+          }
+        }
+      }
     }
   },
   "version": "1.0"

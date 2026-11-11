@@ -667,6 +667,28 @@
           }
         }
       }
+    },
+    "Snoozed": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snoozed"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schlummert"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "في الغفوة"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

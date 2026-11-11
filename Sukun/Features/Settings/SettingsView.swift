@@ -12,6 +12,8 @@ struct SettingsView: View {
     /// The app may use the location, but the user declined it for widgets while having some placed.
     @State private var widgetsLackLocation = false
     @State private var showsDiagnostics = false
+    /// The user turned the Fajr alarm on but alarms aren't allowed in iOS Settings.
+    @State private var alarmsDenied = false
     private let feedbackConfig = FeedbackConfig.production
 
     var body: some View {
@@ -25,6 +27,7 @@ struct SettingsView: View {
                     locationSection
                     calculationSection
                     notificationSection
+                    fajrAlarmSection
                     ramadanSection
                     displaySection
                     feedbackSection
@@ -230,6 +233,37 @@ struct SettingsView: View {
             Text("Notifications")
         } footer: {
             Text("A gentle local reminder at the start of each selected prayer. Nothing is sent over the internet.")
+        }
+    }
+
+    // MARK: Fajr alarm (iOS 26.1+)
+
+    @ViewBuilder
+    private var fajrAlarmSection: some View {
+        if FajrAlarms.isSupported {
+            Section {
+                Picker("Fajr alarm", selection: Binding(
+                    get: { model.settings.fajrAlarmMinutesBefore },
+                    set: { value in
+                        Task {
+                            let allowed = await model.setFajrAlarm(value)
+                            alarmsDenied = !allowed
+                        }
+                    }
+                )) {
+                    Text("Off").tag(Int?.none)
+                    ForEach(ReminderChoices.fajrAlarm, id: \.self) { minutes in
+                        (minutes == 0 ? Text("At Fajr") : Text("\(minutes) min before")).tag(Int?.some(minutes))
+                    }
+                }
+                if alarmsDenied || (model.settings.fajrAlarmMinutesBefore != nil && FajrAlarms.isDenied) {
+                    Button("Allow alarms in iOS Settings") {
+                        if let url = URL(string: UIApplication.openSettingsURLString) { openURL(url) }
+                    }
+                }
+            } footer: {
+                Text("A real alarm that wakes you for Fajr, even in silent mode, with a 5-minute snooze. It replaces the Fajr notification.")
+            }
         }
     }
 

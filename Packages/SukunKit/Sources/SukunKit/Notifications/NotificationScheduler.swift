@@ -34,12 +34,16 @@ public enum NotificationScheduler {
 
         guard let location else {
             store.notificationStamp = nil
+            await FajrAlarms.sync(settings: settings, location: nil, now: now)
             return
         }
-        let plan = NotificationPlan.make(settings: settings, location: location, now: now)
+        // Alarms first: whether the Fajr alarm rings decides whether the Fajr notification is needed.
+        await FajrAlarms.sync(settings: settings, location: location, now: now)
+        let fajrAlarmActive = FajrAlarms.isActive(settings)
+        let plan = NotificationPlan.make(settings: settings, location: location, now: now, fajrAlarmActive: fajrAlarmActive)
         let authorized = await isAuthorized(center)
         store.notificationStamp = NotificationStamp(location: location, settings: settings, plan: plan,
-                                                    authorized: authorized)
+                                                    authorized: authorized, fajrAlarmActive: fajrAlarmActive)
         store.appendRescheduleRecord(RescheduleRecord(date: now, source: source, place: location.name,
                                                       count: authorized ? plan.count : 0))
         guard !plan.isEmpty, authorized else { return }
@@ -78,7 +82,12 @@ public enum NotificationScheduler {
         let settings = store.settings
         let center = UNUserNotificationCenter.current()
         guard NotificationStamp.needsReschedule(store.notificationStamp, location: location, settings: settings,
-                                                now: now, authorized: await isAuthorized(center)) else { return false }
+                                                now: now, authorized: await isAuthorized(center),
+                                                fajrAlarmActive: FajrAlarms.isActive(settings)) else {
+            // Notifications are fine; still top up the week of Fajr alarms (cheap, idempotent).
+            await FajrAlarms.sync(settings: settings, location: location, now: now)
+            return false
+        }
         await reschedule(settings: settings, location: location, store: store, now: now, source: source)
         if source == .widget, store.diagnosticNotifications {
             await postDiagnostic(store: store, location: location, center: center)

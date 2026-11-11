@@ -1679,6 +1679,29 @@
           }
         }
       }
+    },
+    "alarm.snooze": {
+      "extractionState": "manual",
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snooze"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schlummern"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "غفوة"
+          }
+        }
+      }
     }
   },
   "version": "1.0"

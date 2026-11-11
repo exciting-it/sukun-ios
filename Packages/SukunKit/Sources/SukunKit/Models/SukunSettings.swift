@@ -101,6 +101,8 @@ public struct SukunSettings: Codable, Hashable, Sendable {
     public var hijriAdjustmentDays: Int = 0
     /// Name the morning (Sunrise, Duha, Shortly before Dhuhr) with its no-prayer times. On for everyone by default.
     public var showsMorningPeriods: Bool = true
+    /// Fajr alarm (AlarmKit, iOS 26.1+): minutes before Fajr, or nil when off.
+    public var fajrAlarmMinutesBefore: Int?
 
     public init() {}
 
@@ -112,7 +114,7 @@ public struct SukunSettings: Codable, Hashable, Sendable {
         case method, madhab, highLatitude, clockFormat, useManualLocation, manualLocation
         case notificationsEnabled, showsPattern, qiblaHaptics
         case adjustments, earlyReminderMinutes, jumuahReminder, ramadanMode, suhoorReminderMinutes, hijriAdjustmentDays
-        case showsMorningPeriods
+        case showsMorningPeriods, fajrAlarmMinutesBefore
     }
 
     public init(from decoder: Decoder) throws {
@@ -145,6 +147,8 @@ public struct SukunSettings: Codable, Hashable, Sendable {
         let rawHijri = (try? c.decodeIfPresent(Int.self, forKey: .hijriAdjustmentDays)) ?? d.hijriAdjustmentDays
         hijriAdjustmentDays = min(max(rawHijri, hijri.lowerBound), hijri.upperBound)
         showsMorningPeriods = (try? c.decodeIfPresent(Bool.self, forKey: .showsMorningPeriods)) ?? d.showsMorningPeriods
+        fajrAlarmMinutesBefore = (try? c.decodeIfPresent(Int.self, forKey: .fajrAlarmMinutesBefore))
+            .flatMap { ReminderChoices.fajrAlarm.contains($0) ? $0 : nil }
     }
 
     public func encode(to encoder: Encoder) throws {
@@ -166,5 +170,6 @@ public struct SukunSettings: Codable, Hashable, Sendable {
         try c.encodeIfPresent(suhoorReminderMinutes, forKey: .suhoorReminderMinutes)
         try c.encode(hijriAdjustmentDays, forKey: .hijriAdjustmentDays)
         try c.encode(showsMorningPeriods, forKey: .showsMorningPeriods)
+        try c.encodeIfPresent(fajrAlarmMinutesBefore, forKey: .fajrAlarmMinutesBefore)
     }
 }
