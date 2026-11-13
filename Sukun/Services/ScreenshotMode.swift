@@ -6,7 +6,7 @@ import SukunKit
 /// `-SukunScreenshotCity london|berlin|berlin-ar|dubai` sets a manual location and a few reminders,
 /// `-SukunDesignPreview asr` shows that time of day, `-SukunRamadan on` forces Ramadan mode,
 /// `-SukunScreenshotDay 2027-02-20` previews another date, `-SukunPreviewMinutes 60` lands that many minutes after
-/// the previewed prayer (default 10; e.g. `sunrise` + 60 shows Duha), `-SukunFakeQiblaOffset 0` simulates a compass reading that many degrees off the Qibla.
+/// the previewed prayer (default 10; e.g. `sunrise` + 60 shows Duha), `-SukunFakeAlarm 20` / `-SukunOpenFajrSheet YES` show a set Fajr alarm with its sheet, `-SukunFakeQiblaOffset 0` simulates a compass reading that many degrees off the Qibla.
 @MainActor
 enum ScreenshotMode {
     private static let defaults = UserDefaults.standard
@@ -32,7 +32,11 @@ enum ScreenshotMode {
         if let alarm = defaults.string(forKey: "SukunFakeAlarm").flatMap(Int.init) {
             FajrAlarms.previewAuthorized = true
             model.update { $0.fajrAlarmMinutesBefore = alarm }
+        } else {
+            model.update { $0.fajrAlarmMinutesBefore = nil } // a previous run's fake alarm must not leak into other shots
         }
+        // -SukunOpenFajrSheet YES: open the Fajr sheet on launch (App Store screenshot of the alarm).
+        if defaults.bool(forKey: "SukunOpenFajrSheet") { model.showsFajrSheet = true }
         if let preview = defaults.string(forKey: "SukunDesignPreview").flatMap(PrayerKind.init(rawValue:)) {
             // "m5" means 5 minutes before (a leading "-" would read as another launch argument).
             let minutes = defaults.string(forKey: "SukunPreviewMinutes")

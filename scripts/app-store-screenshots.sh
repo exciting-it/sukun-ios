@@ -11,11 +11,11 @@ xcrun simctl bootstatus $DEV -b >/dev/null
 xcrun simctl status_bar $DEV override --dataNetwork wifi --wifiBars 3 --cellularMode active --cellularBars 4 --batteryState discharging --batteryLevel 100
 xcrun simctl uninstall $DEV faith.sukun.ios 2>/dev/null || true
 xcrun simctl install $DEV "$APP"
-shot() { # locale lang city name appearance tab preview day qibla
+shot() { # locale lang city name appearance tab preview day qibla [extra launch args]
   local loc=$1 lang=$2 city=$3 name=$4 look=$5 tab=$6 prev=$7 day=$8 q=$9
   xcrun simctl ui $DEV appearance $look
   xcrun simctl terminate $DEV faith.sukun.ios 2>/dev/null || true
-  local extra=()
+  local extra=(${=10})
   [[ $q != - ]] && extra+=(-SukunFakeQiblaOffset $q)
   [[ $day != - ]] && extra+=(-SukunScreenshotDay $day)
   xcrun simctl launch $DEV faith.sukun.ios -AppleLanguages "($lang)" -AppleLocale $loc \
@@ -28,7 +28,7 @@ shot() { # locale lang city name appearance tab preview day qibla
   local wall=$(TZ=${t[2]} date -r ${t[1]} "+%Y-%m-%d %H:%M")
   local epoch=$(date -j -f "%Y-%m-%d %H:%M" "$wall" +%s)
   xcrun simctl status_bar $DEV override --time "$(date -u -r $epoch "+%Y-%m-%dT%H:%M:00.000Z")"
-  sleep 1.5
+  sleep 2.5
   mkdir -p "$OUT/$lang"
   xcrun simctl io $DEV screenshot "$OUT/$lang/$name.png" >/dev/null 2>&1
 }
@@ -39,5 +39,7 @@ for spec in "en_GB en london" "de_DE de berlin" "ar_AE ar dubai"; do
   shot $1 $2 $3 3-qibla light qibla fajr - 0
   shot $1 $2 $3 4-ramadan light today maghrib 2027-02-20 -
   shot $1 $2 $3 5-settings light settings asr - -
+  # Evening, so the sheet reads "Next alarm: tomorrow …".
+  shot $1 $2 $3 8-fajr-alarm light today isha - - "-SukunFakeAlarm 20 -SukunOpenFajrSheet YES"
 done
 xcrun simctl ui $DEV appearance light
