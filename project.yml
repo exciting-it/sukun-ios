@@ -38,6 +38,7 @@ targets:
     platform: iOS
     sources:
       - path: Sukun
+      - path: Shared
     dependencies:
       - package: SukunKit
       - target: SukunWidgets
@@ -89,6 +90,7 @@ targets:
     platform: iOS
     sources:
       - path: SukunWidgets
+      - path: Shared
     dependencies:
       - package: SukunKit
       - sdk: WidgetKit.framework

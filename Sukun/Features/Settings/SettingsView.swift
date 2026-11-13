@@ -46,6 +46,9 @@ struct SettingsView: View {
             .navigationTitle("Settings")
             .sheet(isPresented: $showingCitySearch) { CitySearchView() }
             .sheet(isPresented: $showingFeedback) { FeedbackView() }
+            // Here, not on the Reminders section: a section inside the Form is rebuilt when the page refreshes
+            // right after opening, which dismissed the sheet on the first try.
+            .sheet(isPresented: $showingFajrSheet) { FajrSheet() }
             .task {
                 await model.refreshNotificationStatus()
                 showsDiagnostics = await Diagnostics.isAvailable()
@@ -242,7 +245,6 @@ struct SettingsView: View {
                 Text("A gentle local reminder at the start of each selected prayer. Nothing is sent over the internet.")
             }
         }
-        .sheet(isPresented: $showingFajrSheet) { FajrSheet() }
     }
 
     /// "Alarm · 20 min before", "Notification" or "Off", matching the Fajr sheet.
@@ -344,7 +346,6 @@ struct SettingsView: View {
                     Text(option.localizedName).tag(option)
                 }
             }
-            Toggle("Background pattern", isOn: model.binding(\.showsPattern))
             Toggle("Haptic feedback on Qibla", isOn: model.binding(\.qiblaHaptics))
         } header: {
             Text("Display")

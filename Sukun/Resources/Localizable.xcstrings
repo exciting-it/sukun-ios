@@ -139,29 +139,6 @@
         }
       }
     },
-    "Background pattern": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Background pattern"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hintergrundmuster"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "نقش الخلفية"
-          }
-        }
-      }
-    },
     "Calculation": {
       "extractionState": "manual",
       "localizations": {

@@ -6,6 +6,7 @@ struct SukunApp: App {
     @State private var model: AppModel
 
     init() {
+        FajrAlarmIntents.register()
         let model = AppModel()
         #if DEBUG
         ScreenshotMode.apply(to: model)

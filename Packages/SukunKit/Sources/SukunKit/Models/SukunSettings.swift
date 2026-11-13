@@ -87,7 +87,6 @@ public struct SukunSettings: Codable, Hashable, Sendable {
     public var useManualLocation: Bool = false
     public var manualLocation: StoredLocation?
     public var notificationsEnabled: Set<PrayerKind> = []
-    public var showsPattern: Bool = true
     public var qiblaHaptics: Bool = true
     /// Minutes added to each time to match a mosque timetable (-30…30). Missing kinds mean 0.
     public var adjustments: [PrayerKind: Int] = [:]
@@ -112,7 +111,7 @@ public struct SukunSettings: Codable, Hashable, Sendable {
 
     enum CodingKeys: String, CodingKey {
         case method, madhab, highLatitude, clockFormat, useManualLocation, manualLocation
-        case notificationsEnabled, showsPattern, qiblaHaptics
+        case notificationsEnabled, qiblaHaptics
         case adjustments, earlyReminderMinutes, jumuahReminder, ramadanMode, suhoorReminderMinutes, hijriAdjustmentDays
         case showsMorningPeriods, fajrAlarmMinutesBefore
     }
@@ -128,7 +127,6 @@ public struct SukunSettings: Codable, Hashable, Sendable {
         manualLocation = try? c.decodeIfPresent(StoredLocation.self, forKey: .manualLocation)
         let kinds = (try? c.decodeIfPresent([String].self, forKey: .notificationsEnabled)) ?? []
         notificationsEnabled = Set(kinds.compactMap(PrayerKind.init(rawValue:)))
-        showsPattern = (try? c.decodeIfPresent(Bool.self, forKey: .showsPattern)) ?? d.showsPattern
         qiblaHaptics = (try? c.decodeIfPresent(Bool.self, forKey: .qiblaHaptics)) ?? d.qiblaHaptics
 
         let range = ReminderChoices.adjustmentRange
@@ -160,7 +158,6 @@ public struct SukunSettings: Codable, Hashable, Sendable {
         try c.encode(useManualLocation, forKey: .useManualLocation)
         try c.encodeIfPresent(manualLocation, forKey: .manualLocation)
         try c.encode(notificationsEnabled.map(\.rawValue).sorted(), forKey: .notificationsEnabled)
-        try c.encode(showsPattern, forKey: .showsPattern)
         try c.encode(qiblaHaptics, forKey: .qiblaHaptics)
         let nonZero = adjustments.filter { $0.value != 0 }
         try c.encode(Dictionary(uniqueKeysWithValues: nonZero.map { ($0.key.rawValue, $0.value) }), forKey: .adjustments)

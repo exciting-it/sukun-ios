@@ -21,8 +21,7 @@ struct QiblaView: View {
             let isAligned = offset.map { abs($0) <= alignmentTolerance } ?? false
 
             ZStack {
-                TimeOfDayBackground(period: model.snapshot(at: model.now())?.period ?? .midday,
-                                    showsPattern: model.settings.showsPattern)
+                TimeOfDayBackground(period: model.snapshot(at: model.now())?.period ?? .midday)
                 ScrollView {
                     VStack(spacing: 32) {
                         Text("Qibla")

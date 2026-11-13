@@ -70,6 +70,14 @@ final class FajrAlarmTests: XCTestCase {
         XCTAssertNil(FajrAlarmPlan.next(settings: settings(alarm: nil), location: Fixtures.munich, now: now))
     }
 
+    func testAlarmsArePlannedAMonthAhead() {
+        let plan = FajrAlarmPlan.make(settings: settings(alarm: 10), location: Fixtures.munich, now: now,
+                                      days: FajrAlarms.horizonDays)
+        XCTAssertEqual(FajrAlarms.horizonDays, 30, "keeps ringing for a month even if nothing plans again")
+        XCTAssertEqual(plan.count, 30)
+        XCTAssertEqual(Set(plan.map(\.id)).count, 30)
+    }
+
     func testNoAlarmsWhenOff() {
         XCTAssertEqual(FajrAlarmPlan.make(settings: settings(alarm: nil), location: Fixtures.munich, now: now), [])
     }

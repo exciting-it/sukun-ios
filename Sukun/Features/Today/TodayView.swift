@@ -44,7 +44,7 @@ struct TodayView: View {
 
     private func content(_ snapshot: PrayerSnapshot) -> some View {
         ZStack {
-            TimeOfDayBackground(period: snapshot.period, showsPattern: model.settings.showsPattern)
+            TimeOfDayBackground(period: snapshot.period)
             ScrollView {
                 VStack(spacing: 32) {
                     header(snapshot)

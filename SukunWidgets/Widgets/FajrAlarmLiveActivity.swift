@@ -26,9 +26,9 @@ struct FajrAlarmLiveActivity: Widget {
                 Spacer()
                 AlarmStatus(state: context.state)
                     .font(.system(.title2, design: .rounded, weight: .light).monospacedDigit())
+                StopButton(alarmID: context.state.alarmID)
             }
             .padding(16)
-            .widgetURL(URL(string: "sukun://fajr"))
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
@@ -41,6 +41,10 @@ struct FajrAlarmLiveActivity: Widget {
                     AlarmStatus(state: context.state)
                         .font(.system(.title3, design: .rounded).monospacedDigit())
                 }
+                DynamicIslandExpandedRegion(.bottom) {
+                    StopButton(alarmID: context.state.alarmID)
+                        .frame(maxWidth: .infinity)
+                }
             } compactLeading: {
                 Image(systemName: "alarm").foregroundStyle(Palette.accentText)
             } compactTrailing: {
@@ -50,8 +54,22 @@ struct FajrAlarmLiveActivity: Widget {
             } minimal: {
                 Image(systemName: "alarm").foregroundStyle(Palette.accentText)
             }
-            .widgetURL(URL(string: "sukun://fajr"))
         }
+    }
+}
+
+/// Ends today's alarm right from the Lock Screen or Dynamic Island (also while snoozed). Tomorrow's alarm stays.
+@available(iOS 26.1, *)
+private struct StopButton: View {
+    let alarmID: UUID
+
+    var body: some View {
+        Button(intent: StopFajrAlarmIntent(alarmID: alarmID)) {
+            Label("Stop", systemImage: "xmark")
+                .font(.system(.subheadline, design: .rounded, weight: .semibold))
+        }
+        .buttonStyle(.bordered)
+        .tint(Palette.accentText)
     }
 }
 

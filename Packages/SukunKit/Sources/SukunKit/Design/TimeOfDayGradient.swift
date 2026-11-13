@@ -18,12 +18,10 @@ public extension DayPeriod {
 /// Full-screen background: time-of-day gradient plus an optional, barely visible geometric pattern.
 public struct TimeOfDayBackground: View {
     let period: DayPeriod
-    let showsPattern: Bool
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
-    public init(period: DayPeriod, showsPattern: Bool = true) {
+    public init(period: DayPeriod) {
         self.period = period
-        self.showsPattern = showsPattern
     }
 
     public var body: some View {
@@ -37,11 +35,10 @@ public struct TimeOfDayBackground: View {
                 startPoint: .top,
                 endPoint: .bottom
             )
-            if showsPattern {
-                GeometricPattern(tile: 56)
-                    .stroke(Palette.text, lineWidth: 0.5)
-                    .opacity(0.045)
-            }
+            // The subtle geometric pattern is part of Sukun's look; no setting (removed in 1.0).
+            GeometricPattern(tile: 56)
+                .stroke(Palette.text, lineWidth: 0.5)
+                .opacity(0.045)
         }
         .animation(.sukun(reduceMotion: reduceMotion), value: period)
         .ignoresSafeArea()

@@ -2,6 +2,7 @@ import Foundation
 
 #if canImport(AlarmKit) && os(iOS)
 import AlarmKit
+import AppIntents
 import SwiftUI
 
 /// What the Fajr alarm carries (AlarmKit shows it on the Lock Screen and in the Dynamic Island).
@@ -17,6 +18,20 @@ public struct SukunAlarmMetadata: AlarmMetadata {
 public enum FajrAlarms {
     /// Snooze length.
     public static let snooze: TimeInterval = 5 * 60
+    /// Alarms are planned this many days ahead. The alarm must keep ringing every morning until the user turns it
+    /// off, even if the app isn't opened for weeks; stopping an alarm also tops the plan up again (see `topUp`).
+    public static let horizonDays = 30
+
+    #if canImport(AlarmKit) && os(iOS)
+    /// Set by the app and the widget extension: the intent that runs when an alarm is stopped (it lives in their
+    /// targets, so the kit can't name it). It stops the alarm and plans the coming days again.
+    nonisolated(unsafe) public static var stopIntent: ((UUID) -> any LiveActivityIntent)?
+    #endif
+
+    /// Plans the alarms again from what's stored (for intents and widgets, outside the app).
+    public static func topUp(store: SharedStore = .shared) async {
+        await sync(settings: store.settings, location: store.effectiveLocation)
+    }
 
     public static var isSupported: Bool {
         #if canImport(AlarmKit) && os(iOS)
@@ -72,7 +87,7 @@ public enum FajrAlarms {
         guard #available(iOS 26.1, *) else { return }
         let manager = AlarmManager.shared
         guard manager.authorizationState == .authorized else { return }
-        let plan = location.map { FajrAlarmPlan.make(settings: settings, location: $0, now: now) } ?? []
+        let plan = location.map { FajrAlarmPlan.make(settings: settings, location: $0, now: now, days: horizonDays) } ?? []
         let wanted = Set(plan.map(\.id))
         let existing = (try? manager.alarms) ?? []
         for alarm in existing where alarm.state == .scheduled && !wanted.contains(alarm.id) {
@@ -80,7 +95,13 @@ public enum FajrAlarms {
         }
         let have = Set(existing.map(\.id))
         for item in plan where !have.contains(item.id) {
-            _ = try? await manager.schedule(id: item.id, configuration: configuration(for: item))
+            do {
+                _ = try await manager.schedule(id: item.id, configuration: configuration(for: item))
+            } catch AlarmManager.AlarmError.maximumLimitReached {
+                break // iOS caps alarms per app; the nearest days are scheduled first, the rest follow later
+            } catch {
+                continue
+            }
         }
         #endif
     }
@@ -123,7 +144,8 @@ public enum FajrAlarms {
         return AlarmManager.AlarmConfiguration(
             countdownDuration: Alarm.CountdownDuration(preAlert: nil, postAlert: snooze),
             schedule: .fixed(item.date),
-            attributes: attributes
+            attributes: attributes,
+            stopIntent: stopIntent?(item.id)
         )
     }
     #endif
