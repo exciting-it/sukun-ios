@@ -50,6 +50,8 @@ struct FajrSheet: View {
                     Text("The alarm replaces the Fajr notification. To turn it off, choose Notification or Off.")
                         .font(.footnote)
                         .foregroundStyle(Palette.secondaryText)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .padding(.leading, 30) // aligned with the option text, like the minutes and "Next alarm"
                         .padding(.top, 12)
                 }
 
