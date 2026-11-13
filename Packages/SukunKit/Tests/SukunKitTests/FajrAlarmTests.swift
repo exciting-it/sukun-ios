@@ -55,6 +55,21 @@ final class FajrAlarmTests: XCTestCase {
         XCTAssertEqual(ids.count, 366 * ReminderChoices.fajrAlarm.count)
     }
 
+    func testNextAlarmIsTodayBeforeFajrAndTomorrowAfter() throws {
+        let s = settings(alarm: 20)
+        let calculator = PrayerCalculator(location: Fixtures.munich, settings: s)
+        let todayFajr = try XCTUnwrap(calculator.schedule(for: now)?.time(for: .fajr))
+        let tomorrowFajr = try XCTUnwrap(calculator.schedule(for: now.addingTimeInterval(86_400))?.time(for: .fajr))
+        let night = Fixtures.date(2026, 12, 15, 1, tz: tz)
+        let early = try XCTUnwrap(FajrAlarmPlan.next(settings: s, location: Fixtures.munich, now: night))
+        XCTAssertEqual(early.fajr, todayFajr)
+        XCTAssertTrue(FajrAlarmPlan.isToday(early.date, location: Fixtures.munich, now: night))
+        let later = try XCTUnwrap(FajrAlarmPlan.next(settings: s, location: Fixtures.munich, now: now))
+        XCTAssertEqual(later.fajr, tomorrowFajr)
+        XCTAssertFalse(FajrAlarmPlan.isToday(later.date, location: Fixtures.munich, now: now))
+        XCTAssertNil(FajrAlarmPlan.next(settings: settings(alarm: nil), location: Fixtures.munich, now: now))
+    }
+
     func testNoAlarmsWhenOff() {
         XCTAssertEqual(FajrAlarmPlan.make(settings: settings(alarm: nil), location: Fixtures.munich, now: now), [])
     }

@@ -20,7 +20,7 @@
   - Faster check (TestFlight): Settings → Diagnostics → turn on "Notify me when the widget plans", swipe the app away, travel or wait until fewer than 3 days of reminders are left; a quiet "Sukun diagnostics" note appears in Notification Center. Afterwards the log under Diagnostics shows the widget runs.
 - [ ] Travel (or change location to another city with GPS): within ~3 h the widget shows the new place and reminders carry the new place name and times, without opening the app
 - [x] Largest Dynamic Type (AX5) on Today, Qibla, Settings (simulator: everything scrolls, nothing truncated)
-- [ ] Fajr alarm (iOS 26.1+, real device only): turn it on → iOS asks for alarm permission; Diagnostics → "Ring a test alarm in 1 minute" rings with the phone locked and muted; Snooze shows a 5-min countdown on the Lock Screen / Dynamic Island; the Fajr notification is gone while the alarm is on
+- [ ] Fajr alarm (iOS 26.1+, real device only): Today → tap the Fajr symbol → sheet → "Alarm" → iOS asks for alarm permission; the row shows the alarm symbol with the next time; tapping the snoozed alarm on the Lock Screen opens the Fajr sheet; Diagnostics → "Ring a test alarm in 1 minute" rings with the phone locked and muted; Snooze shows a 5-min countdown on the Lock Screen / Dynamic Island; the Fajr notification is gone while the alarm is on
 - [ ] VoiceOver pass on all three tabs (real device)
 - [x] Reduce Motion on: no rotating spring animations; gradient changes without animation (all motion goes
   through `Animation.sukun(reduceMotion:)` or `reduceMotion ? nil : …`)

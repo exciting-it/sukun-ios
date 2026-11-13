@@ -190,6 +190,7 @@ struct PrayerListCard: View {
     let snapshot: PrayerSnapshot
 
     var body: some View {
+        @Bindable var model = model
         VStack(spacing: 2) {
             ForEach(snapshot.today.slots) { slot in
                 PrayerRow(
@@ -199,11 +200,21 @@ struct PrayerListCard: View {
                     formatter: snapshot.formatter,
                     notificationEnabled: model.settings.notificationsEnabled.contains(slot.kind),
                     onToggleNotification: toggleAction(for: slot.kind),
-                    ramadanLabel: ramadanLabel(for: slot.kind)
+                    ramadanLabel: ramadanLabel(for: slot.kind),
+                    onOpenFajr: slot.kind == .fajr && FajrAlarms.isSupported ? { model.showsFajrSheet = true } : nil,
+                    alarmTime: slot.kind == .fajr ? nextAlarmTime : nil
                 )
             }
         }
         .sukunCard(padding: 8)
+        .sheet(isPresented: $model.showsFajrSheet) { FajrSheet() }
+    }
+
+    /// "04:59" while the Fajr alarm will really ring (on and allowed), else nil.
+    private var nextAlarmTime: String? {
+        guard FajrAlarms.isActive(model.settings), let location = model.location,
+              let next = FajrAlarmPlan.next(settings: model.settings, location: location, now: Date()) else { return nil }
+        return snapshot.formatter.numerals(from: next.date)
     }
 
     private func ramadanLabel(for kind: PrayerKind) -> LocalizedStringKey? {

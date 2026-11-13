@@ -66,4 +66,28 @@ final class AppModelTests: XCTestCase {
         model.binding(\.clockFormat).wrappedValue = .twentyFourHour
         XCTAssertEqual(store.settings.clockFormat, .twentyFourHour)
     }
+
+    func testFajrSheetChoices() async {
+        let defaults = UserDefaults(suiteName: "sukun.fajr.tests.\(UUID().uuidString)")!
+        let model = AppModel(store: SharedStore(defaults: defaults), requestAuthorization: { true })
+        XCTAssertEqual(model.fajrReminder, .off)
+        await model.setFajrReminder(.notification)
+        XCTAssertEqual(model.fajrReminder, .notification)
+        XCTAssertTrue(model.settings.notificationsEnabled.contains(.fajr))
+        await model.setFajrReminder(.off)
+        XCTAssertEqual(model.fajrReminder, .off)
+        XCTAssertFalse(model.settings.notificationsEnabled.contains(.fajr))
+    }
+
+    func testAlarmChoiceStaysOffWhenAlarmsAreNotAllowed() async {
+        // The simulator never grants AlarmKit: choosing the alarm must not leave a silent "Alarm" checked.
+        let defaults = UserDefaults(suiteName: "sukun.fajr.tests.\(UUID().uuidString)")!
+        let model = AppModel(store: SharedStore(defaults: defaults), requestAuthorization: { true })
+        await model.setFajrReminder(.notification)
+        let allowed = await model.setFajrReminder(.alarm(minutes: 20))
+        if !allowed {
+            XCTAssertEqual(model.fajrReminder, .notification)
+            XCTAssertNil(model.settings.fajrAlarmMinutesBefore)
+        }
+    }
 }

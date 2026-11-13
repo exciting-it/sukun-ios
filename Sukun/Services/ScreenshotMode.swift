@@ -28,6 +28,11 @@ enum ScreenshotMode {
             $0.suhoorReminderMinutes = ramadan == .on ? 30 : nil
         }
         let day = defaults.string(forKey: "SukunScreenshotDay").flatMap { try? Date("\($0)T12:00:00Z", strategy: .iso8601) }
+        // -SukunFakeAlarm 20: show a set Fajr alarm (the simulator can't allow AlarmKit).
+        if let alarm = defaults.string(forKey: "SukunFakeAlarm").flatMap(Int.init) {
+            FajrAlarms.previewAuthorized = true
+            model.update { $0.fajrAlarmMinutesBefore = alarm }
+        }
         if let preview = defaults.string(forKey: "SukunDesignPreview").flatMap(PrayerKind.init(rawValue:)) {
             // "m5" means 5 minutes before (a leading "-" would read as another launch argument).
             let minutes = defaults.string(forKey: "SukunPreviewMinutes")

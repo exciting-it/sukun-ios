@@ -35,6 +35,18 @@ public enum FajrAlarmPlan {
         return Array(items.prefix(days))
     }
 
+    /// The alarm that rings next ("Next alarm: tomorrow 04:59"), or nil when the alarm is off.
+    public static func next(settings: SukunSettings, location: StoredLocation, now: Date) -> FajrAlarmItem? {
+        make(settings: settings, location: location, now: now, days: 1).first
+    }
+
+    /// Whether `date` falls on the same day as `now` in the location's time zone (for "today" / "tomorrow").
+    public static func isToday(_ date: Date, location: StoredLocation, now: Date) -> Bool {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = location.timeZone
+        return calendar.isDate(date, inSameDayAs: now)
+    }
+
     /// A deterministic UUID: bytes 0–5 the Fajr instant (seconds, 48 bits), byte 6–7 version 4, byte 8 variant,
     /// byte 9 the offset, bytes 10–15 the tag "SUKUN". Nothing overlaps, so different alarms never collide.
     static func stableID(fajr: Date, minutes: Int) -> UUID {

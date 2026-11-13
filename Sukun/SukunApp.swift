@@ -73,7 +73,14 @@ struct RootView: View {
         }
         // Widgets deep-link with sukun://today and sukun://qibla.
         .onOpenURL { url in
-            guard url.scheme == "sukun", let target = url.host().flatMap(AppTab.init(rawValue:)) else { return }
+            guard url.scheme == "sukun" else { return }
+            // sukun://fajr from the alarm's Live Activity: straight to the Fajr sheet (turn off / change).
+            if url.host() == "fajr" {
+                tab = .today
+                model.showsFajrSheet = true
+                return
+            }
+            guard let target = url.host().flatMap(AppTab.init(rawValue:)) else { return }
             tab = target
         }
     }

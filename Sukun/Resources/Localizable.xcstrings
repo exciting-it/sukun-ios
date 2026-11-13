@@ -2615,46 +2615,266 @@
         }
       }
     },
-    "Allow alarms in iOS Settings": {
+    "Notification": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "Allow alarms in iOS Settings"
+            "value": "Notification"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Wecker in den iOS-Einstellungen erlauben"
+            "value": "Mitteilung"
           }
         },
         "ar": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "السماح بالمنبّهات في إعدادات iOS"
+            "value": "إشعار"
           }
         }
       }
     },
-    "A real alarm that wakes you for Fajr, even in silent mode, with a 5-minute snooze. It replaces the Fajr notification.": {
+    "A calm reminder at Fajr": {
       "localizations": {
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "A real alarm that wakes you for Fajr, even in silent mode, with a 5-minute snooze. It replaces the Fajr notification."
+            "value": "A calm reminder at Fajr"
           }
         },
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Ein echter Wecker, der dich zu Fajr weckt, auch im Stumm-Modus, mit 5 Minuten Schlummern. Er ersetzt die Fajr-Mitteilung."
+            "value": "Eine ruhige Erinnerung zu Fajr"
           }
         },
         "ar": {
           "stringUnit": {
             "state": "needs_review",
-            "value": "منبّه حقيقي يوقظك لصلاة الفجر حتى في الوضع الصامت، مع غفوة لمدة 5 دقائق. يحلّ محلّ إشعار الفجر."
+            "value": "تذكير هادئ عند الفجر"
+          }
+        }
+      }
+    },
+    "Alarm": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alarm"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wecker"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "منبّه"
+          }
+        }
+      }
+    },
+    "Rings even in silent mode, 5-minute snooze": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rings even in silent mode, 5-minute snooze"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klingelt auch im Stumm-Modus, 5 Min. Schlummern"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "يرنّ حتى في الوضع الصامت، غفوة 5 دقائق"
+          }
+        }
+      }
+    },
+    "Alarm time": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alarm time"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weckzeit"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "وقت المنبّه"
+          }
+        }
+      }
+    },
+    "The alarm replaces the Fajr notification. To turn it off, choose Notification or Off.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The alarm replaces the Fajr notification. To turn it off, choose Notification or Off."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Der Wecker ersetzt die Fajr-Mitteilung. Zum Ausschalten „Mitteilung“ oder „Aus“ wählen."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "يحلّ المنبّه محلّ إشعار الفجر. لإيقافه اختر «إشعار» أو «إيقاف»."
+          }
+        }
+      }
+    },
+    "Sukun isn’t allowed to set alarms. Allow it in iOS Settings, then choose Alarm.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sukun isn’t allowed to set alarms. Allow it in iOS Settings, then choose Alarm."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sukun darf keine Wecker stellen. Erlaube es in den iOS-Einstellungen und wähle dann „Wecker“."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "لا يُسمح لسكون بضبط المنبّهات. اسمح بذلك في إعدادات iOS ثم اختر «منبّه»."
+          }
+        }
+      }
+    },
+    "Next alarm: today %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next alarm: today %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nächster Wecker: heute %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "المنبّه التالي: اليوم %@"
+          }
+        }
+      }
+    },
+    "Next alarm: tomorrow %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Next alarm: tomorrow %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nächster Wecker: morgen %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "المنبّه التالي: غدًا %@"
+          }
+        }
+      }
+    },
+    "Wakes you for Fajr even in silent mode. Also in Today: tap the symbol in the Fajr row.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wakes you for Fajr even in silent mode. Also in Today: tap the symbol in the Fajr row."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weckt dich zu Fajr, auch im Stumm-Modus. Auch in „Heute“: Tippe auf das Symbol in der Fajr-Zeile."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "يوقظك لصلاة الفجر حتى في الوضع الصامت. أيضًا في «اليوم»: اضغط على الرمز في سطر الفجر."
+          }
+        }
+      }
+    },
+    "Set alarm": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Set alarm"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wecker einstellen"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "ضبط المنبّه"
+          }
+        }
+      }
+    },
+    "Alarm %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alarm %@"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wecker %@"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "المنبّه %@"
           }
         }
       }

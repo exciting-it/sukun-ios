@@ -28,6 +28,7 @@ struct FajrAlarmLiveActivity: Widget {
                     .font(.system(.title2, design: .rounded, weight: .light).monospacedDigit())
             }
             .padding(16)
+            .widgetURL(URL(string: "sukun://fajr"))
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
@@ -49,6 +50,7 @@ struct FajrAlarmLiveActivity: Widget {
             } minimal: {
                 Image(systemName: "alarm").foregroundStyle(Palette.accentText)
             }
+            .widgetURL(URL(string: "sukun://fajr"))
         }
     }
 }

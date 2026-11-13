@@ -25,7 +25,11 @@ public enum FajrAlarms {
         return false
     }
 
+    /// Debug screenshots only (the simulator can't grant AlarmKit): treat alarms as allowed for display.
+    nonisolated(unsafe) public static var previewAuthorized = false
+
     public static var isAuthorized: Bool {
+        if previewAuthorized { return true }
         #if canImport(AlarmKit) && os(iOS)
         if #available(iOS 26.1, *) { return AlarmManager.shared.authorizationState == .authorized }
         #endif
@@ -33,6 +37,7 @@ public enum FajrAlarms {
     }
 
     public static var isDenied: Bool {
+        if previewAuthorized { return false }
         #if canImport(AlarmKit) && os(iOS)
         if #available(iOS 26.1, *) { return AlarmManager.shared.authorizationState == .denied }
         #endif

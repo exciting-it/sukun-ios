@@ -161,6 +161,45 @@ final class AppModel {
         update { $0.jumuahReminder = reminder }
     }
 
+    // MARK: Fajr sheet
+
+    /// What the Fajr sheet shows as checked.
+    enum FajrReminder: Equatable {
+        case off, notification, alarm(minutes: Int)
+    }
+
+    /// "Alarm" only when it can really ring; chosen but no longer allowed (permission revoked in iOS Settings)
+    /// shows what actually happens instead: the notification, or nothing.
+    var fajrReminder: FajrReminder {
+        if let minutes = settings.fajrAlarmMinutesBefore, FajrAlarms.isAuthorized { return .alarm(minutes: minutes) }
+        return settings.notificationsEnabled.contains(.fajr) ? .notification : .off
+    }
+
+    /// The alarm is chosen but iOS doesn't allow it (the sheet explains and links to iOS Settings).
+    var fajrAlarmBlocked: Bool {
+        settings.fajrAlarmMinutesBefore != nil && FajrAlarms.isSupported && !FajrAlarms.isAuthorized
+    }
+
+    /// Opens the Fajr sheet (deep link from the alarm's Live Activity).
+    var showsFajrSheet = false
+
+    /// Returns false when the alarm wasn't allowed; the previous choice then stays.
+    @discardableResult
+    func setFajrReminder(_ reminder: FajrReminder) async -> Bool {
+        switch reminder {
+        case .off:
+            await setFajrAlarm(nil)
+            await setNotification(false, for: .fajr)
+            return true
+        case .notification:
+            await setFajrAlarm(nil)
+            await setNotification(true, for: .fajr)
+            return true
+        case .alarm(let minutes):
+            return await setFajrAlarm(minutes)
+        }
+    }
+
     /// Turning the Fajr alarm on asks for alarm permission (iOS dialog). Returns false when not allowed.
     @discardableResult
     func setFajrAlarm(_ minutes: Int?) async -> Bool {
