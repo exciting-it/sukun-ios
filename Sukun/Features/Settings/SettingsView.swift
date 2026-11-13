@@ -22,13 +22,12 @@ struct SettingsView: View {
                     if widgetsLackLocation && !model.isLocationDenied {
                         widgetLocationCard
                     }
-                    morningSection
-                    locationSection
-                    calculationSection
+                    // Most changed first; the calculation (experts) last.
                     notificationSection
-                    fajrAlarmSection
-                    ramadanSection
+                    locationSection
                     displaySection
+                    ramadanSection
+                    calculationSection
                     feedbackSection
                     aboutSection
                     #if DEBUG
@@ -87,17 +86,6 @@ struct SettingsView: View {
                 .tint(Palette.accentText)
             }
             .padding(.vertical, 6)
-        }
-    }
-
-    // MARK: Morning
-
-    /// First on purpose: many people don't know these times exist, so the switch should be seen right away.
-    private var morningSection: some View {
-        Section {
-            Toggle("Duha and no-prayer times", isOn: model.binding(\.showsMorningPeriods))
-        } footer: {
-            Text("Shows the Duha time in the morning and the short times at sunrise and before Dhuhr when one doesn’t pray.")
         }
     }
 
@@ -206,11 +194,28 @@ struct SettingsView: View {
     private var notificationSection: some View {
         Section {
             ForEach(PrayerKind.obligatory) { kind in
-                Toggle(kind.localizedName, isOn: Binding(
-                    get: { model.settings.notificationsEnabled.contains(kind) },
-                    set: { enabled in Task { await model.setNotification(enabled, for: kind) } }
-                ))
-                .accessibilityInputLabels(kind.voiceControlNames.map { Text(verbatim: $0) })
+                if kind == .fajr && FajrAlarms.isSupported {
+                    // Fajr: off / notification / alarm, the same sheet as the Fajr row in Today.
+                    Button { showingFajrSheet = true } label: {
+                        LabeledContent(kind.localizedName) {
+                            HStack(spacing: 6) {
+                                fajrStatus
+                                Image(systemName: "chevron.forward")
+                                    .font(.footnote.weight(.semibold))
+                                    .foregroundStyle(.tertiary)
+                                    .accessibilityHidden(true)
+                            }
+                        }
+                        .foregroundStyle(Palette.text)
+                    }
+                    .accessibilityInputLabels(kind.voiceControlNames.map { Text(verbatim: $0) })
+                } else {
+                    Toggle(kind.localizedName, isOn: Binding(
+                        get: { model.settings.notificationsEnabled.contains(kind) },
+                        set: { enabled in Task { await model.setNotification(enabled, for: kind) } }
+                    ))
+                    .accessibilityInputLabels(kind.voiceControlNames.map { Text(verbatim: $0) })
+                }
             }
             Picker("Remind me before", selection: Binding(
                 get: { model.settings.earlyReminderMinutes },
@@ -229,9 +234,24 @@ struct SettingsView: View {
 
             NotificationPermissionRow()
         } header: {
-            Text("Notifications")
+            Text("Reminders")
         } footer: {
-            Text("A gentle local reminder at the start of each selected prayer. Nothing is sent over the internet.")
+            if FajrAlarms.isSupported {
+                Text("A gentle local reminder at the start of each selected prayer. For Fajr you can also choose an alarm that wakes you. Nothing is sent over the internet.")
+            } else {
+                Text("A gentle local reminder at the start of each selected prayer. Nothing is sent over the internet.")
+            }
+        }
+        .sheet(isPresented: $showingFajrSheet) { FajrSheet() }
+    }
+
+    /// "Alarm · 20 min before", "Notification" or "Off", matching the Fajr sheet.
+    private var fajrStatus: Text {
+        switch model.fajrReminder {
+        case .alarm(let minutes):
+            minutes == 0 ? Text("Alarm at Fajr") : Text("Alarm \(minutes) min before")
+        case .notification: Text("Notification")
+        case .off: Text("Off")
         }
     }
 
@@ -242,30 +262,6 @@ struct SettingsView: View {
         case .fixedTime(let hour, let minute):
             Calendar.current.date(bySettingHour: hour, minute: minute, second: 0, of: .now)
                 .map { $0.formatted(date: .omitted, time: .shortened) } ?? ""
-        }
-    }
-
-    // MARK: Fajr alarm (iOS 26.1+)
-
-    /// Same sheet as the Fajr row in Today, so there's one place to learn.
-    @ViewBuilder
-    private var fajrAlarmSection: some View {
-        if FajrAlarms.isSupported {
-            Section {
-                Button { showingFajrSheet = true } label: {
-                    LabeledContent("Fajr alarm") {
-                        if case .alarm(let minutes) = model.fajrReminder {
-                            minutes == 0 ? Text("At Fajr") : Text("\(minutes) min before")
-                        } else {
-                            Text("Off")
-                        }
-                    }
-                    .foregroundStyle(Palette.text)
-                }
-            } footer: {
-                Text("Wakes you for Fajr even in silent mode. Also in Today: tap the symbol in the Fajr row.")
-            }
-            .sheet(isPresented: $showingFajrSheet) { FajrSheet() }
         }
     }
 
@@ -341,7 +337,8 @@ struct SettingsView: View {
     // MARK: Display
 
     private var displaySection: some View {
-        Section("Display") {
+        Section {
+            Toggle("Duha and no-prayer times", isOn: model.binding(\.showsMorningPeriods))
             Picker("Time format", selection: model.binding(\.clockFormat)) {
                 ForEach(ClockFormat.allCases) { option in
                     Text(option.localizedName).tag(option)
@@ -349,6 +346,10 @@ struct SettingsView: View {
             }
             Toggle("Background pattern", isOn: model.binding(\.showsPattern))
             Toggle("Haptic feedback on Qibla", isOn: model.binding(\.qiblaHaptics))
+        } header: {
+            Text("Display")
+        } footer: {
+            Text("Duha and no-prayer times: shows the Duha time in the morning and the short times at sunrise and before Dhuhr when one doesn’t pray.")
         }
     }
 

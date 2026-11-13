@@ -668,29 +668,6 @@
         }
       }
     },
-    "Notifications": {
-      "extractionState": "manual",
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notifications"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mitteilungen"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "الإشعارات"
-          }
-        }
-      }
-    },
     "Prayer times and Qibla. Calm, private, offline.": {
       "extractionState": "manual",
       "localizations": {
@@ -2392,28 +2369,6 @@
         }
       }
     },
-    "Shows the Duha time in the morning and the short times at sunrise and before Dhuhr when one doesn’t pray.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Shows the Duha time in the morning and the short times at sunrise and before Dhuhr when one doesn’t pray."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Zeigt am Vormittag die Duha-Zeit und die kurzen Zeiten bei Sonnenaufgang und vor Dhuhr, in denen man nicht betet."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "يعرض وقت الضحى صباحًا والأوقات القصيرة عند الشروق وقبيل الظهر التي لا يُصلّى فيها."
-          }
-        }
-      }
-    },
     "Widgets can’t follow you": {
       "localizations": {
         "en": {
@@ -2549,28 +2504,6 @@
         }
       }
     },
-    "Fajr alarm": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fajr alarm"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fajr-Wecker"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "منبّه الفجر"
-          }
-        }
-      }
-    },
     "At Fajr": {
       "localizations": {
         "en": {
@@ -2589,28 +2522,6 @@
           "stringUnit": {
             "state": "needs_review",
             "value": "عند الفجر"
-          }
-        }
-      }
-    },
-    "%lld min before": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld min before"
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld Min. vorher"
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "قبل %lld دقيقة"
           }
         }
       }
@@ -2813,28 +2724,6 @@
         }
       }
     },
-    "Wakes you for Fajr even in silent mode. Also in Today: tap the symbol in the Fajr row.": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Wakes you for Fajr even in silent mode. Also in Today: tap the symbol in the Fajr row."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weckt dich zu Fajr, auch im Stumm-Modus. Auch in „Heute“: Tippe auf das Symbol in der Fajr-Zeile."
-          }
-        },
-        "ar": {
-          "stringUnit": {
-            "state": "needs_review",
-            "value": "يوقظك لصلاة الفجر حتى في الوضع الصامت. أيضًا في «اليوم»: اضغط على الرمز في سطر الفجر."
-          }
-        }
-      }
-    },
     "Set alarm": {
       "localizations": {
         "en": {
@@ -2875,6 +2764,116 @@
           "stringUnit": {
             "state": "needs_review",
             "value": "المنبّه %@"
+          }
+        }
+      }
+    },
+    "Reminders": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reminders"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erinnerungen"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "التذكيرات"
+          }
+        }
+      }
+    },
+    "A gentle local reminder at the start of each selected prayer. For Fajr you can also choose an alarm that wakes you. Nothing is sent over the internet.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A gentle local reminder at the start of each selected prayer. For Fajr you can also choose an alarm that wakes you. Nothing is sent over the internet."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine sanfte, lokale Erinnerung zu Beginn jedes ausgewählten Gebets. Für Fajr kannst du auch einen Wecker wählen, der dich weckt. Es wird nichts über das Internet gesendet."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "تذكير محلي لطيف عند بداية كل صلاة مختارة. ولصلاة الفجر يمكنك أيضًا اختيار منبّه يوقظك. لا يُرسل أي شيء عبر الإنترنت."
+          }
+        }
+      }
+    },
+    "Alarm at Fajr": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alarm at Fajr"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wecker zu Fajr"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "منبّه عند الفجر"
+          }
+        }
+      }
+    },
+    "Alarm %lld min before": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alarm %lld min before"
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wecker %lld Min. vorher"
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "منبّه قبل %lld دقيقة"
+          }
+        }
+      }
+    },
+    "Duha and no-prayer times: shows the Duha time in the morning and the short times at sunrise and before Dhuhr when one doesn’t pray.": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duha and no-prayer times: shows the Duha time in the morning and the short times at sunrise and before Dhuhr when one doesn’t pray."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Duha und Gebetspausen: zeigt am Vormittag die Duha-Zeit und die kurzen Zeiten bei Sonnenaufgang und vor Dhuhr, in denen man nicht betet."
+          }
+        },
+        "ar": {
+          "stringUnit": {
+            "state": "needs_review",
+            "value": "الضحى وأوقات النهي عن الصلاة: يعرض وقت الضحى صباحًا والأوقات القصيرة عند الشروق وقبيل الظهر التي لا يُصلّى فيها."
           }
         }
       }

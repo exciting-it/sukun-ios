@@ -8,7 +8,7 @@ DEV=5099B4BB-8A94-4FA2-9708-4E467E9B6DE1
 APP="$1"; OUT="$2"; shift 2
 xcrun simctl boot $DEV 2>/dev/null || true
 xcrun simctl bootstatus $DEV -b >/dev/null
-xcrun simctl status_bar $DEV override --time "9:41" --dataNetwork wifi --wifiBars 3 --cellularMode active --cellularBars 4 --batteryState discharging --batteryLevel 100
+xcrun simctl status_bar $DEV override --dataNetwork wifi --wifiBars 3 --cellularMode active --cellularBars 4 --batteryState discharging --batteryLevel 100
 xcrun simctl uninstall $DEV faith.sukun.ios 2>/dev/null || true
 xcrun simctl install $DEV "$APP"
 shot() { # locale lang city name appearance tab preview day qibla
@@ -23,8 +23,11 @@ shot() { # locale lang city name appearance tab preview day qibla
   sleep 3
   local data=$(xcrun simctl get_app_container $DEV faith.sukun.ios data)
   local t=($(cat "$data/tmp/screenshot-time"))
-  local fmt="%H:%M"; [[ $lang == ar ]] && fmt="%l:%M"
-  xcrun simctl status_bar $DEV override --time "$(TZ=${t[2]} date -r ${t[1]} +$fmt | tr -d " ")"
+  # Show the location's wall-clock time: simctl only takes ISO instants and renders them in this Mac's time zone,
+  # so take the wall time at the location and re-read it as local time before converting to UTC.
+  local wall=$(TZ=${t[2]} date -r ${t[1]} "+%Y-%m-%d %H:%M")
+  local epoch=$(date -j -f "%Y-%m-%d %H:%M" "$wall" +%s)
+  xcrun simctl status_bar $DEV override --time "$(date -u -r $epoch "+%Y-%m-%dT%H:%M:00.000Z")"
   sleep 1.5
   mkdir -p "$OUT/$lang"
   xcrun simctl io $DEV screenshot "$OUT/$lang/$name.png" >/dev/null 2>&1
